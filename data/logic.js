@@ -1,9 +1,12 @@
 //// PROGRAM DATA ////
 const timeIndex = 4
 const style = document.documentElement.style
+var uiState = '-view'
 // UI
 const addBtn = document.getElementById('addBtn')
 const Slide = document.getElementById("Slide")
+const editBtn = document.getElementById('EditBtn')
+const editBtnIcon = document.getElementById('EditBtnIcon')
 //Entries
 const dayEntry = document.getElementById("DayEntry")
 const CardHeight = document.getElementById('CardHeight')
@@ -63,6 +66,27 @@ if ( settingsData == undefined){
 }
 
 //// Functions ////
+function UiUpdate(){
+    switch (uiState) {
+        case '-view':
+            style.setProperty('--ui-display','none')
+            style.setProperty('--ui-span-display','none')
+            style.setProperty('--edit-span-width','0px')
+            style.setProperty('--edit-btn-bg','none')
+            editBtnIcon.classList.add('fa-edit');editBtnIcon.classList.remove('fa-check')
+            uiState = '-edit'
+            break;
+        case '-edit':
+            style.setProperty('--ui-display','flex')
+            style.setProperty('--ui-span-display','inline')
+            style.setProperty('--edit-span-width','calc(130px)')
+            style.setProperty('--edit-btn-bg','lightgray')
+            editBtnIcon.classList.add('fa-check');editBtnIcon.classList.remove('fa-edit')
+            uiState = '-view'
+            break;
+    }
+    console.log(uiState)
+}
 function buildUi3(){
     Object.keys(eventData).forEach(key => {
         let values = eventData[key] // Sort a array from fullTimeStr
@@ -71,15 +95,15 @@ function buildUi3(){
         for (const i in values){
             let event = values[i]
             if (values != []){
-                let card = `<Layout><Cartão id="Card${key}${i}" style="background-color: ${event[1]};">
+                let card = `<Leiaute><Cartão id="Card${key}${i}" style="background-color: ${event[1]};">
                                 <input id="Name${key}${i}" class="Titulo event" type="text" onchange=(EventUpdate("${key}",${i},this.value,0)) value="${event[0]}">
                                 <input  id="Hour${key}${i}" class="Hora event" type="time" style="background-color: ${event[3]};" onchange=(EventUpdate("${key}",${i},this.value,2,null)) value="${event[2]}">
                             </Cartão>
                             <span class="edit">
                                     <input id="NameColor${key}${i}" onchange="EventUpdate('${key}',${i},this.value,1,Card${key}${i})" class="button card edit" type="color" value="${event[1]}">
                                     <input id="HourColor${key}${i}" onchange="EventUpdate('${key}',${i},this.value,3,Hour${key}${i})" class="button card edit" type="color" value="${event[3]}">
-                                    <button class="button card edit" onclick="EventRemove('${key}',${i})" >x</button>
-                            </span></Layout>`
+                                    <button class="button card edit" onclick="EventRemove('${key}',${i})" ><i class="fa fa-trash"></i></button>
+                            </span></Leiaute>`
                 WeekMap[key].Container.innerHTML+= card
                 TimeParse(key,i,event[2])
             }
@@ -157,6 +181,7 @@ CardHeight.addEventListener('change', function(){
     settings('save','CardHeight',this.value)
     SaveData()
 })
+editBtn.addEventListener('click', function(){UiUpdate()})
 
 //// Exec Space ////
-EventSort();settings('restore')
+EventSort();settings('restore');UiUpdate()
