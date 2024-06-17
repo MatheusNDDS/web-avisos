@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+<meta charset="utf-8">
+<title> Web Avisos</title>
+<link rel="stylesheet" href="data/style.css">
+<link rel="stylesheet" href="fonts/css/all.css">
+</head>
+<body>
+<button id="EditBtn"><i id="EditBtnIcon" class="fa fa-edit"></i></button>
+<!-- APP -->
+<div id="ui">
+  <h2><u>Opçoes</u></h2>
+              <label for="CardHeight"><b>Tamanho dos Cartões</b>
+              </label><input type="range" id="CardHeight" min="42" value="0" required>
+
+              <div>
+                <label for="DayEntry"> <b>Novo Evento</b> </label>
+                <span>
+                <select id="DayEntry" required>
+                  <option>Segunda
+                  <option>Terça
+                  <option>Quarta
+                  <option>Quinta
+                  <option>Sexta
+                  <option>Sábado
+                  <option>Domingo
+                </select>
+                <button id="addBtn">Novo Evento</button>
+                </span>
+              </div>
+</div>
+<div id="Slide">
+<header>
+  <H1> Avisos </H1>
+</header>
+<hr>
+    <Evento id="segMaster">
+        <Dia>Segunda</Dia>
+        <container id="segCont">
+        
+        </container>
+    </Evento>
+
+    <Evento id="terMaster">
+      <Dia>Terça</Dia>
+      <container id="terCont">
+      </container>
+    </Evento>
+
+    <Evento id="quaMaster">
+      <Dia>Quarta</Dia>
+      <container id="quaCont">
+
+      </container>
+    </Evento>
+
+    <Evento id="quiMaster">
+      <Dia>Quinta</Dia>
+      <container id="quiCont">
+
+      </container>
+    </Evento>
+
+    <Evento id="sixMaster">
+      <Dia>Sexta</Dia>
+      <container id="sixCont">
+        
+      </container>
+    </Evento>
+
+    <Evento id="sabMaster">
+      <Dia>Sábado</Dia>
+      <container id="sabCont">
+
+      </container>
+    </Evento>
+
+    <Evento id="domMaster">
+      <Dia>Domingo</Dia>
+      <container id="domCont">
+
+      </container>
+    </Evento>
+
+</div>
+
+<!-- END -->
+<script src="data/logic.js"></script>
+</body>
+</html>
