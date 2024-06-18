@@ -4,9 +4,10 @@ const style = document.documentElement.style
 var uiState = '-view'
 // UI
 const addBtn = document.getElementById('addBtn')
-const Slide = document.getElementById("Slide")
+const Slide = document.getElementById('Slide')
 const editBtn = document.getElementById('EditBtn')
 const editBtnIcon = document.getElementById('EditBtnIcon')
+const styleUi = document.getElementById('StyleUi')
 //Entries
 const dayEntry = document.getElementById("DayEntry")
 const CardHeight = document.getElementById('CardHeight')
@@ -59,7 +60,7 @@ if (eventData == undefined || eventData == null ){
 }
 //Settings
 var settingsData = JSON.parse(localStorage.getItem('settingsData'))
-if ( settingsData == undefined){
+if (settingsData == undefined){
     var settingsData = {
         "CardHeight": 70
     }
@@ -71,17 +72,17 @@ function UiUpdate(){
         case '-view':
             style.setProperty('--ui-display','none')
             style.setProperty('--ui-span-display','none')
-            style.setProperty('--edit-span-width','0px')
             style.setProperty('--edit-btn-bg','none')
             editBtnIcon.classList.add('fa-edit');editBtnIcon.classList.remove('fa-check')
+            EventSort()
             uiState = '-edit'
             break;
         case '-edit':
             style.setProperty('--ui-display','flex')
-            style.setProperty('--ui-span-display','inline')
-            style.setProperty('--edit-span-width','calc(130px)')
+            style.setProperty('--ui-span-display','absolute')
             style.setProperty('--edit-btn-bg','lightgray')
             editBtnIcon.classList.add('fa-check');editBtnIcon.classList.remove('fa-edit')
+            EventSort()
             uiState = '-view'
             break;
     }
@@ -90,7 +91,13 @@ function UiUpdate(){
 function buildUi3(){
     Object.keys(eventData).forEach(key => {
         let values = eventData[key] // Sort a array from fullTimeStr
-        if (values == ''){WeekMap[key].Container.innerHTML='<Evento class="ph">-</Evento>'}else{WeekMap[key].Container.innerHTML=''}
+        if (values == ''){
+            WeekMap[key].Container.innerHTML='<Evento class="ph">-</Evento>'
+            styleUi.innerHTML+='<Evento class="ph">-</Evento>'
+
+        }else{
+            WeekMap[key].Container.innerHTML=''
+        }
         //console.log(key)
         for (const i in values){
             let event = values[i]

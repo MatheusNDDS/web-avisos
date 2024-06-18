@@ -12,10 +12,18 @@
     --ui-font-size: 23px;
     --ui-radius: 5px;
     --ui-height: 30px;
-    --ui-display: flex; --ui-span-display: inline;
+    --ui-display: flex; --ui-span-display: absolute;
     --edit-span-width: calc(130px);
     --edit-btn-bg: none;
+    --animation-speed: 0.2s;
+    --accent: teal;
+    --active-accent: teal;
+    accent-color: var(--acent);
 
+}
+*{
+    transition-duration: var(--animation-speed);
+    accent-color: var(--acent);
 }
 body{
     display: flex;
@@ -39,12 +47,6 @@ header{
     display: flex;
     justify-content: center;
 }
-span{
-    text-align: center;
-    display: var(--ui-display);
-    justify-content: stretch;
-    gap: 0;
-}
 
 /*Primary Classes*/
 #ToolBar{
@@ -59,7 +61,6 @@ span{
     width: auto; height: 62px;
     padding-left: 50px; padding-right:30px;
     border-radius: 31.5px;
-    transition-duration: 0.2s;
 }
 #EditBtn{
     background: var(--edit-btn-bg);
@@ -67,9 +68,8 @@ span{
     left: -32.5px;
 
 }
-#EditBtn:hover,:checked{
-    background: lightgray;
-    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
+#EditBtn:active{
+    background: teal;
 }
 #Slide {
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
@@ -94,14 +94,22 @@ span{
     flex-direction: column;
     justify-content: start;
     gap: 10px;
-    background-color: whitesmoke;
+    background-color: white;
     box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
     transform: translate(-380px, 0);
-    transition-duration: 0.2s;
+    transition-duration: var(--animation-speed);
+    overflow-y: scroll;
+
 
 }
+
 #ui:hover{
     transform: translate(0, 0);
+}
+#ui, section,{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 /* Elements  */
@@ -124,8 +132,7 @@ Evento, Hora,.Hora, Titulo,.Titulo ,Dia {
 .ph{ border-bottom: 0; }
 Evento{
     height: auto;
-    width: calc(100% - var(--edit-span-width) - 50px);
-    margin:0px 0px 0px 0px ;
+    width: calc(100% - 55px);
     display: flex;
     flex-direction: row;
     justify-content: stretch;
@@ -197,39 +204,71 @@ Hora, .Hora {
 }
 
 /*Ui elements*/
-button, input, select, h2{
+button, input, select{
     font-size: var(--ui-font-size);
     height: var(--ui-height);
     line-height: var(--ui-font-size);
     border: 1px solid rgba(0, 0, 0, 0.3);
     padding: 5px;
     outline: 0;
+    border-radius: var(--radius);
+}
+span, vspan{
+    text-align: center;
+    display: var(--ui-display);
+    justify-content: space-between;
+    gap: 5px;
+    padding: 5px 10px 5px 10px;
+    margin: 5px 0 5px 0;
+    background: #cecece;
+    border-radius: var(--radius);
+
+}
+.clickable:hover{
+    --edit-btn-bg: #a3dadd;
+    background: #a3dadd;
+}
+.clickable:active{
+    --edit-btn-bg: #a3dadd;
+    background: var(--active-accent);
+}
+vspan{
+    flex-direction: column;
+}
+section{
+    background: #ebebeb;
+    border-radius: var(--radius);
+    padding: 10px;
 }
 h2{
     text-align: center;
     font-size: 30px;
-    margin: 0;
-    border-left: 0 ; border-right: 0 ; border-top: 0 ;
-    background-color: antiquewhite ;
-    line-height: var(--ui-font-size);
+    margin: 0 5px 0 5px;
+    padding: 10px;
+    line-height: 30px;
+    border-bottom: 1px solid darkgray;
 }
 select{
     height: calc(var(--ui-height) + 13px);
-    width: 50%;
+    width: 150%;
 }
 label{
     font-size: var(--ui-font-size);
-    height: var(--ui-height);
-    padding: 0 0 0 4px;
+    height: 100%;
+    padding: 0;
     line-height: calc(var(--ui-font-size)*2);
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
 }
 button, .button{
-    width: 50%;
+    width: 100%;
     height: calc(var(--ui-height) + 13px);
-    background-color: darkcyan;
+    background-color: var(--accent);
 }
 input, select{
     background-color: white;
+    accent-color: var(--accent);
 }
 input[type="color"]{
     width: 25%;
@@ -243,31 +282,44 @@ input[type="time"], input[type="text"]{
 button:active{
     background-color: cyan;
 }
-
+input[type="checkbox"]{
+    height: 25px; width: 25px;
+    margin: auto;
+}
 input[type="range"]{
-    accent-color: darkcyan;
+    margin-top: 0;
 }
 
 /* Edit Variants*/
 .edit{
-    height: calc(39px);
+    height: calc(55px);
     width: calc(39px);
 }
 span.edit{
     position: relative-layer;
     flex-direction: column;
     display: var(--ui-span-display);
-    width: var(--edit-span-width); min-width: var(--edit-span-width);
+    width: auto;
+    min-width: 130px;
     background: white;
     border: 1px;
     border-color: darkgray;
-    border-radius: var(--radius);
+    border-radius: var(--ui-radius);
     box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
     padding: 0;
+    margin: auto;
     vertical-align: middle;
+    transform: translate(5px,0);
+    transition-duration: var(--animation-speed);
+
+}
+span.edit:hover{
+    transform: translate(-95px,0);
+
 }
 button.edit{
-    height: calc(30px);width: calc(30px);
+    height: 100%;
+    width: calc(30px);
     background: none;
     color: #812424;
     display: inline;
@@ -275,18 +327,20 @@ button.edit{
     padding: 0;
     margin: 0;
     position: relative;
-    bottom: 8px;
     border-radius: 50%;
     font-size: calc(var(--ui-font-size));
     border: none;
 }
 input[type="color"].edit{
+    height: 39px;
     background: none;
     border: none;
     margin: 0;
     box-shadow: none;
     display: inline;
     padding: 0;
+    vertical-align: middle;
+    margin-top: auto;margin-bottom:auto;
 }
 
 input[type="time"].event::-webkit-calendar-picker-indicator { display: none; }
