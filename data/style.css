@@ -99,8 +99,6 @@ header{
     transform: translate(-380px, 0);
     transition-duration: var(--animation-speed);
     overflow-y: scroll;
-
-
 }
 
 #ui:hover{
