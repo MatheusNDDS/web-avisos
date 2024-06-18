@@ -7,7 +7,6 @@ const addBtn = document.getElementById('addBtn')
 const Slide = document.getElementById('Slide')
 const editBtn = document.getElementById('EditBtn')
 const editBtnIcon = document.getElementById('EditBtnIcon')
-const styleUi = document.getElementById('StyleUi')
 //Entries
 const dayEntry = document.getElementById("DayEntry")
 const CardHeight = document.getElementById('CardHeight')
@@ -93,7 +92,6 @@ function buildUi3(){
         let values = eventData[key] // Sort a array from fullTimeStr
         if (values == ''){
             WeekMap[key].Container.innerHTML='<Evento class="ph">-</Evento>'
-            styleUi.innerHTML+='<Evento class="ph">-</Evento>'
 
         }else{
             WeekMap[key].Container.innerHTML=''
