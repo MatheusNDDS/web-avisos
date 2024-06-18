@@ -6,24 +6,23 @@
 */
     --slide-width:calc(100%);
     --slide-height: calc(100%);
+    --title-size: 50px;
     --card-height:calc(70px) ;
     --font-size: calc(32px);
     --radius: calc(12px);
     --ui-font-size: 23px;
     --ui-radius: 5px;
     --ui-height: 30px;
-    --ui-display: flex; --ui-span-display: absolute;
+    --ui-display: none; --ui-span-display: none;
     --edit-span-width: calc(130px);
     --edit-btn-bg: none;
     --animation-speed: 0.2s;
     --accent: teal;
     --active-accent: teal;
-    accent-color: var(--acent);
 
 }
 *{
     transition-duration: var(--animation-speed);
-    accent-color: var(--acent);
 }
 body{
     display: flex;
@@ -32,9 +31,9 @@ body{
     overflow: hidden;
 }
 h1{
-    font-size: calc(50px);
+    font-size: var(--title-size);
     margin: 2px;
-    height: calc(50px);
+    height: var(--title-size);
 }
 
 main{
@@ -58,9 +57,9 @@ header{
     border: none;
     text-align: center;
     vertical-align: middle;
-    width: auto; height: 62px;
+    width: auto; height: calc(var(--title-size) + 12px);
     padding-left: 50px; padding-right:30px;
-    border-radius: 31.5px;
+    border-radius: var(--radius);
 }
 #EditBtn{
     background: var(--edit-btn-bg);
@@ -86,7 +85,7 @@ header{
 }
 #ui{
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
-    top: 63px;
+    top: calc(var(--title-size) + 13px);
     width: 400px;
     height: calc(100vh - 64px);
     display: var(--ui-display);
@@ -99,6 +98,10 @@ header{
     transform: translate(-380px, 0);
     transition-duration: var(--animation-speed);
     overflow-y: scroll;
+}
+#ui > h1{
+    font-size: 40px;
+    text-align:center;
 }
 
 #ui:hover{
@@ -220,6 +223,7 @@ span, vspan{
     margin: 5px 0 5px 0;
     background: #cecece;
     border-radius: var(--radius);
+    vertical-align: middle;
 
 }
 .clickable:hover{
@@ -241,7 +245,7 @@ section{
 h2{
     text-align: center;
     font-size: 30px;
-    margin: 0 5px 0 5px;
+    margin: auto 5px auto 5px;
     padding: 10px;
     line-height: 30px;
     border-bottom: 1px solid darkgray;
@@ -249,6 +253,7 @@ h2{
 select{
     height: calc(var(--ui-height) + 13px);
     width: 150%;
+    margin:auto;
 }
 label{
     font-size: var(--ui-font-size);
@@ -258,6 +263,7 @@ label{
     width: 100%;
     text-align: left;
     font-weight: bold;
+    margin: auto 5px auto 5px;
 }
 button, .button{
     width: 100%;
@@ -317,7 +323,7 @@ span.edit:hover{
 }
 button.edit{
     height: 100%;
-    width: calc(30px);
+    width: 30px;
     background: none;
     color: #812424;
     display: inline;

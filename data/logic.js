@@ -1,12 +1,13 @@
 //// PROGRAM DATA ////
 const timeIndex = 4
 const style = document.documentElement.style
-var uiState = '-view'
+var uiState = '-edit'
 // UI
 const addBtn = document.getElementById('addBtn')
 const Slide = document.getElementById('Slide')
 const editBtn = document.getElementById('EditBtn')
 const editBtnIcon = document.getElementById('EditBtnIcon')
+const sabModeCheck = document.getElementById('SabMode')
 //Entries
 const dayEntry = document.getElementById("DayEntry")
 const CardHeight = document.getElementById('CardHeight')
@@ -61,31 +62,36 @@ if (eventData == undefined || eventData == null ){
 var settingsData = JSON.parse(localStorage.getItem('settingsData'))
 if (settingsData == undefined){
     var settingsData = {
-        "CardHeight": 70
+        "card-height": [70, 'px'],
+        "font-size": [47, 'px'],
+        "title-size": [50, 'px'],
     }
 }
 
 //// Functions ////
-function UiUpdate(){
-    switch (uiState) {
-        case '-view':
-            style.setProperty('--ui-display','none')
-            style.setProperty('--ui-span-display','none')
-            style.setProperty('--edit-btn-bg','none')
-            editBtnIcon.classList.add('fa-edit');editBtnIcon.classList.remove('fa-check')
-            EventSort()
-            uiState = '-edit'
-            break;
-        case '-edit':
-            style.setProperty('--ui-display','flex')
-            style.setProperty('--ui-span-display','absolute')
-            style.setProperty('--edit-btn-bg','lightgray')
-            editBtnIcon.classList.add('fa-check');editBtnIcon.classList.remove('fa-edit')
-            EventSort()
-            uiState = '-view'
-            break;
-    }
+function UiUpdate(cmd){
     console.log(uiState)
+    switch(cmd){
+        case '-ui':
+            switch(uiState){
+            case '-view':
+                style.setProperty('--ui-display','none')
+                style.setProperty('--ui-span-display','none')
+                style.setProperty('--edit-btn-bg','none')
+                editBtnIcon.classList.add('fa-edit');editBtnIcon.classList.remove('fa-check')
+                uiState = '-edit'
+            break;
+            case '-edit':
+                style.setProperty('--ui-display','flex')
+                style.setProperty('--ui-span-display','absolute')
+                style.setProperty('--edit-btn-bg','lightgray')
+                editBtnIcon.classList.add('fa-check');editBtnIcon.classList.remove('fa-edit')
+                uiState = '-view'
+            break;
+        }
+        break;
+    }
+    EventSort()
 }
 function buildUi3(){
     Object.keys(eventData).forEach(key => {
@@ -140,7 +146,6 @@ function EventUpdate(day,eventIndex,value,dataIndex,tagId){
 }
 function SaveData(){
     localStorage.setItem('eventData',JSON.stringify(eventData))
-    localStorage.setItem('settingsData',JSON.stringify(settingsData))
 }
 function TimeParse(day,eventIndex,timeStr){
         let events = eventData[day]
@@ -162,18 +167,30 @@ function EventSort(){
     })
     buildUi3()
 }
-function settings(cmd,key,value){
+function settings(cmd,key,value,type,master){
     switch (cmd){
         case 'save':
-            settingsData[key] = value
+            settingsData[key] = [value , type]
+            localStorage.setItem('settingsData',JSON.stringify(settingsData))
         break;
         case 'restore':
-            style.setProperty('--card-height',`calc(${settingsData['CardHeight']}px/var(--scale))`)
-            CardHeight.value=settingsData['CardHeight']
+            Object.keys(settingsData).forEach(key => {
+                let values = settingsData[key]
+                style.setProperty(`--${key}`.replace('_','-'),`${values[0]}${values[1]}`)
+            })
+            setupEntries()
+        break;
+        case 'set':
+            values = settingsData[key]
+            style.setProperty(`--${key}`, `${values[0]}${values[1]}`)
         break;
     }
 }
+function setupEntries(){
+    values = settingsData
+    CardHeight.value = settingsData.card_height[0]
 
+}
 //// Logic ////
 addBtn.addEventListener('click', function(){
     dayTarget = dayEntry.value
@@ -182,11 +199,10 @@ addBtn.addEventListener('click', function(){
     buildUi3()
 })
 CardHeight.addEventListener('change', function(){
-    style.setProperty('--card-height', `calc(${this.value}px/var(--scale))`);
-    settings('save','CardHeight',this.value)
-    SaveData()
+    style.setProperty("--card-height", `${this.value}px`);
+    settings("save","card_height",parseInt(this.value),'px')
 })
-editBtn.addEventListener('click', function(){UiUpdate()})
+editBtn.addEventListener('click', function(){UiUpdate('-ui')})
 
 //// Exec Space ////
-EventSort();settings('restore');UiUpdate()
+EventSort();settings('restore')
