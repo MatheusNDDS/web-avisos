@@ -59,6 +59,7 @@ span{
     width: auto; height: 62px;
     padding-left: 50px; padding-right:30px;
     border-radius: 31.5px;
+    transition-duration: 0.2s;
 }
 #EditBtn{
     background: var(--edit-btn-bg);
