@@ -9,30 +9,43 @@
 <body>
 <!-- APP -->
 <div id="ToolBar">
-  <button id="EditBtn"><i id="EditBtnIcon" class="fa fa-edit"></i></button>
+  <button class="clickable" id="EditBtn"><i id="EditBtnIcon" class="fa fa-edit"></i></button>
 </div>
-<div id="ui">
-  <h2><u>Opçoes</u></h2>
-              <div>
-                <label for="CardHeight"><b>Tamanho dos Cartões</b>
-                </label><input type="range" id="CardHeight" min="42" value="0" required>
-              </div>
-
-              <div>
-                <label for="DayEntry"> <b>Novo Evento</b> </label>
-                <span>
-                <select id="DayEntry" required>
-                  <option>Segunda
-                  <option>Terça
-                  <option>Quarta
-                  <option>Quinta
-                  <option>Sexta
-                  <option>Sábado
-                  <option>Domingo
-                </select>
-                <button id="addBtn">Novo Evento</button>
+<div id="ui"><h1><u>Web Avisos</u></h1>
+            <section>
+              <h2>Opções de apresentação</h2>
+                <vspan>
+                  <label for="CardHeight">Tamanho dos Cartões</label>
+                  <input type="range" id="CardHeight" min="42" value="0" required>
+                </vspan>
+                <span class="clickable">
+                  <label for="SabMode"> Modo Sábado </label>
+                  <input id="SabMode" type="checkbox"></input>
                 </span>
-              </div>
+            </section>
+
+              <section>
+                <h2> Novo Evento </h2>
+                <span>
+                  <label for="DayEntry">Dia</label>
+                  <select id="DayEntry" required>
+                    <option>Segunda
+                    <option>Terça
+                    <option>Quarta
+                    <option>Quinta
+                    <option>Sexta
+                    <option>Sábado
+                    <option>Domingo
+                  </select>
+                </span>
+                <span>
+                  <label for="ModelEntry">Modelo</label>
+                  <select id="ModelEntry" required>
+                    <option>Evento
+                  </select>
+                </span>
+                <button id="addBtn">Criar</button>
+              </section>
 </div>
 <div id="Slide">
 <header>

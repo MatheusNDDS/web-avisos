@@ -1,0 +1,349 @@
+/*  HTML Bases*/
+:root{
+    --scale: 1;
+    /*--slide-width: calc(1280px);
+    --slide-height: calc(1024px);
+*/
+    --slide-width:calc(100%);
+    --slide-height: calc(100%);
+    --card-height:calc(70px) ;
+    --font-size: calc(32px);
+    --radius: calc(12px);
+    --ui-font-size: 23px;
+    --ui-radius: 5px;
+    --ui-height: 30px;
+    --ui-display: flex; --ui-span-display: absolute;
+    --edit-span-width: calc(130px);
+    --edit-btn-bg: none;
+    --animation-speed: 0.2s;
+    --accent: teal;
+    --active-accent: teal;
+    accent-color: var(--acent);
+
+}
+*{
+    transition-duration: var(--animation-speed);
+    accent-color: var(--acent);
+}
+body{
+    display: flex;
+    text-alig:center;
+    margin: 0;
+    overflow: hidden;
+}
+h1{
+    font-size: calc(50px);
+    margin: 2px;
+    height: calc(50px);
+}
+
+main{
+    display: block;
+    text-align: center;
+    background: blue;
+
+}
+header{
+    display: flex;
+    justify-content: center;
+}
+
+/*Primary Classes*/
+#ToolBar{
+    vertical-align: middle;
+}
+#ToolBar > *{
+    position: absolute;
+    background: none;
+    border: none;
+    text-align: center;
+    vertical-align: middle;
+    width: auto; height: 62px;
+    padding-left: 50px; padding-right:30px;
+    border-radius: 31.5px;
+}
+#EditBtn{
+    background: var(--edit-btn-bg);
+    width: 100px;
+    left: -32.5px;
+
+}
+#EditBtn:active{
+    background: teal;
+}
+#Slide {
+    -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
+    width: var(--slide-width);
+    height: var(--slide-height);
+    background-color: white;
+    /*max-height: var(--slide-height); max-width: var(--slide-width);
+    min-height: var(--slide-height); min-width: var(--slide-width);*/
+    text-align: center;
+    display: block;
+    padding: (5px);
+    padding-left: 0;
+    margin: 0;
+}
+#ui{
+    -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
+    top: 63px;
+    width: 400px;
+    height: calc(100vh - 64px);
+    display: var(--ui-display);
+    position: absolute;
+    flex-direction: column;
+    justify-content: start;
+    gap: 10px;
+    background-color: white;
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
+    transform: translate(-380px, 0);
+    transition-duration: var(--animation-speed);
+    overflow-y: scroll;
+
+
+}
+
+#ui:hover{
+    transform: translate(0, 0);
+}
+#ui, section,{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Elements  */
+/* Slide elements*/
+Evento, Hora,.Hora, Titulo,.Titulo ,Dia {
+    appearance: none;
+    height: var(--card-height);
+    border-radius: var(--radius);
+    font-size: var(--font-size);
+    text-align: center;
+    font-family: serif;
+    display: inline-block;
+    font-weight: 600;
+    min-height: var(--font-size);
+    line-height: var(--font-size);
+}
+.Hora{
+    font-size: calc(var(--font-size) + 5px);
+}
+.ph{ border-bottom: 0; }
+Evento{
+    height: auto;
+    width: calc(100% - 55px);
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    line-height: var(--line-height);
+    vertical-align: middle;
+    margin: auto; margin-bottom: 5px; margin-left: 2%;margin-right: 2%;
+    background: #e3e3e3;
+    padding-left: 7px;
+}
+Container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    border-left: 2px #b8b8b8 solid ;
+}
+Leiaute{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+Cartão, .card {
+    border-radius: var(--radius);
+    background-color: darkblue;
+    display: flex;
+    width: 95%;
+    margin: calc(5px);
+    justify-content: space-between;
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
+}
+Cartão{
+    min-width: 99%;
+}
+Titulo, .Titulo {
+    appearance: none;
+    background: none;
+    border: none;
+    margin: auto;
+    color: white;
+    vertical-align: middle;
+    text-align: center;
+    line-height: var(--card-height);
+}
+Dia, .Dia{
+    appearance: none;
+    max-width: 150px;
+    width: 18%;
+    padding-left: 0;
+    display: inline;
+    vertical-align: top;
+    text-align: left;
+    line-height: var(--font-size);
+    font-weight: 500;
+    height: 100%;
+    margin-left: auto; margin-right: 0; margin-top:5px;
+}
+/* Dia::after{content: ":"; display: inline; padding-right: 5px;} */
+Hora, .Hora {
+    max-width: 150px;
+    padding-left: calc(20px); padding-right: calc(20px);
+    vertical-align: middle;
+    text-align: center;
+    height: var(--card-height);
+    border-radius: var(--radius);
+    line-height: var(--card-height);
+    color: white;
+    background-color: darkslateblue;
+}
+
+/*Ui elements*/
+button, input, select{
+    font-size: var(--ui-font-size);
+    height: var(--ui-height);
+    line-height: var(--ui-font-size);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    outline: 0;
+    border-radius: var(--radius);
+}
+span, vspan{
+    text-align: center;
+    display: var(--ui-display);
+    justify-content: space-between;
+    gap: 5px;
+    padding: 5px 10px 5px 10px;
+    margin: 5px 0 5px 0;
+    background: #cecece;
+    border-radius: var(--radius);
+
+}
+.clickable:hover{
+    --edit-btn-bg: #a3dadd;
+    background: #a3dadd;
+}
+.clickable:active{
+    --edit-btn-bg: #a3dadd;
+    background: var(--active-accent);
+}
+vspan{
+    flex-direction: column;
+}
+section{
+    background: #ebebeb;
+    border-radius: var(--radius);
+    padding: 10px;
+}
+h2{
+    text-align: center;
+    font-size: 30px;
+    margin: 0 5px 0 5px;
+    padding: 10px;
+    line-height: 30px;
+    border-bottom: 1px solid darkgray;
+}
+select{
+    height: calc(var(--ui-height) + 13px);
+    width: 150%;
+}
+label{
+    font-size: var(--ui-font-size);
+    height: 100%;
+    padding: 0;
+    line-height: calc(var(--ui-font-size)*2);
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+}
+button, .button{
+    width: 100%;
+    height: calc(var(--ui-height) + 13px);
+    background-color: var(--accent);
+}
+input, select{
+    background-color: white;
+    accent-color: var(--accent);
+}
+input[type="color"]{
+    width: 25%;
+    height: 100%;
+}
+input[type="time"], input[type="text"]{
+    display: inline;
+    padding: 0;
+    width: 75%;
+}
+button:active{
+    background-color: cyan;
+}
+input[type="checkbox"]{
+    height: 25px; width: 25px;
+    margin: auto;
+}
+input[type="range"]{
+    margin-top: 0;
+}
+
+/* Edit Variants*/
+.edit{
+    height: calc(55px);
+    width: calc(39px);
+}
+span.edit{
+    position: relative-layer;
+    flex-direction: column;
+    display: var(--ui-span-display);
+    width: auto;
+    min-width: 130px;
+    background: white;
+    border: 1px;
+    border-color: darkgray;
+    border-radius: var(--ui-radius);
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
+    padding: 0;
+    margin: auto;
+    vertical-align: middle;
+    transform: translate(5px,0);
+    transition-duration: var(--animation-speed);
+
+}
+span.edit:hover{
+    transform: translate(-95px,0);
+
+}
+button.edit{
+    height: 100%;
+    width: calc(30px);
+    background: none;
+    color: #812424;
+    display: inline;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    border-radius: 50%;
+    font-size: calc(var(--ui-font-size));
+    border: none;
+}
+input[type="color"].edit{
+    height: 39px;
+    background: none;
+    border: none;
+    margin: 0;
+    box-shadow: none;
+    display: inline;
+    padding: 0;
+    vertical-align: middle;
+    margin-top: auto;margin-bottom:auto;
+}
+
+input[type="time"].event::-webkit-calendar-picker-indicator { display: none; }
+input[type="time"].event{
+    border: 0;
+}
