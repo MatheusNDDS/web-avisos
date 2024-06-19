@@ -7,10 +7,10 @@ const addBtn = document.getElementById('addBtn')
 const Slide = document.getElementById('Slide')
 const editBtn = document.getElementById('EditBtn')
 const editBtnIcon = document.getElementById('EditBtnIcon')
-const sabModeCheck = document.getElementById('SabMode')
 //Entries
-const dayEntry = document.getElementById("DayEntry")
+const dayEntry = document.getElementById('DayEntry')
 const CardHeight = document.getElementById('CardHeight')
+const viewMode = document.getElementById('ViewMode')
 //Week html map
 const WeekMap = {
     "Segunda": {
@@ -62,9 +62,7 @@ if (eventData == undefined || eventData == null ){
 var settingsData = JSON.parse(localStorage.getItem('settingsData'))
 if (settingsData == undefined){
     var settingsData = {
-        "card-height": [70, 'px'],
-        "font-size": [37, 'px'],
-        "title-size": [50, 'px'],
+        "slide_view" : ['Semana']
     }
 }
 
@@ -146,6 +144,7 @@ function EventUpdate(day,eventIndex,value,dataIndex,tagId){
 }
 function SaveData(){
     localStorage.setItem('eventData',JSON.stringify(eventData))
+    localStorage.setItem('settingsData',JSON.stringify(settingsData))
 }
 function TimeParse(day,eventIndex,timeStr){
         let events = eventData[day]
@@ -171,7 +170,7 @@ function settings(cmd,key,value,type,master){
     switch (cmd){
         case 'save':
             settingsData[key] = [value , type]
-            localStorage.setItem('settingsData',JSON.stringify(settingsData))
+            SaveData()
         break;
         case 'restore':
             Object.keys(settingsData).forEach(key => {
@@ -182,27 +181,44 @@ function settings(cmd,key,value,type,master){
         break;
         case 'set':
             values = settingsData[key]
-            style.setProperty(`--${key}`, `${values[0]}${values[1]}`)
+            style.setProperty(`--${key}`.replace('_','-'), `${values[0]}${values[1]}`)
         break;
     }
 }
 function setupEntries(){
     values = settingsData
     CardHeight.value = settingsData.card_height[0]
+    viewMode.value = settingsData.slide_view[0]
 
 }
+function SlideViewUpdate(){
+    const value = settingsData.slide_view[0]
+    const views = ['Semana','Amanhã', 'Hoje']
+    views.forEach((element)=>{
+        if (value == element){
+            document.getElementById(element).style.display='block'
+        }
+        else{
+            document.getElementById(element).style.display='none'
+        }
+    })
+}
 //// Logic ////
-addBtn.addEventListener('click', function(){
+addBtn.addEventListener('click',function(){
     dayTarget = dayEntry.value
     
     AddEvent(dayTarget)
     buildUi3()
 })
-CardHeight.addEventListener('change', function(){
-    style.setProperty("--card-height", `${this.value}px`);
+CardHeight.addEventListener('change',function(){
     settings("save","card_height",parseInt(this.value),'px')
+    settings("set","card_height")
 })
 editBtn.addEventListener('click', function(){UiUpdate('-ui')})
+viewMode.addEventListener('change', function(){
+    settings('save','slide_view',this.value,null)
+    SlideViewUpdate(this.value)
+})
 
 //// Exec Space ////
-EventSort();settings('restore')
+EventSort();settings('restore');SlideViewUpdate()

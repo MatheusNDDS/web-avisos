@@ -10,7 +10,8 @@
     --card-height:calc(70px) ;
     --font-size: calc(32px);
     --radius: calc(12px);
-    --ui-font-size: 23px;
+    --ui-font-family: sans-serif;
+    --ui-font-size: 20px;
     --ui-radius: 5px;
     --ui-height: 30px;
     --ui-display: none; --ui-span-display: none;
@@ -111,6 +112,9 @@ header{
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+#ui > *{
+    font-family: var(--ui-font-family);
 }
 
 /* Elements  */
@@ -244,7 +248,7 @@ section{
 }
 h2{
     text-align: center;
-    font-size: 30px;
+    font-size: 25px;
     margin: auto 5px auto 5px;
     padding: 10px;
     line-height: 30px;
@@ -282,6 +286,7 @@ input[type="time"], input[type="text"]{
     display: inline;
     padding: 0;
     width: 75%;
+    height:100%;
 }
 button:active{
     background-color: cyan;
