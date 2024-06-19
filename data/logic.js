@@ -63,7 +63,7 @@ var settingsData = JSON.parse(localStorage.getItem('settingsData'))
 if (settingsData == undefined){
     var settingsData = {
         "card-height": [70, 'px'],
-        "font-size": [47, 'px'],
+        "font-size": [37, 'px'],
         "title-size": [50, 'px'],
     }
 }
