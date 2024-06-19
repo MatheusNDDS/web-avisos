@@ -47,8 +47,7 @@ const WeekMap = {
 const defaultEvent = ["EVENTO", '#6a2c05', "00:00", "#32160a","0" ]
 //Events
 var eventData = JSON.parse(localStorage.getItem('eventData'))
-if (eventData == undefined || eventData == null ){
-    var eventData = {
+if (eventData == undefined || eventData == null ){var eventData = {
         "Segunda": [],
         "Terça": [],
         "Quarta": [],
@@ -60,11 +59,8 @@ if (eventData == undefined || eventData == null ){
 }
 //Settings
 var settingsData = JSON.parse(localStorage.getItem('settingsData'))
-if (settingsData == undefined){
-    var settingsData = {
-        "slide_view" : ['Semana']
-    }
-}
+if (settingsData == undefined){var settingsData = {"css" : {}}}
+if (settingsData.css == undefined){settingsData.css = {}}
 
 //// Functions ////
 function UiUpdate(cmd){
@@ -166,34 +162,38 @@ function EventSort(){
     })
     buildUi3()
 }
-function settings(cmd,key,value,type,master){
+function StyleMg(cmd,key,value,type,master){
     switch (cmd){
         case 'save':
-            settingsData[key] = [value , type]
-            SaveData()
+            settingsData.css[key] = [value , type]
         break;
         case 'restore':
-            Object.keys(settingsData).forEach(key => {
-                let values = settingsData[key]
+            cssData = settingsData.css
+            Object.keys(cssData).forEach(key => {
+                let values = cssData[key]
                 style.setProperty(`--${key}`.replace('_','-'),`${values[0]}${values[1]}`)
             })
             setupEntries()
         break;
         case 'set':
-            values = settingsData[key]
+            cssData = settingsData.css
+            values = cssData[key]
             style.setProperty(`--${key}`.replace('_','-'), `${values[0]}${values[1]}`)
         break;
     }
 }
 function setupEntries(){
     values = settingsData
-    CardHeight.value = settingsData.card_height[0]
-    viewMode.value = settingsData.slide_view[0]
+    cssData = settingsData.css
+    if(cssData.card_height != undefined){CardHeight.value = cssData.card_height[0]}
+    if(values.slide_view != undefined){viewMode.value = values.slide_view}
 
 }
 function SlideViewUpdate(){
-    const value = settingsData.slide_view[0]
+    if(settingsData.slide_view == null){settingsData.slide_view = 'Semana'}
+    const value = settingsData.slide_view
     const views = ['Semana','Amanhã', 'Hoje']
+
     views.forEach((element)=>{
         if (value == element){
             document.getElementById(element).style.display='block'
@@ -202,6 +202,8 @@ function SlideViewUpdate(){
             document.getElementById(element).style.display='none'
         }
     })
+
+    setupEntries()
 }
 //// Logic ////
 addBtn.addEventListener('click',function(){
@@ -211,14 +213,13 @@ addBtn.addEventListener('click',function(){
     buildUi3()
 })
 CardHeight.addEventListener('change',function(){
-    settings("save","card_height",parseInt(this.value),'px')
-    settings("set","card_height")
+    StyleMg("save","card_height",parseInt(this.value),'px')
+    StyleMg("set","card_height")
 })
 editBtn.addEventListener('click', function(){UiUpdate('-ui')})
 viewMode.addEventListener('change', function(){
-    settings('save','slide_view',this.value,null)
+    settingsData.slide_view = this.value
     SlideViewUpdate(this.value)
 })
-
 //// Exec Space ////
-EventSort();settings('restore');SlideViewUpdate()
+EventSort();StyleMg('restore');SlideViewUpdate()
