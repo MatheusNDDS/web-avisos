@@ -16,11 +16,15 @@
               <h2>Opções de apresentação</h2>
                 <vspan>
                   <label for="CardHeight">Tamanho dos Cartões</label>
-                  <input type="range" id="CardHeight" min="42" value="0" required>
+                  <input type="range" id="CardHeight" min="42" value="70" required>
                 </vspan>
-                <span class="clickable">
-                  <label for="SabMode"> Modo Sábado </label>
-                  <input id="SabMode" type="checkbox"></input>
+                <span>
+                  <label for="ViewMode"> Visualização </label>
+                  <select id="ViewMode">
+                    <option>Semana
+                    <option>Amanhã
+                    <option>Hoje
+                  </select>
                 </span>
             </section>
 
@@ -38,7 +42,7 @@
                     <option>Domingo
                   </select>
                 </span>
-                <span>
+                <span style='display:none;'>
                   <label for="ModelEntry">Modelo</label>
                   <select id="ModelEntry" required>
                     <option>Evento
@@ -52,6 +56,7 @@
   <H1> Avisos </H1>
 </header>
 <hr>
+<div id="Semana">
     <Evento id="segMaster">
         <Dia>Segunda</Dia>
         <container id="segCont">
@@ -99,7 +104,9 @@
 
       </container>
     </Evento>
-
+</div>
+<div style='display:none;' id="Amanhã">AMANHÂ</div>
+<div style='display:none;' id="Hoje">HOJE</div>
 </div>
 
 <!-- END -->
