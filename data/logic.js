@@ -47,20 +47,12 @@ const WeekMap = {
 const defaultEvent = ["EVENTO", '#6a2c05', "00:00", "#32160a","0" ]
 //Events
 var eventData = JSON.parse(localStorage.getItem('eventData'))
-if (eventData == undefined || eventData == null ){var eventData = {
-        "Segunda": [],
-        "Terça": [],
-        "Quarta": [],
-        "Quinta": [],
-        "Sexta": [],
-        "Sábado": [],
-        "Domingo": [],
-    }
+if (eventData == undefined || eventData == null ){
+    var eventData = {"Segunda": [],"Terça": [],"Quarta": [],"Quinta": [],"Sexta": [],"Sábado": [],"Domingo": []}
 }
 //Settings
 var settingsData = JSON.parse(localStorage.getItem('settingsData'))
 if (settingsData == undefined){var settingsData = {"css" : {}}}
-if (settingsData.css == undefined){settingsData.css = {}}
 
 //// Functions ////
 function UiUpdate(cmd){
@@ -190,7 +182,7 @@ function setupEntries(){
 
 }
 function SlideViewUpdate(){
-    if(settingsData.slide_view == null){settingsData.slide_view = 'Semana'}
+    if(settingsData.slide_view == undefined){settingsData.slide_view = 'Semana'}
     const value = settingsData.slide_view
     const views = ['Semana','Amanhã', 'Hoje']
 
@@ -204,6 +196,9 @@ function SlideViewUpdate(){
     })
 
     setupEntries()
+}
+function backCompat(){
+    if (settingsData.css == undefined){settingsData.css = {}} //Rebuild a css table
 }
 //// Logic ////
 addBtn.addEventListener('click',function(){
@@ -222,4 +217,4 @@ viewMode.addEventListener('change', function(){
     SlideViewUpdate(this.value)
 })
 //// Exec Space ////
-EventSort();StyleMg('restore');SlideViewUpdate()
+backCompat();EventSort();StyleMg('restore');SlideViewUpdate()
