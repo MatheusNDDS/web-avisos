@@ -100,7 +100,7 @@ function buildUi3(){
         for (const i in values){
             let event = values[i]
             if (values != []){
-                let card = `<Leiaute><Cartão id="Card${key}${i}" style="background-color: ${event[1]};">
+                let card = `<Leiaute id="Lay${key}${i}"><Cartão id="Card${key}${i}" style="background-color: ${event[1]};">
                                 <input id="Name${key}${i}" class="Titulo event" type="text" onchange=(eventUpdate("${key}",${i},this.value,0,null)) value="${event[0]}">
                                 <input  id="Hour${key}${i}" class="Hora event" type="time" style="background-color: ${event[3]};" onchange=(eventUpdate("${key}",${i},this.value,2,null)) value="${event[2]}">
                             </Cartão>
@@ -111,6 +111,10 @@ function buildUi3(){
                             </span></Leiaute>`
                 weekMap[key].Container.innerHTML+= card
                 timeParse(key,i,event[2])
+            }
+            if (values.length > 1 ) {
+                document.getElementById(`Lay${key}${i}`).style.setProperty('border-left', `3pt  #404040 solid`)
+
             }
         }
     })

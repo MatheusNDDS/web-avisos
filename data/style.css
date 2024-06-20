@@ -18,7 +18,7 @@
     --accent: teal;
     --active-accent: teal;
     --ui-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
-    --container-border: 2.8pt  #404040 dashed ; /*#b8b8b8*/
+    --container-border: 0; /*#b8b8b8*/
 
 }
 *{
@@ -175,13 +175,14 @@ Container{
     width: 100%;
     flex-direction: column;
     justify-content: space-between;
-    border-left: var(--container-border);
 }
 Leiaute{
     display: flex;
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
+    border-left: var(--container-border);
+
 }
 Cartão, .card {
     border-radius: var(--radius);
