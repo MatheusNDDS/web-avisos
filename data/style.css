@@ -148,7 +148,7 @@ Evento, Hora,.Hora, Titulo,.Titulo ,Dia {
     border-radius: var(--radius);
     font-size: var(--font-size);
     text-align: center;
-    font-family: serif;
+    font-family: sans-serif;
     display: inline-block;
     font-weight: 600;
     min-height: var(--font-size);
