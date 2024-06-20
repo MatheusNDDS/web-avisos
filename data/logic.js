@@ -141,8 +141,14 @@ function AddEvent(day){
                 }
             })
         }
-        SaveData()
+        MenuUpdate();SaveData()
     }
+}
+function MenuUpdate(){
+    modMenu.options.length = 0
+    eventData.Modelos.forEach((element) =>{
+        modMenu.options[modMenu.options.length] = new Option(element[0], `${element[0]}`);
+    })
 }
 function EventSort(){
     Object.keys(eventData).forEach(key => {
@@ -162,7 +168,7 @@ function EventUpdate(day,eventIndex,value,dataIndex,tagId){
     if ( tagId != null){ tagId.style.setProperty('background', `${event[dataIndex]}`)}
     
     TimeParse(day,eventIndex,event[dataIndex])
-    SaveData()
+    MenuUpdate();SaveData()
 }
 function SaveData(){
     localStorage.setItem('eventData',JSON.stringify(eventData))
