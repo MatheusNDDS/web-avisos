@@ -18,6 +18,7 @@
     --accent: teal;
     --active-accent: teal;
     --ui-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
+    --container-border: 2.8pt  #404040 dashed ; /*#b8b8b8*/
 
 }
 *{
@@ -97,6 +98,7 @@ header{
     transform: translate(-380px, 0);
     transition-duration: var(--animation-speed);
     overflow-y: scroll;
+    padding-left: 5px
 }
 #ui > h1{
     font-size: 40px;
@@ -127,6 +129,18 @@ header{
 }
 
 /* Elements  */
+/*Webkit*/
+::-webkit-scrollbar{
+    width: 5px;
+    display: absolute;
+}
+::-webkit-scrollbar-tumb{
+    width: 5px;
+    display: absolute;
+    background: red;
+    border-radius: 2px;
+}
+
 /* Slide elements*/
 Evento, Hora,.Hora, Titulo,.Titulo ,Dia {
     appearance: none;
@@ -152,7 +166,7 @@ Evento{
     justify-content: stretch;
     line-height: var(--line-height);
     vertical-align: middle;
-    margin: auto; margin-bottom: 5px; margin-left: 2%;margin-right: 2%;
+    margin: auto; margin-bottom: 8px; margin-left: 2%;margin-right: 2%;
     background: #e3e3e3;
     padding-left: 7px;
 }
@@ -161,7 +175,7 @@ Container{
     width: 100%;
     flex-direction: column;
     justify-content: space-between;
-    border-left: 2px #b8b8b8 solid ;
+    border-left: var(--container-border);
 }
 Leiaute{
     display: flex;

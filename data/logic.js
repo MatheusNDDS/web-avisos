@@ -1,7 +1,7 @@
 //// PROGRAM DATA ////
 const timeIndex = 4
 const style = document.documentElement.style
-const defaultEvent = ["Evento", '#999999', "00:00", "#008080","0" ]
+var defaultEvent = ["Evento", '#999999', "--:--", "#008080","0" ]
 var uiState = '-edit'
 // UI
 const addBtn = document.getElementById('addBtn')
@@ -95,23 +95,18 @@ function uiUpdate(cmd){
 function buildUi3(){
     Object.keys(eventData).forEach(key => {
         let values = eventData[key] // Sort a array from fullTimeStr
-        if (values == ''){
-            weekMap[key].Container.innerHTML='<Evento class="ph">-</Evento>'
-
-        }else{
-            weekMap[key].Container.innerHTML=''
-        }
-        //console.log(key)
+        if (values == ''){weekMap[key].Container.innerHTML='<Evento class="ph">-</Evento>'}else{weekMap[key].Container.innerHTML=''}
+        // console.log(key)
         for (const i in values){
             let event = values[i]
             if (values != []){
                 let card = `<Leiaute><Cartão id="Card${key}${i}" style="background-color: ${event[1]};">
-                                <input id="Name${key}${i}" class="Titulo event" type="text" onchange=(EventUpdate("${key}",${i},this.value,0)) value="${event[0]}">
-                                <input  id="Hour${key}${i}" class="Hora event" type="time" style="background-color: ${event[3]};" onchange=(EventUpdate("${key}",${i},this.value,2,null)) value="${event[2]}">
+                                <input id="Name${key}${i}" class="Titulo event" type="text" onchange=(eventUpdate("${key}",${i},this.value,0,null)) value="${event[0]}">
+                                <input  id="Hour${key}${i}" class="Hora event" type="time" style="background-color: ${event[3]};" onchange=(eventUpdate("${key}",${i},this.value,2,null)) value="${event[2]}">
                             </Cartão>
                             <span class="edit">
-                                    <input id="NameColor${key}${i}" onchange="EventUpdate('${key}',${i},this.value,1,Card${key}${i})" class="button card edit" type="color" value="${event[1]}">
-                                    <input id="HourColor${key}${i}" onchange="EventUpdate('${key}',${i},this.value,3,Hour${key}${i})" class="button card edit" type="color" value="${event[3]}">
+                                    <input id="NameColor${key}${i}" onchange="eventUpdate('${key}',${i},this.value,1,Card${key}${i})" class="button card edit" type="color" value="${event[1]}">
+                                    <input id="HourColor${key}${i}" onchange="eventUpdate('${key}',${i},this.value,3,Hour${key}${i})" class="button card edit" type="color" value="${event[3]}">
                                     <button class="button card edit" onclick="eventRemove('${key}',${i})" ><i class="fa fa-trash"></i></button>
                             </span></Leiaute>`
                 weekMap[key].Container.innerHTML+= card
@@ -119,29 +114,27 @@ function buildUi3(){
             }
         }
     })
-    modMenu.options.length = 0
-    eventData.Modelos.forEach((element) =>{
-        modMenu.options[modMenu.options.length] = new Option(element[0], `${element[0]}`);
-    })
-    saveData()
+    saveData(); menuUpdate()
 }
 function addEvent(day){
-    if (modMenu.value == '' && settingsData.slide_view != 'Modelos'){
+    if (modMenu.value == '' && settingsData.slide_view !== "Modelos"){
         alert('Sem modelos para aplicar, vá na visualização de modelos e crie um.')
     }else{
-        if (settingsData.slide_view == 'Modelos'){
-            eventData[day].push(defaultEvent)
+        if (settingsData.slide_view == "Modelos"){
+            var template = Array.from(defaultEvent)
+            eventData[day].push(template)
         }else{
-            eventData.Modelos.forEach((element) =>{
-                console.log(`${element[0]} :: ${modMenu.value}`)
-                if (modMenu.value == element[0]){
-                    eventData[day].push(element)
-                    return
+            eventData.Modelos.forEach(element =>{
+                var template = Array.from(element)
+
+                if (modMenu.value == template[0]){
+                    console.log(`${template[0]} :: ${modMenu.value}`)
+                    eventData[day].push(template)
                 }
             })
         }
-        menuUpdate();saveData()
     }
+    menuUpdate();saveData()
 }
 function menuUpdate(){
     modMenu.options.length = 0
@@ -159,7 +152,7 @@ function eventRemove(day,eventIndex){
     eventData[day].splice(eventIndex,1)
     buildUi3()
 }
-function EventUpdate(day,eventIndex,value,dataIndex,tagId){
+function eventUpdate(day,eventIndex,value,dataIndex,tagId){
     let values = eventData[day]
     let event = values[eventIndex]
     event[dataIndex]=value
@@ -243,7 +236,7 @@ function backCompat(){
 }
 //// Interactivity ////
 addBtn.addEventListener('click',function(){
-    if (settingsData.slide_view == 'Semana'){
+    if (settingsData.slide_view == "Semana"){
         addEvent(dayEntry.value)
     }else{
         addEvent(settingsData.slide_view)
