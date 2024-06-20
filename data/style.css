@@ -1,9 +1,6 @@
 /*  HTML Bases*/
 :root{
     --scale: 1;
-    /*--slide-width: calc(1280px);
-    --slide-height: calc(1024px);
-*/
     --slide-width:calc(100%);
     --slide-height: calc(100%);
     --title-size: 50px;
@@ -20,6 +17,7 @@
     --animation-speed: 0.2s;
     --accent: teal;
     --active-accent: teal;
+    --ui-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
 
 }
 *{
@@ -104,7 +102,6 @@ header{
     font-size: 40px;
     text-align:center;
 }
-
 #ui:hover{
     transform: translate(0, 0);
 }
@@ -115,6 +112,18 @@ header{
 }
 #ui > *{
     font-family: var(--ui-font-family);
+}
+#ModDialog{
+    top: calc(var(--title-size) + 20px);
+    height: 80vh;
+    width: 90%;
+    border: none;
+    border-radius: var(--ui-radius);
+    box-shadow: var(--ui-shadow);
+    backdrop: #00000055;
+    justify-content: start;
+    flex-direction: column;
+    gap: 10px;
 }
 
 /* Elements  */

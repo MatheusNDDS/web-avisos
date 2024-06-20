@@ -7,10 +7,13 @@ const addBtn = document.getElementById('addBtn')
 const Slide = document.getElementById('Slide')
 const editBtn = document.getElementById('EditBtn')
 const editBtnIcon = document.getElementById('EditBtnIcon')
+const modDialog = document.getElementById('ModDialog')
+const sidePanel = document.getElementById('ui')
 //Entries
 const dayEntry = document.getElementById('DayEntry')
 const CardHeight = document.getElementById('CardHeight')
 const viewMode = document.getElementById('ViewMode')
+const modMenu = document.getElementById('ModMenu')
 //Week html map
 const WeekMap = {
     "Segunda": {
@@ -41,14 +44,26 @@ const WeekMap = {
         "Master": document.getElementById("domMaster"),
         "Container": document.getElementById("domCont"),
     },
+    "Amanhã": {
+        "Master": document.getElementById("TomMaster"),
+        "Container": document.getElementById("TomCont"),
+    },
+    "Hoje": {
+        "Master": document.getElementById("TodMaster"),
+        "Container": document.getElementById("TodCont"),
+    },
+    "Modelos": {
+        "Master": document.getElementById("ModMaster"),
+        "Container": document.getElementById("ModCont"),
+    },
 }
 
 //// Storage Setup ////
-const defaultEvent = ["EVENTO", '#6a2c05', "00:00", "#32160a","0" ]
+const defaultEvent = ["Evento", '#999999', "00:00", "#008080","0" ]
 //Events
 var eventData = JSON.parse(localStorage.getItem('eventData'))
 if (eventData == undefined || eventData == null ){
-    var eventData = {"Segunda": [],"Terça": [],"Quarta": [],"Quinta": [],"Sexta": [],"Sábado": [],"Domingo": []}
+    var eventData = {"Segunda": [],"Terça": [],"Quarta": [],"Quinta": [],"Sexta": [],"Sábado": [],"Domingo": [],"Amanhã" : [], "Hoje" : []}
 }
 //Settings
 var settingsData = JSON.parse(localStorage.getItem('settingsData'))
@@ -56,7 +71,6 @@ if (settingsData == undefined){var settingsData = {"css" : {}}}
 
 //// Functions ////
 function UiUpdate(cmd){
-    console.log(uiState)
     switch(cmd){
         case '-ui':
             switch(uiState){
@@ -106,15 +120,35 @@ function buildUi3(){
             }
         }
     })
+    modMenu.options.length = 0
+    eventData.Modelos.forEach((element) =>{
+        modMenu.options[modMenu.options.length] = new Option(element[0], `${element[0]}`);
+    })
     SaveData()
 }
 function AddEvent(day){
-    if (dayEntry.value == ''){
+    if (dayEntry.value == '' | modMenu.value == '' && settingsData.slide_view != 'Modelos'){
         alert('Tem que prencher todos os campos aí, não é mesmo? 1')
-    }else {
-        eventData[day].push(["EVENTO", '#6a2c05', "00:00", "#32160a","0" ])
+    }else{
+        if (settingsData.slide_view == 'Modelos'){
+            eventData[day].push(defaultEvent)
+        }else{
+            eventData.Modelos.forEach((element) =>{
+                console.log(`${element[0]} :: ${modMenu.value}`)
+                if (modMenu.value == element[0]){
+                    eventData[day].push(element)
+                    return
+                }
+            })
+        }
         SaveData()
     }
+}
+function EventSort(){
+    Object.keys(eventData).forEach(key => {
+        eventData[key] = eventData[key].sort((a, b) => { return a[4] - b[4] })
+    })
+    buildUi3()
 }
 function EventRemove(day,eventIndex){
     eventData[day].splice(eventIndex,1)
@@ -148,12 +182,6 @@ function toMS(str) {
     const [sec, ms] = secms.split(".");
     return ((+mins * 60) + +sec) * 1000 + +ms;
 }
-function EventSort(){
-    Object.keys(eventData).forEach(key => {
-        eventData[key] = eventData[key].sort((a, b) => { return a[4] - b[4] })
-    })
-    buildUi3()
-}
 function StyleMg(cmd,key,value,type,master){
     switch (cmd){
         case 'save':
@@ -179,32 +207,42 @@ function setupEntries(){
     cssData = settingsData.css
     if(cssData.card_height != undefined){CardHeight.value = cssData.card_height[0]}
     if(values.slide_view != undefined){viewMode.value = values.slide_view}
-
 }
 function SlideViewUpdate(){
     if(settingsData.slide_view == undefined){settingsData.slide_view = 'Semana'}
     const value = settingsData.slide_view
-    const views = ['Semana','Amanhã', 'Hoje']
+    const views = ['Semana','Amanhã', 'Hoje', 'Modelos']
 
     views.forEach((element)=>{
         if (value == element){
-            document.getElementById(element).style.display='block'
+            document.getElementById(element).style.display = 'block'
         }
         else{
-            document.getElementById(element).style.display='none'
+            document.getElementById(element).style.display ='none'
         }
     })
+
+    if(value == 'Semana'){
+        dayEntry.disabled = false
+    }else{
+        dayEntry.disabled = true
+    }
 
     setupEntries()
 }
 function backCompat(){
-    if (settingsData.css == undefined){settingsData.css = {}} //Rebuild a css table
+    if (settingsData.css == undefined){settingsData.css = {}}
+    if (eventData.Amanhã == undefined){eventData.Amanhã = []}
+    if (eventData.Hoje == undefined){eventData.Hoje = []}
+    if (eventData.Modelos == undefined){eventData.Modelos = [defaultEvent]}
 }
-//// Logic ////
+//// Interactivity ////
 addBtn.addEventListener('click',function(){
-    dayTarget = dayEntry.value
-    
-    AddEvent(dayTarget)
+    if (settingsData.slide_view == 'Semana'){
+        AddEvent(dayEntry.value)
+    }else{
+        AddEvent(settingsData.slide_view)
+    }
     buildUi3()
 })
 CardHeight.addEventListener('change',function(){
@@ -216,5 +254,6 @@ viewMode.addEventListener('change', function(){
     settingsData.slide_view = this.value
     SlideViewUpdate(this.value)
 })
-//// Exec Space ////
+
+//// Main Space ////
 backCompat();EventSort();StyleMg('restore');SlideViewUpdate()
