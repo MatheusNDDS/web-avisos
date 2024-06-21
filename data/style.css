@@ -5,7 +5,7 @@
     --slide-height: calc(100%);
     --title-size: 50px;
     --card-height:calc(70px) ;
-    --font-size: calc(28px);
+    --font-size: calc(29px);
     --radius: calc(12px);
     --ui-font: sans-serif;
     --slide-font: sans-serif;
@@ -170,6 +170,7 @@ Container{
     width: 100%;
     flex-direction: column;
     justify-content: space-between;
+    padding: 3px;
 }
 Leiaute{
     display: flex;
@@ -184,7 +185,7 @@ Cartão, .card {
     background-color: darkblue;
     display: flex;
     width: 95%;
-    margin: calc(5px);
+    margin: calc(3px);
     justify-content: space-between;
     box-shadow: var(--slide-shadow);
 }
