@@ -13,7 +13,29 @@
   <div id="ToolBar">
     <button class="clickable" id="EditBtn"><i id="EditBtnIcon" class="fa fa-edit"></i></button>
   </div>
-  <div id="ui"><h1><u>Web Avisos</u></h1>
+  <div id="ui"> <!-- <h1><u>Web Avisos</u></h1> -->
+              <section>
+                  <h2> Novo Evento </h2>
+                  <span id="DayEntrySpan">
+                    <label>Dia</label>
+                    <select id="DayEntry" required>
+                      <option>Segunda
+                      <option>Terça
+                      <option>Quarta
+                      <option>Quinta
+                      <option>Sexta
+                      <option>Sábado
+                      <option>Domingo
+                    </select>
+                  </span>
+                  <span>
+                    <label>Modelo</label>
+                    <select id="ModMenu">
+                    </select>
+                  </span>
+                  <button id="addBtn">Criar</button>
+              </section>
+
               <section>
                 <h2>Opções de apresentação</h2>
                   <vspan>
@@ -30,28 +52,6 @@
                     </select>
                   </span>
               </section>
-
-                <section>
-                  <h2> Novo Evento </h2>
-                  <span id="DayEntrySpan">
-                    <label for="DayEntry">Dia</label>
-                    <select id="DayEntry" required>
-                      <option>Segunda
-                      <option>Terça
-                      <option>Quarta
-                      <option>Quinta
-                      <option>Sexta
-                      <option>Sábado
-                      <option>Domingo
-                    </select>
-                  </span>
-                  <span>
-                    <label for="ModMenu">Modelo</label>
-                    <select id="ModMenu">
-                    </select>
-                  </span>
-                  <button id="addBtn">Criar</button>
-                </section>
   </div>
   <div id="Slide">
     <header>
