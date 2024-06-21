@@ -161,7 +161,7 @@ Evento{
     line-height: var(--line-height);
     vertical-align: middle;
     margin: auto; margin-bottom: 9px; margin-left: 2%;margin-right: 2%;
-    background: #e3e3e3;
+    background: #c8c8c8;
     padding-left: 7px;
 }
 .ph{ border-bottom: 0; box-shadow: none;}

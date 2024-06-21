@@ -153,7 +153,7 @@ function buildUi3(){
                 timeParse(key,i,event[2])
             }
             if (values.length > 1 && settingsData.slide_view == "Semana") {
-                weekMap[key].Container.style.setProperty('border-left', `3pt  #404040 dashed`)
+                weekMap[key].Container.style.setProperty('border-left', `3pt  black dashed`)
             }else{
                 weekMap[key].Container.style.setProperty('border-left', '3pt  #40404000 dashed')
             }
