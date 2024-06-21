@@ -5,7 +5,7 @@
     --slide-height: calc(100%);
     --title-size: 50px;
     --card-height:calc(70px) ;
-    --font-size: calc(32px);
+    --font-size: calc(30px);
     --radius: calc(12px);
     --ui-font: sans-serif;
     --slide-font: sans-serif;
@@ -135,18 +135,6 @@ header{
 }
 
 /* Elements  */
-/*Webkit*/
-::-webkit-scrollbar{
-    width: 5px;
-    display: absolute;
-}
-::-webkit-scrollbar-tumb{
-    width: 5px;
-    display: absolute;
-    background: red;
-    border-radius: 2px;
-}
-
 /* Slide elements*/
 Evento, Hora,.Hora, Titulo,.Titulo ,Dia {
     appearance: none;
@@ -290,6 +278,8 @@ section{
     background: #ebebeb;
     border-radius: var(--ui-radius);
     padding: 10px;
+    border: 5px;
+    border-color: 5px;
 }
 h2{
     text-align: center;
