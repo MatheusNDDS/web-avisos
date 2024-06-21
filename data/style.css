@@ -266,6 +266,10 @@ span, vspan{
     vertical-align: middle;
 
 }
+.clickable{
+    padding-top:0;
+    padding-bottom:0;
+}
 .clickable:hover{
     --edit-btn-bg: var(--section-accent);
     background: var(--section-accent);
@@ -331,9 +335,15 @@ input[type="time"], input[type="text"]{
     width: 75%;
     height:100%;
 }
-input[type="checkbox"]{
+input[type="checkbox"],input[type="radio"]{
     height: 25px; width: 25px;
     margin: auto;
+    padding: 20px;
+    background: var(--accent);
+}
+input[type="radio"]{
+/*     appearance: none; */
+/*     opacity: 0; */
 }
 input[type="range"]{
     margin-top: 0;

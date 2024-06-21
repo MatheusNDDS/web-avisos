@@ -13,8 +13,10 @@ const sidePanel = document.getElementById('ui')
 //Entries
 const dayEntry = document.getElementById('DayEntry')
 const cardHeight = document.getElementById('CardHeight')
-const viewMode = document.getElementById('ViewMode')
 const modMenu = document.getElementById('ModMenu')
+const viewsForm = document.getElementById('ViewsForm')
+const viewMode = document.getElementsByName("VM")
+const radios = document.forms[0].elements["VM"];
 //Week html map
 const weekMap = {
     "Segunda": {
@@ -58,6 +60,7 @@ const weekMap = {
         "Container": document.getElementById("ModCont"),
     },
 }
+const views = ['Semana','Amanhã', 'Hoje', 'Modelos']
 // Try restore storage
 var eventData = JSON.parse(localStorage.getItem('eventData'))
 var settingsData = JSON.parse(localStorage.getItem('settingsData'))
@@ -204,17 +207,22 @@ function styleMn(cmd,key,value,type,master){
             style.setProperty(`--${key}`.replace('_','-'), `${values[0]}${values[1]}`)
         break;
     }
+    saveData()
 }
 function setupEntries(){
     values = settingsData
     cssData = settingsData.css
     if(cssData.card_height != undefined){cardHeight.value = cssData.card_height[0]}
-    if(values.slide_view != undefined){viewMode.value = values.slide_view}
+    if(values.slide_view != undefined){
+        viewMode.forEach((element) => {
+            if (element.value == values.slide_view) element.checked = true
+        })
+
+    }
 }
 function slideViewUpdate(){
     if(settingsData.slide_view == undefined){settingsData.slide_view = 'Semana'}
     const value = settingsData.slide_view
-    const views = ['Semana','Amanhã', 'Hoje', 'Modelos']
 
     views.forEach((element)=>{
         if (value == element){
@@ -231,7 +239,7 @@ function slideViewUpdate(){
         dayEntry.disabled = true
     }
 
-    setupEntries()
+    setupEntries();saveData()
 }
 function backCompat(){
     if (settingsData.css == undefined){settingsData.css = {}}
@@ -253,10 +261,14 @@ cardHeight.addEventListener('change',function(){
     styleMn("set","card_height")
 })
 editBtn.addEventListener('click', function(){uiUpdate('-ui')})
-viewMode.addEventListener('change', function(){
-    settingsData.slide_view = this.value
-    slideViewUpdate(this.value)
+viewsForm.addEventListener('click', function(){
+    viewMode.forEach((element) =>{
+        if (element.checked == true){
+            console.log(element.value)
+            settingsData.slide_view = element.value
+            slideViewUpdate()
+        }
+    })
 })
-
 //// Main Space ////
 backCompat(); styleMn('restore'); eventSort(); slideViewUpdate()
