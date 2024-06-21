@@ -7,7 +7,8 @@
     --card-height:calc(70px) ;
     --font-size: calc(32px);
     --radius: calc(12px);
-    --ui-font-family: sans-serif;
+    --ui-font: sans-serif;
+    --slide-font: sans-serif;
     --ui-font-size: 20px;
     --ui-radius: 5px;
     --ui-height: 30px;
@@ -16,9 +17,13 @@
     --edit-btn-bg: none;
     --animation-speed: 0.2s;
     --accent: teal;
-    --active-accent: teal;
-    --ui-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
-    --container-border: 0; /*#b8b8b8*/
+    --section-accent: #79dada;
+    --light-accent: #00b8b8;
+    --dark-accent: #005353;
+    --slide-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
+    --ui-shadow:  0 0px 3px 1px rgba(0, 0, 0, 0.3);
+    --ui-highlight:  0 0px 3px 1px var(--light-accent);
+    --container-border: 0;
 
 }
 *{
@@ -65,10 +70,11 @@ header{
     background: var(--edit-btn-bg);
     width: 100px;
     left: -32.5px;
+    color: black;
 
 }
 #EditBtn:active{
-    background: teal;
+    background: var(--accent);
 }
 #Slide {
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
@@ -94,11 +100,11 @@ header{
     justify-content: start;
     gap: 10px;
     background-color: white;
-    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--slide-shadow);
     transform: translate(-380px, 0);
     transition-duration: var(--animation-speed);
     overflow-y: scroll;
-    padding-left: 5px
+    padding: 10px;padding-right: 5px;
 }
 #ui > h1{
     font-size: 40px;
@@ -113,7 +119,7 @@ header{
     gap: 10px;
 }
 #ui > *{
-    font-family: var(--ui-font-family);
+    font-family: var(--ui-font);
 }
 #ModDialog{
     top: calc(var(--title-size) + 20px);
@@ -157,19 +163,20 @@ Evento, Hora,.Hora, Titulo,.Titulo ,Dia {
 .Hora{
     font-size: calc(var(--font-size) + 5px);
 }
-.ph{ border-bottom: 0; }
+
 Evento{
-    height: auto;
+    height: auto; min-height: va(--card-height);
     width: calc(100% - 55px);
     display: flex;
     flex-direction: row;
     justify-content: stretch;
     line-height: var(--line-height);
     vertical-align: middle;
-    margin: auto; margin-bottom: 8px; margin-left: 2%;margin-right: 2%;
+    margin: auto; margin-bottom: 9px; margin-left: 2%;margin-right: 2%;
     background: #e3e3e3;
     padding-left: 7px;
 }
+.ph{ border-bottom: 0; box-shadow: none;}
 Container{
     display: flex;
     width: 100%;
@@ -191,7 +198,7 @@ Cartão, .card {
     width: 95%;
     margin: calc(5px);
     justify-content: space-between;
-    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--slide-shadow);
 }
 Cartão{
     min-width: 99%;
@@ -215,7 +222,7 @@ Dia, .Dia{
     vertical-align: top;
     text-align: left;
     line-height: var(--font-size);
-    font-weight: 500;
+    font-weight: 600;
     height: 100%;
     margin-left: auto; margin-right: 0; margin-top:5px;
 }
@@ -236,44 +243,55 @@ Hora, .Hora {
 button, input, select{
     font-size: var(--ui-font-size);
     height: var(--ui-height);
+    font-family: var(--ui-font);
     line-height: var(--ui-font-size);
     border: 1px solid rgba(0, 0, 0, 0.3);
     padding: 5px;
     outline: 0;
-    border-radius: var(--radius);
+    border-radius: var(--ui-radius);
+}
+select:hover{
+    box-shadow: var(--ui-highlight);
+    border-color: var(--light-accent)
 }
 span, vspan{
     text-align: center;
     display: var(--ui-display);
     justify-content: space-between;
     gap: 5px;
-    padding: 5px 10px 5px 10px;
+    padding: 5px;
     margin: 5px 0 5px 0;
     background: #cecece;
-    border-radius: var(--radius);
+    border-radius: var(--ui-radius);
     vertical-align: middle;
 
 }
 .clickable:hover{
-    --edit-btn-bg: #a3dadd;
-    background: #a3dadd;
+    --edit-btn-bg: var(--section-accent);
+    background: var(--section-accent);
+    color: black;
 }
 .clickable:active{
-    --edit-btn-bg: #a3dadd;
-    background: var(--active-accent);
+    --edit-btn-bg: var(--accent);
+}
+button:hover{
+    background: var(--dark-accent);
+}
+button:active{
+    background: var(--light-accent);
 }
 vspan{
     flex-direction: column;
 }
 section{
     background: #ebebeb;
-    border-radius: var(--radius);
+    border-radius: var(--ui-radius);
     padding: 10px;
 }
 h2{
     text-align: center;
     font-size: 25px;
-    margin: auto 5px auto 5px;
+    margin: auto 0px auto 0px;
     padding: 10px;
     line-height: 30px;
     border-bottom: 1px solid darkgray;
@@ -297,6 +315,7 @@ button, .button{
     width: 100%;
     height: calc(var(--ui-height) + 13px);
     background-color: var(--accent);
+    color: white;
 }
 input, select{
     background-color: white;
@@ -311,9 +330,6 @@ input[type="time"], input[type="text"]{
     padding: 0;
     width: 75%;
     height:100%;
-}
-button:active{
-    background-color: cyan;
 }
 input[type="checkbox"]{
     height: 25px; width: 25px;
@@ -332,14 +348,14 @@ span.edit{
     position: relative-layer;
     flex-direction: column;
     display: var(--ui-span-display);
-    width: auto;
+    width: 300px;
     min-width: 130px;
     background: white;
     border: 1px;
     border-color: darkgray;
     border-radius: var(--ui-radius);
-    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
-    padding: 0;
+    box-shadow: var(--slide-shadow);
+    padding:0;padding-left: 7px;
     margin: auto;
     vertical-align: middle;
     transform: translate(5px,0);
@@ -347,25 +363,29 @@ span.edit{
 
 }
 span.edit:hover{
-    transform: translate(-95px,0);
+    transform: translate(-110px,0);
 
 }
 button.edit{
     height: 100%;
-    width: 30px;
+    width: 40px;
     background: none;
-    color: #812424;
+    color: black;
     display: inline;
     box-shadow: none;
     padding: 0;
     margin: 0;
     position: relative;
-    border-radius: 50%;
+    border-radius: var(--ui-radius);
     font-size: calc(var(--ui-font-size));
     border: none;
 }
+button.edit:hover{
+    background: #ff9898;
+}
 input[type="color"].edit{
     height: 39px;
+    width:35px;
     background: none;
     border: none;
     margin: 0;
