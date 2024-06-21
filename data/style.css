@@ -250,10 +250,6 @@ button, input, select{
     outline: 0;
     border-radius: var(--ui-radius);
 }
-select:hover{
-    box-shadow: var(--ui-highlight);
-    border-color: var(--light-accent)
-}
 span, vspan{
     text-align: center;
     display: var(--ui-display);
@@ -304,6 +300,14 @@ select{
     height: calc(var(--ui-height) + 13px);
     width: 150%;
     margin:auto;
+}
+select:hover{
+    box-shadow: var(--ui-highlight);
+    border-color: var(--light-accent)
+}
+select:disabled{
+    box-shadow: none;
+    border-color: darkgray;
 }
 label{
     font-size: var(--ui-font-size);
