@@ -160,7 +160,7 @@ Evento{
     justify-content: stretch;
     line-height: var(--line-height);
     vertical-align: middle;
-    margin: auto; margin-bottom: 9px; margin-left: 2%;margin-right: 2%;
+    margin: auto; margin-bottom: 6px; margin-left: 2%;margin-right: 2%;
     background: #c8c8c8;
     padding-left: 7px;
 }
