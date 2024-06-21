@@ -113,8 +113,7 @@ function buildUi3(){
                 timeParse(key,i,event[2])
             }
             if (values.length > 1 ) {
-                document.getElementById(`Lay${key}${i}`).style.setProperty('border-left', `3pt  #404040 solid`)
-
+                weekMap[key].Container.style.setProperty('border-left', `3pt  #404040 dashed`)
             }
         }
     })
