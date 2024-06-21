@@ -15,6 +15,30 @@
   </div>
   <div id="ui"> <!-- <h1><u>Web Avisos</u></h1> -->
               <section>
+                <h2>Visualização</h2>
+                <form id="ViewsForm">
+                  <span class="clickable">
+                    <label for="VMC1"> Semana </label>
+                    <input type="radio" value="Semana" id="VMC1" name="VM">
+                  </span>
+
+                  <span class="clickable">
+                    <label for="VMC2"> Amanhã </label>
+                    <input type="radio" value="Amanhã" id="VMC2" name="VM">
+                  </span>
+
+                  <span class="clickable">
+                    <label for="VMC3"> Hoje </label>
+                    <input type="radio" value="Hoje" id="VMC3" name="VM">
+                  </span>
+
+                  <span class="clickable">
+                    <label for="VMC4"> Modelos </label>
+                    <input type="radio" value="Modelos" id="VMC4" name="VM">
+                  </span>
+                </form>
+              </section>
+              <section>
                   <h2> Novo Evento </h2>
                   <span id="DayEntrySpan">
                     <label>Dia</label>
@@ -42,15 +66,6 @@
                     <label for="CardHeight">Tamanho dos Cartões</label>
                     <input type="range" id="CardHeight" min="42" value="70" required>
                   </vspan>
-                  <span>
-                    <label for="ViewMode"> Visualização </label>
-                    <select id="ViewMode">
-                      <option>Semana
-                      <option>Amanhã
-                      <option>Hoje
-                      <option>Modelos
-                    </select>
-                  </span>
               </section>
   </div>
   <div id="Slide">
