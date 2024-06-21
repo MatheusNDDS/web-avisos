@@ -274,6 +274,9 @@ span, vspan{
 .clickable:active{
     --edit-btn-bg: var(--accent);
 }
+.trigger{
+    display: none;
+}
 button:hover{
     background: var(--dark-accent);
 }

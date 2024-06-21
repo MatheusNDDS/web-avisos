@@ -5,8 +5,10 @@ var defaultEvent = ["Evento", '#999999', "--:--", "#008080","0" ]
 var uiState = '-edit'
 // UI
 const addBtn = document.getElementById('addBtn')
-const Slide = document.getElementById('Slide')
+const expBtn = document.getElementById('ExpBtn')
+const impBtn = document.getElementById('ImpBtn')
 const editBtn = document.getElementById('EditBtn')
+const Slide = document.getElementById('Slide')
 const editBtnIcon = document.getElementById('EditBtnIcon')
 const modDialog = document.getElementById('ModDialog')
 const sidePanel = document.getElementById('ui')
@@ -17,6 +19,7 @@ const modMenu = document.getElementById('ModMenu')
 const viewsForm = document.getElementById('ViewsForm')
 const viewMode = document.getElementsByName("VM")
 const radios = document.forms[0].elements["VM"];
+const impTrigger = document.getElementById('ImpTrigger')
 //Week html map
 const weekMap = {
     "Segunda": {
@@ -72,6 +75,40 @@ if (settingsData == undefined){var settingsData = {"css" : {}}}
 
 
 //// Functions ////
+function fileMn(cmd,content,filename){
+    switch (cmd){
+        case '-up':
+            const json = JSON.parse(content)
+            if (json.Segunda != undefined | json.Segunda != null &&
+                json.Terça != undefined | json.Terça != null &&
+                json.Quarta != undefined | json.Quarta != null &&
+                json.Quinta != undefined | json.Quinta!= null &&
+                json.Sexta != undefined | json.Sexta != null &&
+                json.Sábado != undefined | json.Sábado != null &&
+                json.Domingo != undefined | json.Domingo != null &&
+                json.Modelos != undefined | json.Modelos != null)
+            {
+                eventData = json
+                buildUi3(); saveData()
+            }else{
+                alert('Arquivo de eventos invállido!')
+            }
+            break;
+        case '-dl':
+            const json_txt = JSON.stringify(content)
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(json_txt));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+            break;
+    }
+}
 function uiUpdate(cmd){
     switch(cmd){
         case '-ui':
@@ -269,6 +306,24 @@ viewsForm.addEventListener('click', function(){
             slideViewUpdate()
         }
     })
+})
+impBtn.addEventListener('click', function(){
+    impTrigger.click()
+})
+expBtn.addEventListener('click', function(){
+    fileMn('-dl',eventData,`Eventos.json`)
+})
+impTrigger.addEventListener('change',  function(){
+    var eventsFile = this.files[0]
+    console.log(eventsFile)
+    var fileReader = new FileReader()
+    if (eventsFile) {
+        fileReader.readAsText(eventsFile,"UTF-8")
+        fileReader.onload = function(loadedFile){
+            fileMn('-up',loadedFile.target.result,null)
+            impTrigger.value = null
+        }
+    }
 })
 //// Main Space ////
 backCompat(); styleMn('restore'); eventSort(); slideViewUpdate()
