@@ -57,21 +57,25 @@
                     <select id="ModMenu">
                     </select>
                   </span>
-                  <button id="addBtn">Criar</button>
+                  <button id="addBtn">Criar <i id="EditBtnIcon" class="fa fa-calendar-plus"></i></button>
               </section>
 
               <section>
                 <h2>Opções de apresentação</h2>
                   <vspan>
-                    <label for="CardHeight">Tamanho dos Cartões</label>
+                    <label>Tamanho dos Cartões</label>
                     <input type="range" id="CardHeight" min="42" value="70" required>
+                  </vspan>
+                  <vspan>
+                    <label>Tamanho da Fonte</label>
+                    <input type="range" id="FontSize" min="30" max="40" value="30" required>
                   </vspan>
               </section>
               <section>
                 <h2>Eventos</h2>
                   <span>
-                    <button id="ExpBtn">Exportar</button>
-                    <button id="ImpBtn">Importar</button>
+                    <button id="ExpBtn">Exportar <i id="EditBtnIcon" class="fa fa-download"></i></button>
+                    <button id="ImpBtn">Importar <i id="EditBtnIcon" class="fa fa-file-import"></i></button>
                     <input class="trigger"  type="file" id="ImpTrigger">
                   </span>
               </section>
