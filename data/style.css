@@ -5,14 +5,15 @@
     --slide-height: calc(100%);
     --title-size: 50px;
     --card-height:calc(70px) ;
-    --font-size: calc(29px);
+    --font-size: calc(28px);
     --radius: calc(12px);
     --ui-font: sans-serif;
     --slide-font: sans-serif;
     --ui-font-size: 20px;
     --ui-radius: 5px;
     --ui-height: 30px;
-    --ui-display: none; --ui-span-display: none;
+    --ui-display: none;
+    --ui-span-display: none;
     --edit-span-width: calc(130px);
     --edit-btn-bg: none;
     --animation-speed: 0.2s;
@@ -23,6 +24,8 @@
     --slide-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
     --ui-shadow:  0 0px 3px 1px rgba(0, 0, 0, 0.3);
     --ui-highlight:  0 0px 3px 1px var(--light-accent);
+    --ui-bg: white;
+    --ui-bg-fx: none;
     --container-border: 0;
 
 }
@@ -31,7 +34,7 @@
 }
 body{
     display: flex;
-    text-alig:center;
+    text-align:center;
     margin: 0;
     overflow: hidden;
 }
@@ -63,7 +66,8 @@ header{
     text-align: center;
     vertical-align: middle;
     width: auto; height: calc(var(--title-size) + 12px);
-    padding-left: 50px; padding-right:30px;
+    padding-left: 50px;
+    padding-right:30px;
     border-radius: var(--radius);
 }
 #EditBtn{
@@ -80,7 +84,7 @@ header{
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
     width: var(--slide-width);
     height: var(--slide-height);
-    background-color: white;
+    background: white;
     /*max-height: var(--slide-height); max-width: var(--slide-width);
     min-height: var(--slide-height); min-width: var(--slide-width);*/
     text-align: center;
@@ -99,12 +103,14 @@ header{
     flex-direction: column;
     justify-content: start;
     gap: 10px;
-    background-color: white;
+    background: var(--ui-bg);
+    backdrop-filter: var(--ui-bg-fx);
     box-shadow: var(--slide-shadow);
     transform: translate(-380px, 0);
     transition-duration: var(--animation-speed);
     overflow-y: scroll;
-    padding: 10px;padding-right: 5px;
+    padding: 10px;
+    padding-right: 5px;
 }
 #ui > h1{
     font-size: 40px;
@@ -121,21 +127,38 @@ header{
 #ui > *{
     font-family: var(--ui-font);
 }
-#ModDialog{
-    top: calc(var(--title-size) + 20px);
-    height: 80vh;
-    width: 90%;
-    border: none;
-    border-radius: var(--ui-radius);
-    box-shadow: var(--ui-shadow);
-    backdrop: #00000055;
-    justify-content: start;
-    flex-direction: column;
-    gap: 10px;
+/* Elements  */
+
+::-webkit-scrollbar {
+    width: 10px;
+    opacity: 0;
 }
 
-/* Elements  */
+::-webkit-scrollbar-track {
+    border: 1px solid darkgray;
+    border-radius: 8px;
+    background-color: #95a5a600;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: var(--accent);
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: var(--dark-accent)
+}
+::-webkit-scrollbar-thumb:active{
+    background-color: var(--light-accent)
+}
+
 /* Slide elements*/
+#Semana,#Hoje,#Amanhã,#Modelos{
+    padding:0;
+    text-align:right;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 Evento, Hora,.Hora, Titulo,.Titulo ,Dia {
     appearance: none;
     height: var(--card-height);
@@ -153,16 +176,20 @@ Evento, Hora,.Hora, Titulo,.Titulo ,Dia {
 }
 
 Evento{
-    height: auto; min-height: va(--card-height);
-    width: calc(100% - 55px);
+    height: auto; min-height: var(--card-height);
+    width: calc(100%);
     display: flex;
     flex-direction: row;
-    justify-content: stretch;
+    justify-content: space-between;
+    gap:20px;
     line-height: var(--line-height);
     vertical-align: middle;
-    margin: auto; margin-bottom: 6px; margin-left: 2%;margin-right: 2%;
-    background: #c8c8c8;
-    padding-left: 7px;
+    margin: auto;
+    margin-bottom: 7px;
+    margin-left: 0%;
+    margin-right: 0%;
+    background: #b2b2b2;
+    padding-left: 0px;
 }
 .ph{ border-bottom: 0; box-shadow: none;}
 Container{
@@ -170,7 +197,8 @@ Container{
     width: 100%;
     flex-direction: column;
     justify-content: space-between;
-    padding: 3px;
+    padding: 5px;padding-bottom:0px;
+    border-radius: var(--radius);
 }
 Leiaute{
     display: flex;
@@ -182,10 +210,10 @@ Leiaute{
 }
 Cartão, .card {
     border-radius: var(--radius);
-    background-color: darkblue;
+    background: darkblue;
     display: flex;
-    width: 95%;
-    margin: calc(3px);
+    width: 100%;
+    margin-bottom: 5px;
     justify-content: space-between;
     box-shadow: var(--slide-shadow);
 }
@@ -204,18 +232,19 @@ Titulo, .Titulo {
 }
 Dia, .Dia{
     appearance: none;
-    max-width: 150px;
+    max-width: 160px;
     width: 18%;
-    padding-left: 0;
+    padding-right: 0px;
     display: inline;
     vertical-align: top;
     text-align: left;
     line-height: var(--font-size);
-    font-weight: 600;
+    font-size:  min(var(--font-size), 34px);
+    font-weight: bold;
     height: 100%;
-    margin-left: auto; margin-right: 0; margin-top:5px;
+    margin-left: 5px; margin-right: 0; margin-top:5px;
 }
-/* Dia::after{content: ":"; display: inline; padding-right: 5px;} */
+Dia::after{content: ":"; display: inline}
 Hora, .Hora {
     max-width: 150px;
     padding-left: calc(20px); padding-right: calc(20px);
@@ -225,7 +254,7 @@ Hora, .Hora {
     border-radius: var(--radius);
     line-height: var(--card-height);
     color: white;
-    background-color: darkslateblue;
+    background: darkslateblue;
 }
 
 /*Ui elements*/
@@ -280,24 +309,27 @@ section{
     border-radius: var(--ui-radius);
     padding: 10px;
     border: 5px;
-    border-color: 5px;
+    border-color: black;
 }
 h2{
     text-align: center;
     font-size: 25px;
     margin: auto 0px auto 0px;
     padding: 10px;
-    line-height: 30px;
+    line-height: 25px;
     border-bottom: 1px solid darkgray;
 }
-select{
+select,input[type="number"]{
     height: calc(var(--ui-height) + 13px);
     width: 150%;
     margin:auto;
 }
+input[type="number"]{
+    height: var(--ui-height);
+}
 select:hover{
     box-shadow: var(--ui-highlight);
-    border-color: var(--light-accent)
+    border-color: var(--light-accent);
 }
 select:disabled{
     box-shadow: none;
@@ -316,11 +348,12 @@ label{
 button, .button{
     width: 100%;
     height: calc(var(--ui-height) + 13px);
-    background-color: var(--accent);
+    background: var(--accent);
     color: white;
+    font-weight: bold;
 }
 input, select{
-    background-color: white;
+    background: white;
     accent-color: var(--accent);
 }
 input[type="color"]{
@@ -348,35 +381,49 @@ input[type="range"]{
 }
 
 /* Edit Variants*/
-.edit{
+*.edit{
     height: calc(55px);
     width: calc(39px);
+    font-size: 26px;
+}
+div.edit{
+    position: absolute;
+    width: 137px;
+    transform: translate(5px,0);
+    height: calc(var(--card-height) + 0px);
+    left: 99%;
+    display:flex;
+    flex-direction: column;
+    border-radius: var(--ui-radius);
+    margin: auto;
 }
 span.edit{
-    position: relative-layer;
+    position: relative;
     flex-direction: column;
     display: var(--ui-span-display);
-    width: 300px;
-    min-width: 130px;
-    background: white;
+    width: 130px;
+    background: lightgray;
+    backdrop-filter: var(--ui-bg-fx);
     border: 1px;
-    border-color: darkgray;
     border-radius: var(--ui-radius);
     box-shadow: var(--slide-shadow);
     padding:0;padding-left: 7px;
     margin: auto;
     vertical-align: middle;
-    transform: translate(5px,0);
     transition-duration: var(--animation-speed);
 
 }
 span.edit:hover{
-    transform: translate(-110px,0);
+    box-shadow: var(--slide-shadow);
 
+}
+div.edit:hover{
+    transform: translate(-120px,0);
+    box-shadow: none;
 }
 button.edit{
     height: 100%;
-    width: 40px;
+    width: 45px;
     background: none;
     color: black;
     display: inline;
@@ -385,7 +432,7 @@ button.edit{
     margin: 0;
     position: relative;
     border-radius: var(--ui-radius);
-    font-size: calc(var(--ui-font-size));
+    font-size: 20px;
     border: none;
 }
 button.edit:hover{
@@ -399,7 +446,7 @@ input[type="color"].edit{
     margin: 0;
     box-shadow: none;
     display: inline;
-    padding: 0;
+    padding: 0px;
     vertical-align: middle;
     margin-top: auto;margin-bottom:auto;
 }

@@ -1,7 +1,7 @@
 //// PROGRAM DATA ////
 const timeIndex = 4
 const style = document.documentElement.style
-var defaultEvent = ["Evento", '#999999', "--:--", "#008080","0" ]
+var defaultEvent = ["Evento", '#005a5c', "--:--", "#008080","0" ]
 var uiState = '-edit'
 // UI
 const addBtn = document.getElementById('addBtn')
@@ -15,6 +15,7 @@ const sidePanel = document.getElementById('ui')
 //Entries
 const dayEntry = document.getElementById('DayEntry')
 const cardHeight = document.getElementById('CardHeight')
+const fontSize = document.getElementById('FontSize')
 const modMenu = document.getElementById('ModMenu')
 const viewsForm = document.getElementById('ViewsForm')
 const viewMode = document.getElementsByName("VM")
@@ -144,18 +145,18 @@ function buildUi3(){
                                 <input id="Name${key}${i}" class="Titulo event" type="text" onchange=(eventUpdate("${key}",${i},this.value,0,null)) value="${event[0]}">
                                 <input  id="Hour${key}${i}" class="Hora event" type="time" style="background-color: ${event[3]};" onchange=(eventUpdate("${key}",${i},this.value,2,null)) value="${event[2]}">
                             </Cartão>
-                            <span class="edit">
+                            <div class="edit"><span class="edit">
                                     <input id="NameColor${key}${i}" onchange="eventUpdate('${key}',${i},this.value,1,Card${key}${i})" class="button card edit" type="color" value="${event[1]}">
                                     <input id="HourColor${key}${i}" onchange="eventUpdate('${key}',${i},this.value,3,Hour${key}${i})" class="button card edit" type="color" value="${event[3]}">
                                     <button class="button card edit" onclick="eventRemove('${key}',${i})" ><i class="fa fa-trash"></i></button>
-                            </span></Leiaute>`
+                            </span></div></Leiaute>`
                 weekMap[key].Container.innerHTML+= card
                 timeParse(key,i,event[2])
             }
-            if (values.length > 1 && settingsData.slide_view == "Semana") {
-                weekMap[key].Container.style.setProperty('border-left', `3pt  black dashed`)
+            if (values.length > 1 /*&& settingsData.slide_view == "Semana"*/) {
+                weekMap[key].Container.style.setProperty('border-left', `4pt  black solid`)
             }else{
-                weekMap[key].Container.style.setProperty('border-left', '3pt  #40404000 dashed')
+                weekMap[key].Container.style.setProperty('border-left', '4pt  #40404000 solid')
             }
         }
     })
@@ -250,6 +251,7 @@ function setupEntries(){
     values = settingsData
     cssData = settingsData.css
     if(cssData.card_height != undefined){cardHeight.value = cssData.card_height[0]}
+    if(cssData.font_size != undefined){fontSize.value = cssData.font_size[0]}
     if(values.slide_view != undefined){
         viewMode.forEach((element) => {
             if (element.value == values.slide_view) element.checked = true
@@ -258,6 +260,7 @@ function setupEntries(){
     }
 }
 function slideViewUpdate(){
+    buildUi3()
     if(settingsData.slide_view == undefined){settingsData.slide_view = 'Semana'}
     const value = settingsData.slide_view
 
@@ -296,6 +299,10 @@ addBtn.addEventListener('click',function(){
 cardHeight.addEventListener('change',function(){
     styleMn("save","card_height",parseInt(this.value),'px')
     styleMn("set","card_height")
+})
+fontSize.addEventListener('change',function(){
+    styleMn("save","font_size",parseInt(this.value),'px')
+    styleMn("set","font_size")
 })
 editBtn.addEventListener('click', function(){uiUpdate('-ui')})
 viewsForm.addEventListener('click', function(){
