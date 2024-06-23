@@ -180,6 +180,7 @@ function addEvent(day){
                 if (modMenu.value == template[0]){
                     console.log(`${template[0]} :: ${modMenu.value}`)
                     eventData[day].push(template)
+                    settingsData.last_event = template[0]
                 }
             })
         }
@@ -187,9 +188,13 @@ function addEvent(day){
     menuUpdate();saveData()
 }
 function menuUpdate(){
+    last_event = settingsData.last_event
     modMenu.options.length = 0
     eventData.Modelos.forEach((element) =>{
         modMenu.options[modMenu.options.length] = new Option(element[0], `${element[0]}`);
+        if (last_event != null | last_event != undefined | element[0] == last_event){
+            modMenu.value = last_event
+        }
     })
 }
 function eventSort(){
