@@ -290,11 +290,14 @@ function slideViewUpdate(){
 
     setupEntries();saveData()
 }
-function backCompat(){
+function setup(){
+// Backward compatibility
     if (settingsData.css == undefined){settingsData.css = {}}
     if (eventData.Amanhã == undefined){eventData.Amanhã = []}
     if (eventData.Hoje == undefined){eventData.Hoje = []}
     if (eventData.Modelos == undefined){eventData.Modelos = [defaultEvent]}
+// General Setup
+    settingsData.last_event = null
 }
 //// Interactivity ////
 addBtn.addEventListener('click',function(){
@@ -342,4 +345,4 @@ impTrigger.addEventListener('change',  function(){
     }
 })
 //// Main Space ////
-backCompat(); styleMn('restore'); eventSort(); slideViewUpdate()
+setup(); styleMn('restore'); eventSort(); slideViewUpdate()
