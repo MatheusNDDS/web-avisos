@@ -154,12 +154,13 @@ function buildUi3(){
                 timeParse(key,i,event[2])
             }
             if (values.length > 1 /*&& settingsData.slide_view == "Semana"*/) {
-                weekMap[key].Container.style.setProperty('border-left', `4pt  black solid`)
-                weekMap[key].Container.style.setProperty('border-right', `4pt  black solid`)
+                weekMap[key].Container.style.setProperty('border-left', `5pt  black solid`)
+                weekMap[key].Container.style.setProperty('border-right', `5pt  black solid`)
+                weekMap[key].Container.style.setProperty('background', '#a1a1a1')
             }else{
-                weekMap[key].Container.style.setProperty('border-left', '4pt  #40404000 solid')
-                weekMap[key].Container.style.setProperty('border-right', '4pt  #40404000 solid')
-
+                weekMap[key].Container.style.setProperty('border-left', '0pt  #40404000 solid')
+                weekMap[key].Container.style.setProperty('border-right', '0pt  #40404000 solid')
+                weekMap[key].Container.style.setProperty('background', '#00000000')
             }
         }
     })

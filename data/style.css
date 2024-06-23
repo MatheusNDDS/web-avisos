@@ -73,7 +73,7 @@ header{
 #EditBtn{
     background: var(--edit-btn-bg);
     width: 100px;
-    left: -32.5px;
+    left: -28px;
     color: black;
 
 }
