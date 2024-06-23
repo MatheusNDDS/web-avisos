@@ -155,8 +155,11 @@ function buildUi3(){
             }
             if (values.length > 1 /*&& settingsData.slide_view == "Semana"*/) {
                 weekMap[key].Container.style.setProperty('border-left', `4pt  black solid`)
+                weekMap[key].Container.style.setProperty('border-right', `4pt  black solid`)
             }else{
                 weekMap[key].Container.style.setProperty('border-left', '4pt  #40404000 solid')
+                weekMap[key].Container.style.setProperty('border-right', '4pt  #40404000 solid')
+
             }
         }
     })
