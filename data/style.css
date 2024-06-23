@@ -395,7 +395,7 @@ input[type="range"]{
 div.edit{
     position: absolute;
     width: 137px;
-    transform: translate(5px,0);
+    transform: translate(0px,0);
     height: calc(var(--card-height) + 0px);
     left: 99%;
     display:flex;
