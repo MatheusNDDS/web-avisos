@@ -296,6 +296,7 @@ span, vspan{
 }
 .clickable:active{
     --edit-btn-bg: var(--accent);
+    background: var(--light-accent);
 }
 .trigger{
     display: none;
