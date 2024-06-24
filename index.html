@@ -13,6 +13,7 @@
   <div id="ToolBar">
     <button class="clickable" id="EditBtn"><i id="EditBtnIcon" class="fa fa-edit"></i></button>
   </div>
+
   <div id="ui"> <!-- <h1><u>Web Avisos</u></h1> -->
               <section>
                 <h2>Visualização</h2>
@@ -23,7 +24,7 @@
                   </span>
 
                   <span class="clickable">
-                    <label for="VMC2"> Sábado </label>
+                    <label id="TomDayLabel" for="VMC2"> Amanhã </label>
                     <input type="radio" value="Amanhã" id="VMC2" name="VM">
                   </span>
 
@@ -39,7 +40,7 @@
                 </form>
               </section>
               <section>
-                  <h2> Novo Evento </h2>
+                  <h2 id="DinAdd" > Novo Evento </h2>
                   <span id="DayEntrySpan">
                     <label>Dia</label>
                     <select id="DayEntry" required>
@@ -72,7 +73,7 @@
                   </vspan>
               </section>
               <section>
-                <h2>Eventos</h2>
+                <h2>Dados de eventos</h2>
                   <span>
                     <button id="ExpBtn">Exportar <i id="EditBtnIcon" class="fa fa-download"></i></button>
                     <button id="ImpBtn">Importar <i id="EditBtnIcon" class="fa fa-file-import"></i></button>
@@ -82,7 +83,7 @@
   </div>
   <div id="Slide">
     <header>
-      <H1> Avisos </H1>
+      <input id="SlideTitle" class="h1" type="text" value="Avisos">
     </header>
     <hr>
     <div style="display:none;" id="Semana">
