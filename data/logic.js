@@ -21,6 +21,7 @@ const viewsForm = document.getElementById('ViewsForm')
 const viewMode = document.getElementsByName("VM")
 const radios = document.forms[0].elements["VM"];
 const impTrigger = document.getElementById('ImpTrigger')
+const slideTitle = document.getElementById('SlideTitle')
 //Week html map
 const weekMap = {
     "Segunda": {
@@ -76,6 +77,49 @@ if (settingsData == undefined){var settingsData = {"css" : {}}}
 
 
 //// Functions ////
+function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
+    switch (cmd) {
+        case '-add':
+            if (modMenu.value == '' && settingsData.slide_view !== "Modelos"){
+                alert('Sem modelos para aplicar, vá na visualização de modelos e crie um.')
+            }else if (settingsData.slide_view == "Modelos"){
+                    var template = Array.from(defaultEvent)
+                    eventData[day].push(template)
+            }else{
+                eventData.Modelos.forEach(element =>{
+                    var template = Array.from(element)
+
+                    if (modMenu.value == template[0]){
+                        console.log(`${template[0]} :: ${modMenu.value}`)
+                        eventData[day].push(template)
+                        settingsData.last_event = template[0]
+                    }
+                })
+            }
+            menuUpdate();saveData();buildUi3()
+        break
+        case '-rm':
+            eventData[day].splice(eventIndex,1)
+            buildUi3()
+        break
+        case '-update':
+            let values = eventData[day]
+            let event = values[eventIndex]
+            event[dataIndex] = value
+
+            if (tagId != null) { tagId.style.setProperty('background', `${event[dataIndex]}`)}
+            timeParse(day,eventIndex,event[dataIndex])
+
+            menuUpdate();saveData()
+        break
+        case '-sort':
+            Object.keys(eventData).forEach(key => {
+                eventData[key] = eventData[key].sort((a, b) => { return a[4] - b[4] })
+            })
+            buildUi3()
+        break
+    }
+}
 function fileMn(cmd,content,filename){
     switch (cmd){
         case '-up':
@@ -90,7 +134,7 @@ function fileMn(cmd,content,filename){
                 json.Modelos != undefined | json.Modelos != null)
             {
                 eventData = json
-                buildUi3(); saveData()
+                saveData();buildUi3()
             }else{
                 alert('Arquivo de eventos invállido!')
             }
@@ -131,61 +175,43 @@ function uiUpdate(cmd){
         }
         break;
     }
-    eventSort()
+    eventMn('-sort')
 }
 function buildUi3(){
     Object.keys(eventData).forEach(key => {
         let values = eventData[key] // Sort a array from fullTimeStr
         if (values == ''){weekMap[key].Container.innerHTML='<Evento class="ph">-</Evento>'}else{weekMap[key].Container.innerHTML=''}
-        // console.log(key)
         for (const i in values){
             let event = values[i]
-            if (values != []){
+            if (values != [] && values != null){
                 let card = `<Leiaute id="Lay${key}${i}"><Cartão id="Card${key}${i}" style="background-color: ${event[1]};">
-                                <input id="Name${key}${i}" class="Titulo event" type="text" onchange=(eventUpdate("${key}",${i},this.value,0,null)) value="${event[0]}">
-                                <input  id="Hour${key}${i}" class="Hora event" type="time" style="background-color: ${event[3]};" onchange=(eventUpdate("${key}",${i},this.value,2,null)) value="${event[2]}">
+                                <input id="Name${key}${i}" class="Titulo event" type="text" onchange=(eventMn('-update',"${key}",${i},this.value,0,null)) value="${event[0]}">
+                                <input  id="Hour${key}${i}" class="Hora event" type="time" style="background-color: ${event[3]};" onchange=(eventMn('-update',"${key}",${i},this.value,2,null)) value="${event[2]}">
                             </Cartão>
                             <div class="edit"><span class="edit">
-                                    <input id="NameColor${key}${i}" onchange="eventUpdate('${key}',${i},this.value,1,Card${key}${i})" class="button card edit" type="color" value="${event[1]}">
-                                    <input id="HourColor${key}${i}" onchange="eventUpdate('${key}',${i},this.value,3,Hour${key}${i})" class="button card edit" type="color" value="${event[3]}">
-                                    <button class="button card edit" onclick="eventRemove('${key}',${i})" ><i class="fa fa-trash"></i></button>
+                                    <input id="NameColor${key}${i}" onchange="eventMn('-update','${key}',${i},this.value,1,Card${key}${i})" class="button card edit" type="color" value="${event[1]}">
+                                    <input id="HourColor${key}${i}" onchange="eventMn('-update','${key}',${i},this.value,3,Hour${key}${i})" class="button card edit" type="color" value="${event[3]}">
+                                    <button class="button card edit" onclick="eventMn('-rm','${key}',${i})" ><i class="fa fa-trash"></i></button>
                             </span></div></Leiaute>`
                 weekMap[key].Container.innerHTML+= card
                 timeParse(key,i,event[2])
+
             }
-            if (values.length > 1 /*&& settingsData.slide_view == "Semana"*/) {
-                weekMap[key].Container.style.setProperty('border-left', `5pt  black solid`)
-                weekMap[key].Container.style.setProperty('border-right', `5pt  black solid`)
-                weekMap[key].Container.style.setProperty('background', '#a1a1a1')
-            }else{
-                weekMap[key].Container.style.setProperty('border-left', '0pt  #40404000 solid')
-                weekMap[key].Container.style.setProperty('border-right', '0pt  #40404000 solid')
-                weekMap[key].Container.style.setProperty('background', '#00000000')
-            }
+        }
+        if (values.length > 0 ){
+            weekMap[key].Container.style.setProperty('background', '#a1a1a1')
+        }else{
+            weekMap[key].Container.style.setProperty('background', '#00000000')
+        }
+        if (values.length > 1 /*&& settingsData.slide_view == "Semana"*/) {
+            weekMap[key].Container.style.setProperty('border-left', `5pt  black solid`)
+            weekMap[key].Container.style.setProperty('border-right', `5pt  black solid`)
+        }else{
+            weekMap[key].Container.style.setProperty('border-left', '0pt  #40404000 solid')
+            weekMap[key].Container.style.setProperty('border-right', '0pt  #40404000 solid')
         }
     })
     saveData(); menuUpdate()
-}
-function addEvent(day){
-    if (modMenu.value == '' && settingsData.slide_view !== "Modelos"){
-        alert('Sem modelos para aplicar, vá na visualização de modelos e crie um.')
-    }else{
-        if (settingsData.slide_view == "Modelos"){
-            var template = Array.from(defaultEvent)
-            eventData[day].push(template)
-        }else{
-            eventData.Modelos.forEach(element =>{
-                var template = Array.from(element)
-
-                if (modMenu.value == template[0]){
-                    console.log(`${template[0]} :: ${modMenu.value}`)
-                    eventData[day].push(template)
-                    settingsData.last_event = template[0]
-                }
-            })
-        }
-    }
-    menuUpdate();saveData()
 }
 function menuUpdate(){
     last_event = settingsData.last_event
@@ -196,26 +222,6 @@ function menuUpdate(){
             modMenu.value = last_event
         }
     })
-}
-function eventSort(){
-    Object.keys(eventData).forEach(key => {
-        eventData[key] = eventData[key].sort((a, b) => { return a[4] - b[4] })
-    })
-    buildUi3()
-}
-function eventRemove(day,eventIndex){
-    eventData[day].splice(eventIndex,1)
-    buildUi3()
-}
-function eventUpdate(day,eventIndex,value,dataIndex,tagId){
-    let values = eventData[day]
-    let event = values[eventIndex]
-    event[dataIndex]=value
-
-    if ( tagId != null){ tagId.style.setProperty('background', `${event[dataIndex]}`)}
-    
-    timeParse(day,eventIndex,event[dataIndex])
-    menuUpdate();saveData()
 }
 function saveData(){
     localStorage.setItem('eventData',JSON.stringify(eventData))
@@ -237,10 +243,10 @@ function toMS(str) {
 }
 function styleMn(cmd,key,value,type,master){
     switch (cmd){
-        case 'save':
+        case '-save':
             settingsData.css[key] = [value , type]
         break;
-        case 'restore':
+        case '-restore':
             cssData = settingsData.css
             Object.keys(cssData).forEach(key => {
                 let values = cssData[key]
@@ -248,7 +254,7 @@ function styleMn(cmd,key,value,type,master){
             })
             setupEntries()
         break;
-        case 'set':
+        case '-set':
             cssData = settingsData.css
             values = cssData[key]
             style.setProperty(`--${key}`.replace('_','-'), `${values[0]}${values[1]}`)
@@ -259,14 +265,17 @@ function styleMn(cmd,key,value,type,master){
 function setupEntries(){
     values = settingsData
     cssData = settingsData.css
+
     if(cssData.card_height != undefined){cardHeight.value = cssData.card_height[0]}
     if(cssData.font_size != undefined){fontSize.value = cssData.font_size[0]}
+    if(values.slide_title != undefined | values.slide_title != null){slideTitle.value = values.slide_title}
     if(values.slide_view != undefined){
-        viewMode.forEach((element) => {
-            if (element.value == values.slide_view) element.checked = true
-        })
-
+        viewMode.forEach((element) => {if (element.value == values.slide_view) element.checked = true})
     }
+
+    // renames the “Amanhã” label for my especial use case
+    tomDayLabel = document.getElementById('TomDayLabel')
+    if(values.tom_day_label != undefined | values.tom_day_label != null){tomDayLabel.innerHTML = values.tom_day_label}
 }
 function slideViewUpdate(){
     buildUi3()
@@ -282,10 +291,14 @@ function slideViewUpdate(){
         }
     })
 
-    if(value == 'Semana'){
-        dayEntry.disabled = false
+    if(value == 'Semana'){dayEntry.disabled = false}else{dayEntry.disabled = true}
+    if(value == 'Modelos'){
+        document.getElementById('DinAdd').innerHTML = 'Novo Modelo'
+        modMenu.disabled = true
     }else{
-        dayEntry.disabled = true
+        document.getElementById('DinAdd').innerHTML = 'Novo Evento'
+        modMenu.disabled = false
+
     }
 
     setupEntries();saveData()
@@ -298,23 +311,29 @@ function setup(){
     if (eventData.Modelos == undefined){eventData.Modelos = [defaultEvent]}
 // General Setup
     settingsData.last_event = null
+    firstModel = eventData.Modelos[0]
+    if (firstModel[0] != defaultEvent[0] ) {console.log('TODO')}
 }
 //// Interactivity ////
 addBtn.addEventListener('click',function(){
     if (settingsData.slide_view == "Semana"){
-        addEvent(dayEntry.value)
+        eventMn('-add',dayEntry.value)
     }else{
-        addEvent(settingsData.slide_view)
+        eventMn('-add',settingsData.slide_view)
     }
     buildUi3()
 })
 cardHeight.addEventListener('change',function(){
-    styleMn("save","card_height",parseInt(this.value),'px')
-    styleMn("set","card_height")
+    styleMn('-save',"card_height",parseInt(this.value),'px')
+    styleMn('-set',"card_height")
+})
+slideTitle.addEventListener('change',function(){
+    settingsData.slide_title = this.value
+    saveData()
 })
 fontSize.addEventListener('change',function(){
-    styleMn("save","font_size",parseInt(this.value),'px')
-    styleMn("set","font_size")
+    styleMn('-save',"font_size",parseInt(this.value),'px')
+    styleMn('-set',"font_size")
 })
 editBtn.addEventListener('click', function(){uiUpdate('-ui')})
 viewsForm.addEventListener('click', function(){
@@ -345,4 +364,4 @@ impTrigger.addEventListener('change',  function(){
     }
 })
 //// Main Space ////
-setup(); styleMn('restore'); eventSort(); slideViewUpdate()
+setup(); styleMn('-restore'); eventMn('-sort'); slideViewUpdate()

@@ -38,10 +38,19 @@ body{
     margin: 0;
     overflow: hidden;
 }
-h1{
+h1, .h1{
+    appearance: none;
+    -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
     font-size: var(--title-size);
-    margin: 2px;
+    margin: none;padding:none;
+    display:flex;
     height: var(--title-size);
+    line-height: var(--title-size);
+    border: none;
+    text-align: center;
+    font-weight: bold;
+    font-family: serif;
+    vertical-align: middle;
 }
 
 main{
@@ -65,7 +74,7 @@ header{
     border: none;
     text-align: center;
     vertical-align: middle;
-    width: auto; height: calc(var(--title-size) + 12px);
+    width: auto; height: calc(var(--title-size) + 16px);
     padding-left: 50px;
     padding-right:30px;
     border-radius: var(--radius);
@@ -95,7 +104,7 @@ header{
 }
 #ui{
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
-    top: calc(var(--title-size) + 13px);
+    top: calc(var(--title-size) + 17px);
     width: 400px;
     height: calc(100vh - 64px);
     display: var(--ui-display);
@@ -108,7 +117,6 @@ header{
     box-shadow: var(--slide-shadow);
     transform: translate(-380px, 0);
     transition-duration: var(--animation-speed);
-    border-radius: 0 var(--ui-radius)  var(--ui-radius) 0;
     overflow-y: auto;
     padding: 12px;
     padding-right: 0px;
@@ -137,23 +145,22 @@ header{
 }
 
 ::-webkit-scrollbar-track {
-    border: 1px solid #95a5a600;
-    border-radius: 8px;
-    background-color: #95a5a600;
+    background: none;
 }
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    background-color: var(--accent);
+    border-radius: 2px;
+    background: var(--accent);
 }
 ::-webkit-scrollbar-thumb:hover{
-    background-color: var(--dark-accent)
+    background: var(--dark-accent)
 }
 ::-webkit-scrollbar-track:hover{
-    background-color: lightgray;
+    background: lightgray;
 }
 ::-webkit-scrollbar-thumb:active{
-    background-color: var(--light-accent)
+    background: var(--light-accent);
+
 }
 
 /* Slide elements*/
@@ -196,7 +203,7 @@ Evento{
     background: #c2c2c2;
     padding-left: 0px;
 }
-.ph{ border-bottom: 0; box-shadow: none;}
+.ph{ border-bottom: 0; box-shadow: none;background: none;}
 Container{
     display: flex;
     width: 100%;
