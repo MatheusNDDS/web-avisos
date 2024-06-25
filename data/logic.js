@@ -97,11 +97,11 @@ function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
                 })
             }
             menuUpdate();saveData();buildUi3()
-        break
+        return;break
         case '-rm':
             eventData[day].splice(eventIndex,1)
             buildUi3()
-        break
+        return;break
         case '-update':
             let values = eventData[day]
             let event = values[eventIndex]
@@ -111,13 +111,13 @@ function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
             timeParse(day,eventIndex,event[dataIndex])
 
             menuUpdate();saveData()
-        break
+        return;break
         case '-sort':
             Object.keys(eventData).forEach(key => {
                 eventData[key] = eventData[key].sort((a, b) => { return a[4] - b[4] })
             })
             buildUi3()
-        break
+        return;break
     }
 }
 function fileMn(cmd,content,filename){
@@ -164,6 +164,7 @@ function uiUpdate(cmd){
                 style.setProperty('--edit-btn-bg','none')
                 editBtnIcon.classList.add('fa-edit');editBtnIcon.classList.remove('fa-check')
                 uiState = '-edit'
+                eventMn('-sort')
             break;
             case '-edit':
                 style.setProperty('--ui-display','flex')
@@ -203,7 +204,7 @@ function buildUi3(){
         }else{
             weekMap[key].Container.style.setProperty('background', '#00000000')
         }
-        if (values.length > 1 /*&& settingsData.slide_view == "Semana"*/) {
+        if (values.length > 1 && settingsData.slide_view == "Semana") {
             weekMap[key].Container.style.setProperty('border-left', `5pt  black solid`)
             weekMap[key].Container.style.setProperty('border-right', `5pt  black solid`)
         }else{
@@ -218,9 +219,9 @@ function menuUpdate(){
     modMenu.options.length = 0
     eventData.Modelos.forEach((element) =>{
         modMenu.options[modMenu.options.length] = new Option(element[0], `${element[0]}`);
-        if (last_event != null | last_event != undefined | element[0] == last_event){
-            modMenu.value = last_event
-        }
+        if (last_event != null && last_event != undefined && element[0] == last_event){
+                modMenu.value = last_event
+            }
     })
 }
 function saveData(){
@@ -335,7 +336,7 @@ fontSize.addEventListener('change',function(){
     styleMn('-save',"font_size",parseInt(this.value),'px')
     styleMn('-set',"font_size")
 })
-editBtn.addEventListener('click', function(){uiUpdate('-ui')})
+editBtn.addEventListener('click', function(){uiUpdate('-ui');eventMn('-sort')})
 viewsForm.addEventListener('click', function(){
     viewMode.forEach((element) =>{
         if (element.checked == true){

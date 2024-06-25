@@ -24,8 +24,8 @@
     --slide-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
     --ui-shadow:  0 0px 3px 1px rgba(0, 0, 0, 0.3);
     --ui-highlight:  0 0px 3px 1px var(--light-accent);
-    --ui-bg: white;
-    --ui-bg-fx: none;
+    --ui-bg: #00535388;
+    --ui-bg-fx: blur(10px);
     --container-border: 0;
 
 }
@@ -115,12 +115,13 @@ header{
     background: var(--ui-bg);
     backdrop-filter: var(--ui-bg-fx);
     box-shadow: var(--slide-shadow);
-    transform: translate(-380px, 0);
+    transform: translate(-390px, 0);
     transition-duration: var(--animation-speed);
     overflow-y: auto;
     padding: 12px;
     padding-right: 0px;
     scrollbar-gutter: stable;
+    transition-delay: 0.25s;
 }
 #ui > h1{
     font-size: 40px;
@@ -128,6 +129,7 @@ header{
 }
 #ui:hover{
     transform: translate(0, 0);
+    transition-delay: 0s;
 }
 #ui, section,{
     display: flex;
@@ -145,21 +147,21 @@ header{
 }
 
 ::-webkit-scrollbar-track {
-    background: none;
+    background: #ffffff40;
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 2px;
-    background: var(--accent);
+    background: var(--light-accent);
 }
 ::-webkit-scrollbar-thumb:hover{
-    background: var(--dark-accent)
+    background: var(--section-accent)
 }
 ::-webkit-scrollbar-track:hover{
-    background: lightgray;
+    background: #ffffff55;
 }
 ::-webkit-scrollbar-thumb:active{
-    background: var(--light-accent);
+    background: var(--accent);
 
 }
 
@@ -200,7 +202,7 @@ Evento{
     margin-bottom: 5px;
     margin-left: 0%;
     margin-right: 0%;
-    background: #c2c2c2;
+    background: #d2d2d2;
     padding-left: 0px;
 }
 .ph{ border-bottom: 0; box-shadow: none;background: none;}
@@ -409,13 +411,14 @@ div.edit{
     flex-direction: column;
     border-radius: var(--ui-radius);
     margin: auto;
+    transition-delay: 0.2s;
 }
 span.edit{
     position: relative;
     flex-direction: column;
     display: var(--ui-span-display);
     width: 130px;
-    background: lightgray;
+    background: #c2c2c2aa;
     backdrop-filter: var(--ui-bg-fx);
     border: 1px;
     border-radius: var(--ui-radius);
@@ -432,6 +435,7 @@ span.edit:hover{
 div.edit:hover{
     transform: translate(-120px,0);
     box-shadow: none;
+    transition-delay: 0s;
 }
 button.edit{
     height: 100%;
