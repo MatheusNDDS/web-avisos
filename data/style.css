@@ -6,7 +6,7 @@
     --title-size: 50px;
     --card-height:calc(70px) ;
     --font-size: calc(28px);
-    --radius: calc(12px);
+    --radius: calc(15px);
     --ui-font: sans-serif;
     --slide-font: sans-serif;
     --ui-font-size: 20px;
@@ -24,8 +24,8 @@
     --slide-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
     --ui-shadow:  0 0px 3px 1px rgba(0, 0, 0, 0.3);
     --ui-highlight:  0 0px 3px 1px var(--light-accent);
-    --ui-bg: #00535388;
-    --ui-bg-fx: blur(10px);
+    --ui-bg: #005353;
+    --ui-bg-fx: none;
     --container-border: 0;
 
 }
@@ -196,13 +196,14 @@ Evento{
     flex-direction: row;
     justify-content: space-between;
     gap: 20px;
+    border-radius: var(--radius);
     line-height: var(--line-height);
     vertical-align: middle;
     margin: auto;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
     margin-left: 0%;
     margin-right: 0%;
-    background: #d2d2d2;
+    background: #a1a1a1;
     padding-left: 0px;
 }
 .ph{ border-bottom: 0; box-shadow: none;background: none;}
@@ -418,7 +419,7 @@ span.edit{
     flex-direction: column;
     display: var(--ui-span-display);
     width: 130px;
-    background: #c2c2c2aa;
+    background: #c2c2c2;
     backdrop-filter: var(--ui-bg-fx);
     border: 1px;
     border-radius: var(--ui-radius);

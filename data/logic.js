@@ -200,7 +200,7 @@ function buildUi3(){
             }
         }
         if (values.length > 0 ){
-            weekMap[key].Container.style.setProperty('background', '#a1a1a1')
+            weekMap[key].Container.style.setProperty('background', '#838383')
         }else{
             weekMap[key].Container.style.setProperty('background', '#00000000')
         }
