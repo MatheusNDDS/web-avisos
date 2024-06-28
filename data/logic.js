@@ -97,8 +97,8 @@ function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
                     }
                 })
             }
-            saveData();menuUpdate();buildUi3()
-        break
+            menuUpdate();saveData();buildUi3()
+        return;break
         case '-rm':
             eventData[day].splice(eventIndex,1)
             buildUi3()
@@ -111,14 +111,14 @@ function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
             if (tagId != null) { tagId.style.setProperty('background', `${event[dataIndex]}`)}
             timeParse(day,eventIndex,event[dataIndex])
 
-            saveData();menuUpdate()
-        break
+            menuUpdate();saveData()
+        return;break
         case '-sort':
             Object.keys(eventData).forEach(key => {
                 eventData[key] = eventData[key].sort((a, b) => { return a[4] - b[4] })
             })
             buildUi3()
-        break
+        return;break
     }
 }
 function fileMn(cmd,content,filename){
@@ -332,11 +332,16 @@ function setup(){
     oldSettings = JSON.parse(localStorage.getItem('settingsData'))
     if (oldEvents != undefined | oldEvents != null){
         eventData = oldEvents
+        if (eventData.Modelos == undefined){eventData.Modelos = [defaultEvent]}
+        if (eventData.Amanhã == undefined){eventData.Amanhã = []}
+        if (eventData.Hoje == undefined){eventData.Hoje = []}
+        if (eventData.Modelos == undefined){eventData.Modelos = [defaultEvent]}
         saveData();buildUi3()
         localStorage.removeItem('eventData')
     }
     if (oldSettings != undefined | oldSettings != null){
         settingsData = oldSettings
+        if (settingsData.css == undefined){settingsData.css = {}}
         saveData();buildUi3()
         localStorage.removeItem('settingsData')
     }
