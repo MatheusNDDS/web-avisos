@@ -145,21 +145,21 @@ header{
 }
 
 ::-webkit-scrollbar-track {
-    background: #ffffff40;
+    background: lightgrey;
+    box-shadow: inset 0 0px 3px 1px rgba(0, 0, 0, 0.05)
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 2px;
-    background: var(--light-accent);
+    background: var(--accent);
 }
 ::-webkit-scrollbar-thumb:hover{
-    background: var(--section-accent)
+    background: var(--light-accent)
 }
 ::-webkit-scrollbar-track:hover{
-    background: #ffffff55;
 }
 ::-webkit-scrollbar-thumb:active{
-    background: var(--accent);
+    background: var(--dark-accent);
 
 }
 
@@ -395,7 +395,7 @@ input[type="range"]{
 }
 
 /* Edit Variants*/
-*.edit{
+.edit{
     height: calc(55px);
     width: calc(39px);
     font-size: 26px;
@@ -408,7 +408,6 @@ div.edit{
     left: 99%;
     display:flex;
     flex-direction: column;
-    border-radius: var(--ui-radius);
     margin: auto;
     transition-delay: 0.2s;
 }
@@ -432,7 +431,6 @@ span.edit:hover{
 }
 div.edit:hover{
     transform: translate(-120px,0);
-    box-shadow: none;
     transition-delay: 0s;
 }
 button.edit{

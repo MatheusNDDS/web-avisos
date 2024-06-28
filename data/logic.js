@@ -77,7 +77,6 @@ if (Data == undefined || Data == null){
 }
 var eventData = Data.Events
 var settingsData = Data.Settings
-
 //// Functions ////
 function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
     switch (cmd) {
@@ -98,8 +97,8 @@ function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
                     }
                 })
             }
-            menuUpdate();saveData();buildUi3()
-        return;break
+            saveData();menuUpdate();buildUi3()
+        break
         case '-rm':
             eventData[day].splice(eventIndex,1)
             buildUi3()
@@ -112,14 +111,14 @@ function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
             if (tagId != null) { tagId.style.setProperty('background', `${event[dataIndex]}`)}
             timeParse(day,eventIndex,event[dataIndex])
 
-            menuUpdate();saveData()
-        return;break
+            saveData();menuUpdate()
+        break
         case '-sort':
             Object.keys(eventData).forEach(key => {
                 eventData[key] = eventData[key].sort((a, b) => { return a[4] - b[4] })
             })
             buildUi3()
-        return;break
+        break
     }
 }
 function fileMn(cmd,content,filename){
