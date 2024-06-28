@@ -327,7 +327,7 @@ function slideViewUpdate(){
 }
 function setup(){
 /// Backward compatibility
-    //Data storage refactoring
+    //Data storage refactoring (Everting went wrong during test stage.)
     oldEvents = JSON.parse(localStorage.getItem('eventData'))
     oldSettings = JSON.parse(localStorage.getItem('settingsData'))
     if (oldEvents != undefined | oldEvents != null){
@@ -335,13 +335,15 @@ function setup(){
         if (eventData.Modelos == undefined){eventData.Modelos = [defaultEvent]}
         if (eventData.Amanhã == undefined){eventData.Amanhã = []}
         if (eventData.Hoje == undefined){eventData.Hoje = []}
-        if (eventData.Modelos == undefined){eventData.Modelos = [defaultEvent]}
         saveData();buildUi3()
         localStorage.removeItem('eventData')
     }
     if (oldSettings != undefined | oldSettings != null){
         settingsData = oldSettings
+        firstModel = eventData.Modelos[0]
+        settingsData.last_event = null
         if (settingsData.css == undefined){settingsData.css = {}}
+        if (firstModel[0] != defaultEvent[0] ) {console.log('TODO')}
         saveData();buildUi3()
         localStorage.removeItem('settingsData')
     }
@@ -351,6 +353,7 @@ function setup(){
     if (eventData.Amanhã == undefined){eventData.Amanhã = []}
     if (eventData.Hoje == undefined){eventData.Hoje = []}
     if (eventData.Modelos == undefined){eventData.Modelos = [defaultEvent]}
+
 /// General Setup
     settingsData.last_event = null
     firstModel = eventData.Modelos[0]
