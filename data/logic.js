@@ -19,7 +19,7 @@ const fontSize = document.getElementById('FontSize')
 const modMenu = document.getElementById('ModMenu')
 const viewsForm = document.getElementById('ViewsForm')
 const viewMode = document.getElementsByName("VM")
-const radios = document.forms[0].elements["VM"];
+const radios = document.forms[0].elements["VM"]
 const impTrigger = document.getElementById('ImpTrigger')
 const slideTitle = document.getElementById('SlideTitle')
 //Week html map
@@ -67,14 +67,16 @@ const weekMap = {
 }
 const views = ['Semana','Amanhã', 'Hoje', 'Modelos']
 // Try restore storage
-var eventData = JSON.parse(localStorage.getItem('eventData'))
-var settingsData = JSON.parse(localStorage.getItem('settingsData'))
-// Setup Storage
-if (eventData == undefined || eventData == null ){
-    var eventData = {"Segunda": [],"Terça": [],"Quarta": [],"Quinta": [],"Sexta": [],"Sábado": [],"Domingo": [],"Amanhã" : [], "Hoje" : []}
+var Data = JSON.parse(localStorage.getItem('Data'))
+// Setup Data
+if (Data == undefined || Data == null){
+    Data = {
+        "Events" : {"Segunda": [],"Terça": [],"Quarta": [],"Quinta": [],"Sexta": [],"Sábado": [],"Domingo": [],"Amanhã" : [], "Hoje" : []},
+        "Settings" : {"css" : {}},
+    }
 }
-if (settingsData == undefined){var settingsData = {"css" : {}}}
-
+var eventData = Data.Events
+var settingsData = Data.Settings
 
 //// Functions ////
 function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
@@ -124,19 +126,37 @@ function fileMn(cmd,content,filename){
     switch (cmd){
         case '-up':
             const json = JSON.parse(content)
-            if (json.Segunda != undefined | json.Segunda != null &&
-                json.Terça != undefined | json.Terça != null &&
-                json.Quarta != undefined | json.Quarta != null &&
-                json.Quinta != undefined | json.Quinta!= null &&
-                json.Sexta != undefined | json.Sexta != null &&
-                json.Sábado != undefined | json.Sábado != null &&
-                json.Domingo != undefined | json.Domingo != null &&
-                json.Modelos != undefined | json.Modelos != null)
+            if (json.Events != undefined | json.Events != null &&
+                json.Events.Segunda != undefined | json.Events.Segunda != null &&
+                json.Events.Terça != undefined | json.Events.Terça != null &&
+                json.Events.Quarta != undefined | json.Events.Quarta != null &&
+                json.Events.Quinta != undefined | json.Events.Quinta != null &&
+                json.Events.Sexta != undefined | json.Events.Sexta != null &&
+                json.Events.Sábado != undefined | json.Events.Sábado != null &&
+                json.Events.Domingo != undefined | json.Events.Domingo != null &&
+                json.Events.Modelos != undefined | json.Events.Modelos != null &&
+                json.Settings != undefined | json.Settings != null &&
+                json.Settings.css != undefined | json.Settings.css != null)
             {
-                eventData = json
-                saveData();buildUi3()
+                Data = json
+                eventData = Data.Events
+                settingsData = Data.Settings
+                saveData();buildUi3();styleMn('-restore')
             }else{
-                alert('Arquivo de eventos invállido!')
+                if (json.Segunda != undefined | json.Segunda != null &&
+                    json.Terça != undefined | json.Terça != null &&
+                    json.Quarta != undefined | json.Quarta != null &&
+                    json.Quinta != undefined | json.Quinta != null &&
+                    json.Sexta != undefined | json.Sexta != null &&
+                    json.Sábado != undefined | json.Sábado != null &&
+                    json.Domingo != undefined | json.Domingo != null &&
+                    json.Modelos != undefined | json.Modelos != null)
+                {
+                    eventData = json
+                    saveData();buildUi3()
+                }else{
+                    alert('Arquivo de eventos invállido!')
+                }
             }
             break;
         case '-dl':
@@ -164,7 +184,6 @@ function uiUpdate(cmd){
                 style.setProperty('--edit-btn-bg','none')
                 editBtnIcon.classList.add('fa-edit');editBtnIcon.classList.remove('fa-check')
                 uiState = '-edit'
-                eventMn('-sort')
             break;
             case '-edit':
                 style.setProperty('--ui-display','flex')
@@ -180,11 +199,11 @@ function uiUpdate(cmd){
 }
 function buildUi3(){
     Object.keys(eventData).forEach(key => {
-        let values = eventData[key] // Sort a array from fullTimeStr
-        if (values == ''){weekMap[key].Container.innerHTML='<Evento class="ph">-</Evento>'}else{weekMap[key].Container.innerHTML=''}
+        const values = eventData[key]
+        if (values.length == 0){weekMap[key].Container.innerHTML='<Evento class="ph">-</Evento>'}else{weekMap[key].Container.innerHTML=''}
         for (const i in values){
             let event = values[i]
-            if (values != [] && values != null){
+            if (values.length != 0 && values != null){
                 let card = `<Leiaute id="Lay${key}${i}"><Cartão id="Card${key}${i}" style="background-color: ${event[1]};">
                                 <input id="Name${key}${i}" class="Titulo event" type="text" onchange=(eventMn('-update',"${key}",${i},this.value,0,null)) value="${event[0]}">
                                 <input  id="Hour${key}${i}" class="Hora event" type="time" style="background-color: ${event[3]};" onchange=(eventMn('-update',"${key}",${i},this.value,2,null)) value="${event[2]}">
@@ -196,7 +215,6 @@ function buildUi3(){
                             </span></div></Leiaute>`
                 weekMap[key].Container.innerHTML+= card
                 timeParse(key,i,event[2])
-
             }
         }
         if (values.length > 0 ){
@@ -217,16 +235,20 @@ function buildUi3(){
 function menuUpdate(){
     last_event = settingsData.last_event
     modMenu.options.length = 0
+
     eventData.Modelos.forEach((element) =>{
         modMenu.options[modMenu.options.length] = new Option(element[0], `${element[0]}`);
         if (last_event != null && last_event != undefined && element[0] == last_event){
                 modMenu.value = last_event
-            }
+        }
     })
 }
 function saveData(){
-    localStorage.setItem('eventData',JSON.stringify(eventData))
-    localStorage.setItem('settingsData',JSON.stringify(settingsData))
+    const wadata = {
+        "Events" : eventData,
+        "Settings" : settingsData,
+    }
+    localStorage.setItem('Data',JSON.stringify(wadata))
 }
 function timeParse(day,eventIndex,timeStr){
         let events = eventData[day]
@@ -305,17 +327,32 @@ function slideViewUpdate(){
     setupEntries();saveData()
 }
 function setup(){
-// Backward compatibility
+/// Backward compatibility
+    //Data storage refactoring
+    oldEvents = JSON.parse(localStorage.getItem('eventData'))
+    oldSettings = JSON.parse(localStorage.getItem('settingsData'))
+    if (oldEvents != undefined | oldEvents != null){
+        eventData = oldEvents
+        saveData();buildUi3()
+        localStorage.removeItem('eventData')
+    }
+    if (oldSettings != undefined | oldSettings != null){
+        settingsData = oldSettings
+        saveData();buildUi3()
+        localStorage.removeItem('settingsData')
+    }
+
+    //Simple faisafe
     if (settingsData.css == undefined){settingsData.css = {}}
     if (eventData.Amanhã == undefined){eventData.Amanhã = []}
     if (eventData.Hoje == undefined){eventData.Hoje = []}
     if (eventData.Modelos == undefined){eventData.Modelos = [defaultEvent]}
-// General Setup
+/// General Setup
     settingsData.last_event = null
     firstModel = eventData.Modelos[0]
     if (firstModel[0] != defaultEvent[0] ) {console.log('TODO')}
 }
-//// Interactivity ////
+//// Listeners ////
 addBtn.addEventListener('click',function(){
     if (settingsData.slide_view == "Semana"){
         eventMn('-add',dayEntry.value)
@@ -336,7 +373,9 @@ fontSize.addEventListener('change',function(){
     styleMn('-save',"font_size",parseInt(this.value),'px')
     styleMn('-set',"font_size")
 })
-editBtn.addEventListener('click', function(){uiUpdate('-ui');eventMn('-sort')})
+editBtn.addEventListener('click', function(){
+    uiUpdate('-ui');eventMn('-sort')
+})
 viewsForm.addEventListener('click', function(){
     viewMode.forEach((element) =>{
         if (element.checked == true){
@@ -350,7 +389,7 @@ impBtn.addEventListener('click', function(){
     impTrigger.click()
 })
 expBtn.addEventListener('click', function(){
-    fileMn('-dl',eventData,`Eventos.json`)
+    fileMn('-dl',Data,`Eventos.json`)
 })
 impTrigger.addEventListener('change',  function(){
     var eventsFile = this.files[0]

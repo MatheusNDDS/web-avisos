@@ -9,7 +9,7 @@
     --radius: calc(15px);
     --ui-font: sans-serif;
     --slide-font: sans-serif;
-    --ui-font-size: 20px;
+    --ui-font-size: 18px;
     --ui-radius: 5px;
     --ui-height: 30px;
     --ui-display: none;
@@ -25,7 +25,6 @@
     --ui-shadow:  0 0px 3px 1px rgba(0, 0, 0, 0.3);
     --ui-highlight:  0 0px 3px 1px var(--light-accent);
     --ui-bg: #FFFFFF;
-    --ui-bg-fx: none;
     --container-border: 0;
 
 }
@@ -77,7 +76,7 @@ header{
     width: auto; height: calc(var(--title-size) + 16px);
     padding-left: 50px;
     padding-right:30px;
-    border-radius: var(--radius);
+    border-radius: var(--ui-radius);
 }
 #EditBtn{
     background: var(--edit-btn-bg);
@@ -113,7 +112,6 @@ header{
     justify-content: start;
     gap: 10px;
     background: var(--ui-bg);
-    backdrop-filter: var(--ui-bg-fx);
     box-shadow: var(--slide-shadow);
     transform: translate(-390px, 0);
     transition-duration: var(--animation-speed);
@@ -124,7 +122,7 @@ header{
     transition-delay: 0.25s;
 }
 #ui > h1{
-    font-size: 40px;
+    font-size: 38px;
     text-align:center;
 }
 #ui:hover{
@@ -420,7 +418,6 @@ span.edit{
     display: var(--ui-span-display);
     width: 130px;
     background: #c2c2c2;
-    backdrop-filter: var(--ui-bg-fx);
     border: 1px;
     border-radius: var(--ui-radius);
     padding:0;padding-left: 7px;
