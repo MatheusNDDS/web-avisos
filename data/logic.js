@@ -77,6 +77,8 @@ if (Data == undefined || Data == null){
 }
 var eventData = Data.Events
 var settingsData = Data.Settings
+
+
 //// Functions ////
 function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
     switch (cmd) {
@@ -87,38 +89,36 @@ function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
                     var template = Array.from(defaultEvent)
                     eventData[day].push(template)
             }else{
-                eventData.Modelos.forEach(element =>{
-                    var template = Array.from(element)
-
+                for (let key in eventData.Modelos){
+                    let template = Array.from(eventData.Modelos[key])
                     if (modMenu.value == template[0]){
-                        console.log(`${template[0]} :: ${modMenu.value}`)
                         eventData[day].push(template)
                         settingsData.last_event = template[0]
                     }
-                })
+                }
             }
             menuUpdate();saveData();buildUi3()
-        return;break
+        break
         case '-rm':
             eventData[day].splice(eventIndex,1)
             buildUi3()
-        return;break
+        break
         case '-update':
-            let values = eventData[day]
-            let event = values[eventIndex]
+            let dayEvents = eventData[day]
+            let event = dayEvents[eventIndex]
             event[dataIndex] = value
 
-            if (tagId != null) { tagId.style.setProperty('background', `${event[dataIndex]}`)}
-            timeParse(day,eventIndex,event[dataIndex])
+            if (tagId != null) {tagId.style.setProperty('background', `${event[dataIndex]}`)}
 
+            timeParse(day,eventIndex,event[dataIndex])
             menuUpdate();saveData()
-        return;break
+        break
         case '-sort':
-            Object.keys(eventData).forEach(key => {
+            for (let key in eventData){
                 eventData[key] = eventData[key].sort((a, b) => { return a[4] - b[4] })
-            })
+            }
             buildUi3()
-        return;break
+        break
     }
 }
 function fileMn(cmd,content,filename){
@@ -197,12 +197,12 @@ function uiUpdate(cmd){
     eventMn('-sort')
 }
 function buildUi3(){
-    Object.keys(eventData).forEach(key => {
-        const values = eventData[key]
-        if (values.length == 0){weekMap[key].Container.innerHTML='<Evento class="ph">-</Evento>'}else{weekMap[key].Container.innerHTML=''}
-        for (const i in values){
-            let event = values[i]
-            if (values.length != 0 && values != null){
+    for (let key in eventData){
+        let Events = eventData[key]
+        if (Events.length == 0){weekMap[key].Container.innerHTML='<Evento class="ph">-</Evento>'}else{weekMap[key].Container.innerHTML=''}
+        for (const i in Events){
+            let event = Events[i]
+            if (Events.length != 0 && Events != null){
                 let card = `<Leiaute id="Lay${key}${i}"><Cartão id="Card${key}${i}" style="background-color: ${event[1]};">
                                 <input id="Name${key}${i}" class="Titulo event" type="text" onchange=(eventMn('-update',"${key}",${i},this.value,0,null)) value="${event[0]}">
                                 <input  id="Hour${key}${i}" class="Hora event" type="time" style="background-color: ${event[3]};" onchange=(eventMn('-update',"${key}",${i},this.value,2,null)) value="${event[2]}">
@@ -216,31 +216,33 @@ function buildUi3(){
                 timeParse(key,i,event[2])
             }
         }
-        if (values.length > 0 ){
+        if (Events.length > 0){
             weekMap[key].Container.style.setProperty('background', '#838383')
         }else{
             weekMap[key].Container.style.setProperty('background', '#00000000')
         }
-        if (values.length > 1 && settingsData.slide_view == "Semana") {
+        if (Events.length > 1 && settingsData.slide_view == "Semana") {
             weekMap[key].Container.style.setProperty('border-left', `5pt  black solid`)
             weekMap[key].Container.style.setProperty('border-right', `5pt  black solid`)
         }else{
             weekMap[key].Container.style.setProperty('border-left', '0pt  #40404000 solid')
             weekMap[key].Container.style.setProperty('border-right', '0pt  #40404000 solid')
         }
-    })
+    }
     saveData(); menuUpdate()
 }
 function menuUpdate(){
-    last_event = settingsData.last_event
+    let lastEvent = settingsData.last_event
     modMenu.options.length = 0
+    models = eventData.Modelos
 
-    eventData.Modelos.forEach((element) =>{
+    for (let key in models){
+        let element = models[key]
         modMenu.options[modMenu.options.length] = new Option(element[0], `${element[0]}`);
-        if (last_event != null && last_event != undefined && element[0] == last_event){
-                modMenu.value = last_event
+        if (lastEvent != null && lastEvent != undefined && element[0] == lastEvent){
+            modMenu.value = lastEvent
         }
-    })
+    }
 }
 function saveData(){
     const wadata = {
@@ -253,68 +255,61 @@ function timeParse(day,eventIndex,timeStr){
         let events = eventData[day]
         let event = events[eventIndex]
         let fullTimeStr = `${timeStr}.00`
-
         event[timeIndex] = toMS(fullTimeStr)
 }
 function toMS(str) {
-    if(!str.includes(":"))
-       return parseFloat(str);
-    const [mins, secms] = str.split(":");
-    const [sec, ms] = secms.split(".");
-    return ((+mins * 60) + +sec) * 1000 + +ms;
+    if (! str.includes(":")) {return parseFloat(str)}
+    const [mins, secms] = str.split(":")
+    const [sec, ms] = secms.split(".")
+    return ((+mins * 60) + +sec) * 1000 + +ms
 }
 function styleMn(cmd,key,value,type,master){
+    let cssVars = settingsData.css
+    let cssValues = cssVars[key]
+
     switch (cmd){
         case '-save':
             settingsData.css[key] = [value , type]
         break;
         case '-restore':
-            cssData = settingsData.css
-            Object.keys(cssData).forEach(key => {
-                let values = cssData[key]
-                style.setProperty(`--${key}`.replace('_','-'),`${values[0]}${values[1]}`)
-            })
+            for (let key in cssVars){
+                cssValues = cssVars[key]
+                style.setProperty(`--${key}`.replace('_','-'),`${cssValues[0]}${cssValues[1]}`)
+            }
             setupEntries()
         break;
         case '-set':
-            cssData = settingsData.css
-            values = cssData[key]
-            style.setProperty(`--${key}`.replace('_','-'), `${values[0]}${values[1]}`)
+            style.setProperty(`--${key}`.replace('_','-'), `${cssValues[0]}${cssValues[1]}`)
         break;
     }
     saveData()
 }
 function setupEntries(){
-    values = settingsData
-    cssData = settingsData.css
+    let settings = settingsData
+    let cssVars = settingsData.css
 
-    if(cssData.card_height != undefined){cardHeight.value = cssData.card_height[0]}
-    if(cssData.font_size != undefined){fontSize.value = cssData.font_size[0]}
-    if(values.slide_title != undefined | values.slide_title != null){slideTitle.value = values.slide_title}
-    if(values.slide_view != undefined){
-        viewMode.forEach((element) => {if (element.value == values.slide_view) element.checked = true})
-    }
+    if (cssVars.card_height != undefined) {cardHeight.value = cssVars.card_height[0]}
+    if (cssVars.font_size != undefined) {fontSize.value = cssVars.font_size[0]}
+    if (settings.slide_title != undefined | settings.slide_title != null) {slideTitle.value = settings.slide_title}
+    if (settings.slide_view != undefined) {viewMode.forEach((element) => {if (element.value == settings.slide_view) element.checked = true})}
 
     // renames the “Amanhã” label for my especial use case
     tomDayLabel = document.getElementById('TomDayLabel')
-    if(values.tom_day_label != undefined | values.tom_day_label != null){tomDayLabel.innerHTML = values.tom_day_label}
+    if (settings.tom_day_label != undefined | settings.tom_day_label != null) tomDayLabel.innerHTML = settings.tom_day_label
 }
 function slideViewUpdate(){
-    buildUi3()
-    if(settingsData.slide_view == undefined){settingsData.slide_view = 'Semana'}
-    const value = settingsData.slide_view
+    let view = settingsData.slide_view
+    if (view == undefined) settingsData.slide_view = 'Semana'
 
-    views.forEach((element)=>{
-        if (value == element){
-            document.getElementById(element).style.display = 'block'
+    for (let key in views) {
+        if (view == views[key]){
+            document.getElementById(views[key]).style.display = 'block'
+        }else{
+            document.getElementById(views[key]).style.display ='none'
         }
-        else{
-            document.getElementById(element).style.display ='none'
-        }
-    })
-
-    if(value == 'Semana'){dayEntry.disabled = false}else{dayEntry.disabled = true}
-    if(value == 'Modelos'){
+    }
+    if (view == 'Semana') {dayEntry.disabled = false} else {dayEntry.disabled = true}
+    if (view == 'Modelos'){
         document.getElementById('DinAdd').innerHTML = 'Novo Modelo'
         modMenu.disabled = true
     }else{
@@ -323,7 +318,7 @@ function slideViewUpdate(){
 
     }
 
-    setupEntries();saveData()
+    saveData();setupEntries();buildUi3()
 }
 function setup(){
 /// Backward compatibility
@@ -359,6 +354,7 @@ function setup(){
     firstModel = eventData.Modelos[0]
     if (firstModel[0] != defaultEvent[0] ) {console.log('TODO')}
 }
+
 //// Listeners ////
 addBtn.addEventListener('click',function(){
     if (settingsData.slide_view == "Semana"){
@@ -384,13 +380,14 @@ editBtn.addEventListener('click', function(){
     uiUpdate('-ui');eventMn('-sort')
 })
 viewsForm.addEventListener('click', function(){
-    viewMode.forEach((element) =>{
+    for (let key in viewMode){
+        let element = viewMode[key]
         if (element.checked == true){
             console.log(element.value)
             settingsData.slide_view = element.value
             slideViewUpdate()
         }
-    })
+    }
 })
 impBtn.addEventListener('click', function(){
     impTrigger.click()
@@ -399,9 +396,8 @@ expBtn.addEventListener('click', function(){
     fileMn('-dl',Data,`Eventos.json`)
 })
 impTrigger.addEventListener('change',  function(){
-    var eventsFile = this.files[0]
-    console.log(eventsFile)
-    var fileReader = new FileReader()
+    let eventsFile = this.files[0]
+    let fileReader = new FileReader()
     if (eventsFile) {
         fileReader.readAsText(eventsFile,"UTF-8")
         fileReader.onload = function(loadedFile){
@@ -410,5 +406,6 @@ impTrigger.addEventListener('change',  function(){
         }
     }
 })
+
 //// Main Space ////
 setup(); styleMn('-restore'); eventMn('-sort'); slideViewUpdate()
