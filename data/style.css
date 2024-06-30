@@ -1,4 +1,5 @@
-/*  HTML Bases*/
+/************ HTML ************/
+/***PRIMARY***/
 :root{
     --scale: 1;
     --slide-width:calc(100%);
@@ -9,6 +10,7 @@
     --radius: calc(15px);
     --ui-font: sans-serif;
     --slide-font: sans-serif;
+    --slide-font-shadow:  0px 2px 1px #000000dd;
     --ui-font-size: 18px;
     --ui-radius: 5px;
     --ui-height: 30px;
@@ -31,6 +33,11 @@
 *{
     transition-duration: var(--animation-speed);
 }
+/***ELEMENTS***/
+header{
+    display: flex;
+    justify-content: center;
+}
 body{
     display: flex;
     text-align:center;
@@ -51,19 +58,29 @@ h1, .h1{
     font-family: serif;
     vertical-align: middle;
 }
-
+h2{
+    text-align: center;
+    font-size: 25px;
+    margin: auto 0px auto 0px;
+    padding: 10px;
+    line-height: 25px;
+    border-bottom: 1px solid darkgray;
+}
 main{
     display: block;
     text-align: center;
     background: blue;
 
 }
-header{
-    display: flex;
-    justify-content: center;
+hr{
+    margin:0;
+    margin-bottom: 7px;
 }
 
-/*Primary Classes*/
+
+
+/************UI************/
+/***PRIMARY***/
 #ToolBar{
     vertical-align: middle;
 }
@@ -73,7 +90,7 @@ header{
     border: none;
     text-align: center;
     vertical-align: middle;
-    width: auto; height: calc(var(--title-size) + 16px);
+    width: auto; height: calc(var(--title-size) + 8px);
     padding-left: 50px;
     padding-right:30px;
     border-radius: var(--ui-radius);
@@ -93,17 +110,15 @@ header{
     width: var(--slide-width);
     height: var(--slide-height);
     background: white;
-    /*max-height: var(--slide-height); max-width: var(--slide-width);
-    min-height: var(--slide-height); min-width: var(--slide-width);*/
     text-align: center;
     display: block;
-    padding: (5px);
+    padding: 0;
     padding-left: 0;
     margin: 0;
 }
 #ui{
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
-    top: calc(var(--title-size) + 17px);
+    top: calc(var(--title-size) + 9px);
     width: 400px;
     height: calc(100vh - 64px);
     display: var(--ui-display);
@@ -137,143 +152,50 @@ header{
 #ui > *{
     font-family: var(--ui-font);
 }
-/* Elements  */
 
-::-webkit-scrollbar {
-    width: 12px;
-    opacity: 0;
+/***CLASSES***/
+.clickable{
+    padding-top:0;
+    padding-bottom:0;
+}
+.clickable:hover{
+    --edit-btn-bg: var(--section-accent);
+    background: var(--section-accent);
+    color: black;
+}
+.clickable:active{
+    --edit-btn-bg: var(--accent);
+    background: var(--light-accent);
+}
+.trigger{
+    display: none;
+}
+.compact > *{
+    padding-top:0;
+    margin-top: 2px;
+    padding-bottom:0;
+    margin-bottom: 0px;
+    gap:0;
+
 }
 
-::-webkit-scrollbar-track {
-    background: lightgrey;
-    box-shadow: inset 0 0px 3px 1px rgba(0, 0, 0, 0.05)
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    background: var(--accent);
-}
-::-webkit-scrollbar-thumb:hover{
-    background: var(--light-accent)
-}
-::-webkit-scrollbar-track:hover{
-}
-::-webkit-scrollbar-thumb:active{
+/***TRANSITIONS***/
+button:hover{
     background: var(--dark-accent);
-
+}
+button:active{
+    background: var(--light-accent);
+}
+select:hover{
+    box-shadow: var(--ui-highlight);
+    border-color: var(--light-accent);
+}
+select:disabled{
+    box-shadow: none;
+    border-color: darkgray;
 }
 
-/* Slide elements*/
-#Semana,#Hoje,#Amanhã,#Modelos{
-    padding:0;
-    text-align:right;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-Evento, Hora,.Hora, Titulo,.Titulo ,Dia {
-    appearance: none;
-    height: var(--card-height);
-    border-radius: var(--radius);
-    font-size: var(--font-size);
-    text-align: center;
-    font-family: sans-serif;
-    display: inline-block;
-    font-weight: 600;
-    min-height: var(--font-size);
-    line-height: var(--font-size);
-}
-.Hora{
-    font-size: calc(var(--font-size) + 5px);
-}
-
-Evento{
-    height: auto; min-height: calc(var(--card-height) - 22px);
-    width: calc(100%);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 20px;
-    border-radius: var(--radius);
-    line-height: var(--line-height);
-    vertical-align: middle;
-    margin: auto;
-    margin-bottom: 7px;
-    margin-left: 0%;
-    margin-right: 0%;
-    background: #a1a1a1;
-    padding-left: 0px;
-}
-.ph{ border-bottom: 0; box-shadow: none;background: none;}
-Container{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 5px;padding-bottom:0px;
-    border-radius: var(--radius);
-}
-Leiaute{
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-    border-left: var(--container-border);
-
-}
-Cartão, .card {
-    border-radius: var(--radius);
-    background: darkblue;
-    display: flex;
-    width: 100%;
-    margin-bottom: 5px;
-    justify-content: space-between;
-    box-shadow: var(--slide-shadow);
-}
-Cartão > * {
-    text-shadow: 2px 2px 1px black;
-}
-Cartão{
-    min-width: 99%;
-}
-Titulo, .Titulo {
-    appearance: none;
-    background: none;
-    border: none;
-    margin: auto;
-    color: white;
-    vertical-align: middle;
-    text-align: center;
-    line-height: var(--card-height);
-}
-Dia, .Dia{
-    appearance: none;
-    max-width: 160px;
-    width: 18%;
-    padding-right: 0px;
-    display: inline;
-    vertical-align: top;
-    text-align: left;
-    line-height: var(--font-size);
-    font-size:  min(var(--font-size), 30px);
-    font-weight: bold;
-    height: 100%;
-    margin-left: 5px; margin-right: 0; margin-top:5px;
-}
-Dia::after{content: ":"; display: inline}
-Hora, .Hora {
-    max-width: 150px;
-    padding-left: calc(20px); padding-right: calc(20px);
-    vertical-align: middle;
-    text-align: center;
-    height: var(--card-height);
-    border-radius: var(--radius);
-    line-height: var(--card-height);
-    color: white;
-    background: darkslateblue;
-}
-
-/*Ui elements*/
+/***ELEMENTS***/
 button, input, select{
     font-size: var(--ui-font-size);
     height: var(--ui-height);
@@ -296,28 +218,6 @@ span, vspan{
     vertical-align: middle;
 
 }
-.clickable{
-    padding-top:0;
-    padding-bottom:0;
-}
-.clickable:hover{
-    --edit-btn-bg: var(--section-accent);
-    background: var(--section-accent);
-    color: black;
-}
-.clickable:active{
-    --edit-btn-bg: var(--accent);
-    background: var(--light-accent);
-}
-.trigger{
-    display: none;
-}
-button:hover{
-    background: var(--dark-accent);
-}
-button:active{
-    background: var(--light-accent);
-}
 vspan{
     flex-direction: column;
 }
@@ -327,30 +227,6 @@ section{
     padding: 10px;
     border: 5px;
     border-color: black;
-}
-h2{
-    text-align: center;
-    font-size: 25px;
-    margin: auto 0px auto 0px;
-    padding: 10px;
-    line-height: 25px;
-    border-bottom: 1px solid darkgray;
-}
-select,input[type="number"]{
-    height: calc(var(--ui-height) + 13px);
-    width: 150%;
-    margin:auto;
-}
-input[type="number"]{
-    height: var(--ui-height);
-}
-select:hover{
-    box-shadow: var(--ui-highlight);
-    border-color: var(--light-accent);
-}
-select:disabled{
-    box-shadow: none;
-    border-color: darkgray;
 }
 label{
     font-size: var(--ui-font-size);
@@ -372,6 +248,14 @@ button, .button{
 input, select{
     background: white;
     accent-color: var(--accent);
+}
+select,input[type="number"]{
+    height: calc(var(--ui-height) + 13px);
+    width: 150%;
+    margin:auto;
+}
+input[type="number"]{
+    height: var(--ui-height);
 }
 input[type="color"]{
     width: 25%;
@@ -396,8 +280,6 @@ input[type="radio"]{
 input[type="range"]{
     margin-top: 0;
 }
-
-/* Edit Variants*/
 .edit{
     height: calc(55px);
     width: calc(39px);
@@ -465,8 +347,157 @@ input[type="color"].edit{
     vertical-align: middle;
     margin-top: auto;margin-bottom:auto;
 }
-
 input[type="time"].event::-webkit-calendar-picker-indicator { display: none; }
 input[type="time"].event{
     border: 0;
+}
+
+
+
+/************SLIDE************/
+/***Primary***/
+#Semana,#Hoje,#Amanhã,#Modelos{
+    padding:0;
+    text-align:right;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+/***CLASSES***/
+.Hora{
+    font-size: calc(var(--font-size) + 5px);
+}
+.ph{
+    border-bottom: 0;
+    box-shadow: none;
+    background: none;
+}
+
+/***TRANSITIONS***/
+Dia::after{
+    content: ":";
+    display: inline
+}
+
+/***ELEMENTS***/
+Evento, Hora,.Hora, Titulo,.Titulo ,Dia {
+    appearance: none;
+    height: var(--card-height);
+    border-radius: var(--radius);
+    font-size: var(--font-size);
+    text-align: center;
+    font-family: sans-serif;
+    display: inline-block;
+    font-weight: 600;
+    min-height: var(--font-size);
+    line-height: var(--font-size);
+}
+Evento{
+    height: auto; min-height: calc(var(--card-height) - 22px);
+    width: calc(100%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    border-radius: var(--radius);
+    line-height: var(--line-height);
+    vertical-align: middle;
+    margin: auto;
+    margin-bottom: 7px;
+    margin-left: 0;
+    margin-right: 0;
+    background: #a1a1a1;
+    padding-left: 0px;
+}
+Container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;padding-bottom:0px;
+    border-radius: var(--radius);
+}
+Leiaute{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    border-left: var(--container-border);
+
+}
+Cartão, .card {
+    border-radius: var(--radius);
+    background: darkblue;
+    display: flex;
+    width: 100%;
+    margin-bottom: 5px;
+    justify-content: space-between;
+    box-shadow: var(--slide-shadow);
+}
+Cartão > * {
+    text-shadow:var(--slide-font-shadow);
+}
+Cartão{
+    min-width: 99%;
+}
+Titulo, .Titulo {
+    appearance: none;
+    background: none;
+    border: none;
+    margin: auto;
+    color: white;
+    vertical-align: middle;
+    text-align: center;
+    line-height: var(--card-height);
+}
+Dia, .Dia{
+    appearance: none;
+    max-width: 160px;
+    width: 18%;
+    padding-right: 0px;
+    display: inline;
+    vertical-align: top;
+    text-align: left;
+    line-height: var(--font-size);
+    font-size:  min(var(--font-size), 30px);
+    font-weight: bold;
+    height: 100%;
+    margin-left: 5px; margin-right: 0; margin-top:5px;
+}
+Hora, .Hora {
+    max-width: 150px;
+    padding-left: calc(20px); padding-right: calc(20px);
+    vertical-align: middle;
+    text-align: center;
+    height: var(--card-height);
+    border-radius: var(--radius);
+    line-height: var(--card-height);
+    color: white;
+    background: darkslateblue;
+}
+
+
+
+/************WEBKIT************/
+/***ELEMENTS***/
+::-webkit-scrollbar {
+    width: 12px;
+    opacity: 0;
+}
+::-webkit-scrollbar-track {
+    background: lightgrey;
+    box-shadow: inset 0 0px 3px 1px rgba(0, 0, 0, 0.05)
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: var(--accent);
+}
+/***TRANSITIONS***/
+::-webkit-scrollbar-thumb:hover{
+    background: var(--light-accent)
+}
+::-webkit-scrollbar-track:hover{
+}
+::-webkit-scrollbar-thumb:active{
+    background: var(--dark-accent);
+
 }

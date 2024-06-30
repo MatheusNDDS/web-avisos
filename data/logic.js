@@ -1,27 +1,28 @@
 //// PROGRAM DATA ////
-const timeIndex = 4
-const style = document.documentElement.style
-var defaultEvent = ["Evento", '#005a5c', "--:--", "#008080","0" ]
-var uiState = '-edit'
+const timeIndex = 4,
+      style = document.documentElement.style
+var defaultEvent = ["Evento", '#005a5c', "--:--", "#008080","0" ],
+    uiState = '-edit'
 // UI
-const addBtn = document.getElementById('addBtn')
-const expBtn = document.getElementById('ExpBtn')
-const impBtn = document.getElementById('ImpBtn')
-const editBtn = document.getElementById('EditBtn')
-const Slide = document.getElementById('Slide')
-const editBtnIcon = document.getElementById('EditBtnIcon')
-const modDialog = document.getElementById('ModDialog')
-const sidePanel = document.getElementById('ui')
+const addBtn = document.getElementById('addBtn'),
+      expBtn = document.getElementById('ExpBtn'),
+      impBtn = document.getElementById('ImpBtn'),
+      editBtn = document.getElementById('EditBtn'),
+      Slide = document.getElementById('Slide'),
+      editBtnIcon = document.getElementById('EditBtnIcon'),
+      sidePanel = document.getElementById('ui')
 //Entries
-const dayEntry = document.getElementById('DayEntry')
-const cardHeight = document.getElementById('CardHeight')
-const fontSize = document.getElementById('FontSize')
-const modMenu = document.getElementById('ModMenu')
-const viewsForm = document.getElementById('ViewsForm')
-const viewMode = document.getElementsByName("VM")
-const radios = document.forms[0].elements["VM"]
-const impTrigger = document.getElementById('ImpTrigger')
-const slideTitle = document.getElementById('SlideTitle')
+const dayEntry = document.getElementById('DayEntry'),
+      cardHeight = document.getElementById('CardHeight'),
+      fontSize = document.getElementById('FontSize'),
+      titleSize = document.getElementById('TitleSize'),
+      modMenu = document.getElementById('ModMenu'),
+      viewsForm = document.getElementById('ViewsForm'),
+      viewMode = document.getElementsByName("VM"),
+      radios = document.forms[0].elements["VM"],
+      impTrigger = document.getElementById('ImpTrigger'),
+      slideTitle = document.getElementById('SlideTitle')
+
 //Week html map
 const weekMap = {
     "Segunda": {
@@ -86,7 +87,7 @@ function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
             if (modMenu.value == '' && settingsData.slide_view !== "Modelos"){
                 alert('Sem modelos para aplicar, vá na visualização de modelos e crie um.')
             }else if (settingsData.slide_view == "Modelos"){
-                    var template = Array.from(defaultEvent)
+                    let template = Array.from(defaultEvent)
                     eventData[day].push(template)
             }else{
                 for (let key in eventData.Modelos){
@@ -208,9 +209,9 @@ function buildUi3(){
                                 <input  id="Hour${key}${i}" class="Hora event" type="time" style="background-color: ${event[3]};" onchange=(eventMn('-update',"${key}",${i},this.value,2,null)) value="${event[2]}">
                             </Cartão>
                             <div class="edit"><span class="edit">
-                                    <input id="NameColor${key}${i}" onchange="eventMn('-update','${key}',${i},this.value,1,Card${key}${i})" class="button card edit" type="color" value="${event[1]}">
-                                    <input id="HourColor${key}${i}" onchange="eventMn('-update','${key}',${i},this.value,3,Hour${key}${i})" class="button card edit" type="color" value="${event[3]}">
-                                    <button class="button card edit" onclick="eventMn('-rm','${key}',${i})" ><i class="fa fa-trash"></i></button>
+                                    <input id="NameColor${key}${i}" title="Fundo do título" onchange="eventMn('-update','${key}',${i},this.value,1,Card${key}${i})" class="button card edit" type="color" value="${event[1]}">
+                                    <input id="HourColor${key}${i}" title="Fundo da hora" onchange="eventMn('-update','${key}',${i},this.value,3,Hour${key}${i})" class="button card edit" type="color" value="${event[3]}">
+                                    <button class="button card edit" title="Excluir" onclick="eventMn('-rm','${key}',${i})" ><i class="fa fa-trash"></i></button>
                             </span></div></Leiaute>`
                 weekMap[key].Container.innerHTML+= card
                 timeParse(key,i,event[2])
@@ -253,8 +254,8 @@ function saveData(){
 }
 function timeParse(day,eventIndex,timeStr){
         let events = eventData[day]
-        let event = events[eventIndex]
         let fullTimeStr = `${timeStr}.00`
+        event = events[eventIndex]
         event[timeIndex] = toMS(fullTimeStr)
 }
 function toMS(str) {
@@ -378,6 +379,10 @@ slideTitle.addEventListener('change',function(){
 fontSize.addEventListener('change',function(){
     styleMn('-save',"font_size",parseInt(this.value),'px')
     styleMn('-set',"font_size")
+})
+titleSize.addEventListener('change',function(){
+    styleMn('-save',"title_size",parseInt(this.value),'px')
+    styleMn('-set',"title_size")
 })
 editBtn.addEventListener('click', function(){
     uiUpdate('-ui');eventMn('-sort')
