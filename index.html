@@ -7,8 +7,6 @@
 <link rel="stylesheet" href="data/fonts/css/all.css">
 </head>
 <body>
-<dialog id="ModDialog">
-</dialog>
   <!-- APP -->
   <div id="ToolBar">
     <button class="clickable" id="EditBtn"><i id="EditBtnIcon" class="fa fa-edit"></i></button>
@@ -63,13 +61,17 @@
 
               <section>
                 <h2>Opções de apresentação</h2>
-                  <vspan>
+                  <vspan class="compact">
                     <label>Tamanho dos Cartões</label>
                     <input type="range" id="CardHeight" min="42" value="70" required>
                   </vspan>
-                  <vspan>
+                  <vspan class="compact">
                     <label>Tamanho da Fonte</label>
                     <input type="range" id="FontSize" min="30" max="40" value="30" required>
+                  </vspan>
+                  <vspan class="compact">
+                    <label>Tamanho do Título</label>
+                    <input type="range" id="TitleSize" min="50" max="80" value="50" required>
                   </vspan>
               </section>
               <section>
