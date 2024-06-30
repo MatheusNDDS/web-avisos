@@ -391,7 +391,6 @@ viewsForm.addEventListener('click', function(){
     for (let key in viewMode){
         let element = viewMode[key]
         if (element.checked == true){
-            console.log(element.value)
             settingsData.slide_view = element.value
             slideViewUpdate()
         }
