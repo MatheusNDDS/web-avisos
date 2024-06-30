@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+<meta charset="utf-8">
+<title>Web Avisos</title>
+<link rel="stylesheet" href="data/style.css">
+<link rel="stylesheet" href="data/fonts/css/all.css">
+</head>
+<body>
+  <!-- APP -->
+  <div id="ToolBar">
+    <button class="clickable" id="EditBtn"><i id="EditBtnIcon" class="fa fa-edit"></i></button>
+  </div>
+
+  <div id="ui"> <!-- <h1><u>Web Avisos</u></h1> -->
+              <section>
+                <h2>Visualização</h2>
+                <form id="ViewsForm">
+                  <span class="clickable">
+                    <label for="VMC1"> Semana </label>
+                    <input type="radio" value="Semana" id="VMC1" name="VM">
+                  </span>
+
+                  <span class="clickable">
+                    <label id="TomDayLabel" for="VMC2"> Amanhã </label>
+                    <input type="radio" value="Amanhã" id="VMC2" name="VM">
+                  </span>
+
+                  <span class="clickable">
+                    <label for="VMC3"> Hoje </label>
+                    <input type="radio" value="Hoje" id="VMC3" name="VM">
+                  </span>
+
+                  <span class="clickable">
+                    <label for="VMC4"> Modelos </label>
+                    <input type="radio" value="Modelos" id="VMC4" name="VM">
+                  </span>
+                </form>
+              </section>
+              <section>
+                  <h2 id="DinAdd" > Novo Evento </h2>
+                  <span id="DayEntrySpan">
+                    <label>Dia</label>
+                    <select id="DayEntry" required>
+                      <option>Segunda
+                      <option>Terça
+                      <option>Quarta
+                      <option>Quinta
+                      <option>Sexta
+                      <option>Sábado
+                      <option>Domingo
+                    </select>
+                  </span>
+                  <span>
+                    <label>Modelo</label>
+                    <select id="ModMenu">
+                    </select>
+                  </span>
+                  <button id="addBtn">Criar <i id="EditBtnIcon" class="fa fa-calendar-plus"></i></button>
+              </section>
+
+              <section>
+                <h2>Opções de apresentação</h2>
+                  <vspan class="compact">
+                    <label>Tamanho dos Cartões</label>
+                    <input type="range" id="CardHeight" min="42" value="70" required>
+                  </vspan>
+                  <vspan class="compact">
+                    <label>Tamanho da Fonte</label>
+                    <input type="range" id="FontSize" min="30" max="40" value="30" required>
+                  </vspan>
+                  <vspan class="compact">
+                    <label>Tamanho do Título</label>
+                    <input type="range" id="TitleSize" min="50" max="80" value="50" required>
+                  </vspan>
+              </section>
+              <section>
+                <h2>Dados de eventos</h2>
+                  <span>
+                    <button id="ExpBtn">Exportar <i id="EditBtnIcon" class="fa fa-download"></i></button>
+                    <button id="ImpBtn">Importar <i id="EditBtnIcon" class="fa fa-file-import"></i></button>
+                    <input class="trigger"  type="file" id="ImpTrigger">
+                  </span>
+              </section>
+  </div>
+  <div id="Slide">
+    <header>
+      <input id="SlideTitle" class="h1" type="text" value="Avisos">
+    </header>
+    <hr>
+    <div style="display:none;" id="Semana">
+        <Evento id="segMaster">
+            <Dia>Segunda</Dia>
+            <container id="segCont">
+
+            </container>
+        </Evento>
+
+        <Evento id="terMaster">
+          <Dia>Terça</Dia>
+          <container id="terCont">
+          </container>
+        </Evento>
+
+        <Evento id="quaMaster">
+          <Dia>Quarta</Dia>
+          <container id="quaCont">
+
+          </container>
+        </Evento>
+
+        <Evento id="quiMaster">
+          <Dia>Quinta</Dia>
+          <container id="quiCont">
+
+          </container>
+        </Evento>
+
+        <Evento id="sixMaster">
+          <Dia>Sexta</Dia>
+          <container id="sixCont">
+
+          </container>
+        </Evento>
+
+        <Evento id="sabMaster">
+          <Dia>Sábado</Dia>
+          <container id="sabCont">
+
+          </container>
+        </Evento>
+
+        <Evento id="domMaster">
+          <Dia>Domingo</Dia>
+          <container id="domCont">
+
+          </container>
+        </Evento>
+    </div>
+    <div style='display:none;' id="Amanhã">
+      <Evento id="TomMaster">
+            <Dia>Amanhã</Dia>
+            <container id="TomCont">
+
+            </container>
+      </Evento>
+    </div>
+    <div style='display:none;' id="Hoje">
+      <Evento id="TodMaster">
+            <Dia>Hoje</Dia>
+            <container id="TodCont">
+
+            </container>
+      </Evento>
+    </div>
+    <div style='display:none;' id="Modelos">
+      <Evento id="ModMaster">
+            <Dia>Modelos</Dia>
+            <container id="ModCont"></container>
+      </Evento>
+    </div>
+</div>
+
+  <!-- END -->
+  <script src="data/logic.js"></script>
+  </body>
+</html>
