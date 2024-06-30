@@ -187,7 +187,7 @@ function uiUpdate(cmd){
             case '-edit':
                 style.setProperty('--ui-display','flex')
                 style.setProperty('--ui-span-display','absolute')
-                style.setProperty('--edit-btn-bg','lightgray')
+                style.setProperty('--edit-btn-bg','var(--light-accent)')
                 editBtnIcon.classList.add('fa-check');editBtnIcon.classList.remove('fa-edit')
                 uiState = '-view'
             break;
@@ -353,6 +353,9 @@ function setup(){
     settingsData.last_event = null
     firstModel = eventData.Modelos[0]
     if (firstModel[0] != defaultEvent[0] ) {console.log('TODO')}
+
+/// Starting functions
+    styleMn('-restore'); eventMn('-sort'); slideViewUpdate()
 }
 
 //// Listeners ////
@@ -408,4 +411,4 @@ impTrigger.addEventListener('change',  function(){
 })
 
 //// Main Space ////
-setup(); styleMn('-restore'); eventMn('-sort'); slideViewUpdate()
+setup()
