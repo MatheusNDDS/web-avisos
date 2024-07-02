@@ -25,9 +25,10 @@
     --dark-accent: #005353;
     --slide-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
     --ui-shadow:  0 0px 3px 1px rgba(0, 0, 0, 0.3);
-    --ui-highlight:  0 0px 0px 1px var(--light-accent);
+    --ui-highlight:  0px 0px 1px var(--light-accent);
     --ui-bg: #FFFFFF;
     --container-border: 0;
+    --slide-highlight: none;
     opacity: 0; /*All elements are 100% opaque until the script finish*/
 
 }
@@ -355,6 +356,8 @@ input[type="color"].edit{
 input[type="time"].event::-webkit-calendar-picker-indicator { display: none; }
 input[type="time"].event{
     border: 0;
+    margin: auto;
+    margin-right: 0;
 }
 
 
@@ -370,6 +373,7 @@ input[type="time"].event{
 #SlideTitle{
     height: var(--title-size);
     line-height: var(--title-size);
+    width: auto;
 }
 /***CLASSES***/
 .Hora{
@@ -385,6 +389,9 @@ input[type="time"].event{
 Dia::after{
     content: ":";
     display: inline
+}
+.event:hover{
+    box-shadow: var(--slide-highlight);
 }
 
 /***ELEMENTS***/
@@ -439,23 +446,24 @@ Cartão, .card {
     display: flex;
     width: 100%;
     margin-bottom: 5px;
-    justify-content: space-between;
+    justify-content: stretch;
     box-shadow: var(--slide-shadow);
 }
 Cartão > * {
     text-shadow:var(--slide-font-shadow);
 }
 Cartão{
-    min-width: 99%;
+    min-width: 100%;
 }
-Titulo, .Titulo {
+Titulo, .Titulo, .Titulo.event{
     background: none;
     border: none;
-    margin: auto;
+    margin: 0;
     color: white;
     vertical-align: middle;
     text-align: center;
     line-height: var(--card-height);
+    width: 100%;
 }
 Dia, .Dia{
     appearance: none;

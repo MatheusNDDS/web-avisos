@@ -181,6 +181,7 @@ function uiUpdate(cmd){
                 style.setProperty('--ui-display','none')
                 style.setProperty('--ui-span-display','none')
                 style.setProperty('--edit-btn-bg','none')
+                style.setProperty('--slide-highlight','none')
                 editBtnIcon.classList.add('fa-edit')
                 editBtnIcon.classList.remove('fa-check')
                 uiState = '-edit'
@@ -189,6 +190,7 @@ function uiUpdate(cmd){
                 style.setProperty('--ui-display','flex')
                 style.setProperty('--ui-span-display','absolute')
                 style.setProperty('--edit-btn-bg','var(--light-accent)')
+                style.setProperty('--slide-highlight','inset 0px 0px 1px 3px var(--light-accent)')
                 editBtnIcon.classList.add('fa-check')
                 editBtnIcon.classList.remove('fa-edit')
                 uiState = '-view'
@@ -301,8 +303,6 @@ function setupEntries(){
 }
 function slideViewUpdate(){
     let view = settingsData.slide_view
-    if (view == undefined) settingsData.slide_view = 'Semana'
-
     for (let key in views) {
         if (view == views[key]){
             document.getElementById(views[key]).style.display = 'block'
@@ -324,35 +324,36 @@ function setup(){
     //Data storage refactoring (Everting went wrong during test stage.)
     oldEvents = JSON.parse(localStorage.getItem('eventData'))
     oldSettings = JSON.parse(localStorage.getItem('settingsData'))
+    firstModel = eventData.Modelos[0]
+
     if (oldEvents != undefined | oldEvents != null){
         eventData = oldEvents
+        firstModel = eventData.Modelos[0]
         if (eventData.Modelos == undefined){eventData.Modelos = [defaultEvent]}
         if (eventData.Amanhã == undefined){eventData.Amanhã = []}
         if (eventData.Hoje == undefined){eventData.Hoje = []}
+        if (firstModel[0] != defaultEvent[0]) {console.log('TODO')}
         saveData();buildUi3()
         localStorage.removeItem('eventData')
     }
     if (oldSettings != undefined | oldSettings != null){
         settingsData = oldSettings
-        firstModel = eventData.Modelos[0]
         settingsData.last_event = null
+        if (settingsData.slide_view == undefined){settingsData.slide_view = "Semana"}
         if (settingsData.css == undefined){settingsData.css = {}}
-        if (firstModel[0] != defaultEvent[0] ) {console.log('TODO')}
         saveData();buildUi3()
         localStorage.removeItem('settingsData')
     }
 
     //Simple faisafe
+    if (settingsData.slide_view == undefined){settingsData.slide_view = "Semana"}
     if (settingsData.css == undefined){settingsData.css = {}}
-    if (settingsData.slide_view == undefined | settingsData.slide_view == null){settingsData.slide_view = "Semana"}
     if (eventData.Amanhã == undefined){eventData.Amanhã = []}
     if (eventData.Hoje == undefined){eventData.Hoje = []}
     if (eventData.Modelos == undefined){eventData.Modelos = [defaultEvent]}
 
 /// General Setup
     settingsData.last_event = null
-    firstModel = eventData.Modelos[0]
-    if (firstModel[0] != defaultEvent[0] ) {console.log('TODO')}
 
 /// Starting functions
     styleMn('-restore'); eventMn('-sort'); slideViewUpdate()
