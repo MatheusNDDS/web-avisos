@@ -7,12 +7,8 @@
 <link rel="stylesheet" href="data/fonts/css/all.css">
 </head>
 <body>
-  <!-- APP -->
-  <div id="ToolBar">
-    <button class="clickable" id="EditBtn"><i id="EditBtnIcon" class="fa fa-edit"></i></button>
-  </div>
-
-  <div id="ui"> <!-- <h1><u>Web Avisos</u></h1> -->
+<!--- APP Ui --->
+  <div id="ui">
               <section>
                 <h2>Visualização</h2>
                 <form id="ViewsForm">
@@ -56,7 +52,7 @@
                     <select id="ModMenu">
                     </select>
                   </span>
-                  <button id="addBtn">Criar <i id="EditBtnIcon" class="fa fa-calendar-plus"></i></button>
+                  <button id="addBtn">Criar <i class="fa fa-calendar-plus"></i></button>
               </section>
 
               <section>
@@ -77,14 +73,18 @@
               <section>
                 <h2>Dados de eventos</h2>
                   <span>
-                    <button id="ExpBtn">Exportar <i id="EditBtnIcon" class="fa fa-download"></i></button>
-                    <button id="ImpBtn">Importar <i id="EditBtnIcon" class="fa fa-file-import"></i></button>
+                    <button id="ExpBtn">Exportar <i class="fa fa-download"></i></button>
+                    <button id="ImpBtn">Importar <i class="fa fa-file-import"></i></button>
                     <input class="trigger"  type="file" id="ImpTrigger">
                   </span>
               </section>
   </div>
+<!--- Slide --->
   <div id="Slide">
     <header>
+      <div id="ToolBar">
+        <button class="clickable" id="EditBtn"> <i id="EditBtnIcon" class="fa fa-edit"></i> </button>
+      </div>
       <input id="SlideTitle" class="h1" type="text" value="Avisos">
     </header>
     <hr>
