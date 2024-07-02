@@ -1,6 +1,8 @@
 //// PROGRAM DATA ////
 const timeIndex = 4,
-      style = document.documentElement.style
+      style = document.documentElement.style,
+      views = ['Semana','Amanhã', 'Hoje', 'Modelos']
+
 var defaultEvent = ["Evento", '#005a5c', "--:--", "#008080","0" ],
     uiState = '-edit'
 // UI
@@ -8,7 +10,6 @@ const addBtn = document.getElementById('addBtn'),
       expBtn = document.getElementById('ExpBtn'),
       impBtn = document.getElementById('ImpBtn'),
       editBtn = document.getElementById('EditBtn'),
-      Slide = document.getElementById('Slide'),
       editBtnIcon = document.getElementById('EditBtnIcon'),
       sidePanel = document.getElementById('ui')
 //Entries
@@ -66,10 +67,8 @@ const weekMap = {
         "Container": document.getElementById("ModCont"),
     },
 }
-const views = ['Semana','Amanhã', 'Hoje', 'Modelos']
-// Try restore storage
+//Setup data
 var Data = JSON.parse(localStorage.getItem('Data'))
-// Setup Data
 if (Data == undefined || Data == null){
     Data = {
         "Events" : {"Segunda": [],"Terça": [],"Quarta": [],"Quinta": [],"Sexta": [],"Sábado": [],"Domingo": [],"Amanhã" : [], "Hoje" : []},
