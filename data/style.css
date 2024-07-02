@@ -10,7 +10,7 @@
     --radius: calc(15px);
     --ui-font: sans-serif;
     --slide-font: sans-serif;
-    --slide-font-shadow:  0px 2px 1px #000000dd;
+    --slide-font-shadow:  1px 2px 1px #000000dd;
     --ui-font-size: 18px;
     --ui-radius: 5px;
     --ui-height: 30px;
@@ -25,9 +25,10 @@
     --dark-accent: #005353;
     --slide-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
     --ui-shadow:  0 0px 3px 1px rgba(0, 0, 0, 0.3);
-    --ui-highlight:  0 0px 3px 1px var(--light-accent);
+    --ui-highlight:  0 0px 0px 1px var(--light-accent);
     --ui-bg: #FFFFFF;
     --container-border: 0;
+    opacity: 0; /*All elements are 100% opaque until the script finish*/
 
 }
 *{
@@ -37,6 +38,7 @@
 header{
     display: flex;
     justify-content: center;
+    padding: 4px;
 }
 body{
     display: flex;
@@ -83,6 +85,8 @@ hr{
 /***PRIMARY***/
 #ToolBar{
     vertical-align: middle;
+    height: 100%;
+
 }
 #ToolBar > *{
     position: absolute;
@@ -90,7 +94,8 @@ hr{
     border: none;
     text-align: center;
     vertical-align: middle;
-    width: auto; height: calc(var(--title-size) + 8px);
+    width: auto;
+    height: var(--title-size);
     padding-left: 50px;
     padding-right:30px;
     border-radius: var(--ui-radius);
@@ -362,6 +367,10 @@ input[type="time"].event{
     padding-left: 15px;
     padding-right: 15px;
 }
+#SlideTitle{
+    height: var(--title-size);
+    line-height: var(--title-size);
+}
 /***CLASSES***/
 .Hora{
     font-size: calc(var(--font-size) + 5px);
@@ -440,7 +449,6 @@ Cartão{
     min-width: 99%;
 }
 Titulo, .Titulo {
-    appearance: none;
     background: none;
     border: none;
     margin: auto;

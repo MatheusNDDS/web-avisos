@@ -182,20 +182,21 @@ function uiUpdate(cmd){
                 style.setProperty('--ui-display','none')
                 style.setProperty('--ui-span-display','none')
                 style.setProperty('--edit-btn-bg','none')
-                editBtnIcon.classList.add('fa-edit');editBtnIcon.classList.remove('fa-check')
+                editBtnIcon.classList.add('fa-edit')
+                editBtnIcon.classList.remove('fa-check')
                 uiState = '-edit'
             break;
             case '-edit':
                 style.setProperty('--ui-display','flex')
                 style.setProperty('--ui-span-display','absolute')
                 style.setProperty('--edit-btn-bg','var(--light-accent)')
-                editBtnIcon.classList.add('fa-check');editBtnIcon.classList.remove('fa-edit')
+                editBtnIcon.classList.add('fa-check')
+                editBtnIcon.classList.remove('fa-edit')
                 uiState = '-view'
             break;
         }
         break;
     }
-    eventMn('-sort')
 }
 function buildUi3(){
     for (let key in eventData){
@@ -290,6 +291,7 @@ function setupEntries(){
     let cssVars = settingsData.css
 
     if (cssVars.card_height != undefined) {cardHeight.value = cssVars.card_height[0]}
+    if (cssVars.title_size != undefined) {titleSize.value = cssVars.title_size[0]}
     if (cssVars.font_size != undefined) {fontSize.value = cssVars.font_size[0]}
     if (settings.slide_title != undefined | settings.slide_title != null) {slideTitle.value = settings.slide_title}
     if (settings.slide_view != undefined) {viewMode.forEach((element) => {if (element.value == settings.slide_view) element.checked = true})}
@@ -316,10 +318,7 @@ function slideViewUpdate(){
     }else{
         document.getElementById('DinAdd').innerHTML = 'Novo Evento'
         modMenu.disabled = false
-
     }
-
-    saveData();setupEntries();buildUi3()
 }
 function setup(){
 /// Backward compatibility
@@ -357,6 +356,7 @@ function setup(){
 
 /// Starting functions
     styleMn('-restore'); eventMn('-sort'); slideViewUpdate()
+    style.setProperty('opacity',1) // Prevent visual gliches when JS change css style during setup.
 }
 
 //// Listeners ////
@@ -386,6 +386,7 @@ titleSize.addEventListener('change',function(){
 })
 editBtn.addEventListener('click', function(){
     uiUpdate('-ui');eventMn('-sort')
+
 })
 viewsForm.addEventListener('click', function(){
     for (let key in viewMode){
