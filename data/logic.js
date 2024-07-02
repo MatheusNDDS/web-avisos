@@ -344,6 +344,7 @@ function setup(){
 
     //Simple faisafe
     if (settingsData.css == undefined){settingsData.css = {}}
+    if (settingsData.slide_view == undefined | settingsData.slide_view == null){settingsData.slide_view = "Semana"}
     if (eventData.Amanhã == undefined){eventData.Amanhã = []}
     if (eventData.Hoje == undefined){eventData.Hoje = []}
     if (eventData.Modelos == undefined){eventData.Modelos = [defaultEvent]}
