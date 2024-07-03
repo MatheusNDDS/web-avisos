@@ -4,7 +4,7 @@ const timeIndex = 4,
       views = ['Semana','Amanhã', 'Hoje', 'Modelos']
 
 var defaultEvent = ["Evento", '#005a5c', "--:--", "#008080","0" ],
-    uiState = '-edit'
+    uiState = '-view'
 // UI
 const addBtn = document.getElementById('addBtn'),
       expBtn = document.getElementById('ExpBtn'),
@@ -174,28 +174,24 @@ function fileMn(cmd,content,filename){
     }
 }
 function uiUpdate(cmd){
-    switch(cmd){
-        case '-ui':
-            switch(uiState){
-            case '-view':
-                style.setProperty('--ui-display','none')
-                style.setProperty('--ui-span-display','none')
-                style.setProperty('--edit-btn-bg','none')
-                style.setProperty('--slide-highlight','none')
-                editBtnIcon.classList.add('fa-edit')
-                editBtnIcon.classList.remove('fa-check')
-                uiState = '-edit'
-            break;
-            case '-edit':
-                style.setProperty('--ui-display','flex')
-                style.setProperty('--ui-span-display','absolute')
-                style.setProperty('--edit-btn-bg','var(--light-accent)')
-                style.setProperty('--slide-highlight','inset 0px 0px 1px 3px var(--light-accent)')
-                editBtnIcon.classList.add('fa-check')
-                editBtnIcon.classList.remove('fa-edit')
-                uiState = '-view'
-            break;
-        }
+    switch(uiState){
+        case '-view':
+            style.setProperty('--ui-display','none')
+            style.setProperty('--ui-span-display','none')
+            style.setProperty('--edit-btn-bg','none')
+            style.setProperty('--slide-highlight','var(--slide-font-shadow)')
+            editBtnIcon.classList.add('fa-edit')
+            editBtnIcon.classList.remove('fa-check')
+            uiState = '-edit'
+        break;
+        case '-edit':
+            style.setProperty('--ui-display','flex')
+            style.setProperty('--ui-span-display','absolute')
+            style.setProperty('--edit-btn-bg','var(--light-accent)')
+            style.setProperty('--slide-highlight','var(--slide-font-shadow), 0px 0px 10px var(--light-accent)')
+            editBtnIcon.classList.add('fa-check')
+            editBtnIcon.classList.remove('fa-edit')
+            uiState = '-view'
         break;
     }
 }
@@ -356,7 +352,7 @@ function setup(){
     settingsData.last_event = null
 
 /// Starting functions
-    styleMn('-restore'); eventMn('-sort'); slideViewUpdate()
+    styleMn('-restore'); eventMn('-sort'); uiUpdate(); slideViewUpdate()
     style.setProperty('opacity',1) // Prevent visual gliches when JS change css style during setup.
 }
 
@@ -386,7 +382,7 @@ titleSize.addEventListener('change',function(){
     styleMn('-set',"title_size")
 })
 editBtn.addEventListener('click', function(){
-    uiUpdate('-ui');eventMn('-sort')
+    uiUpdate();eventMn('-sort')
 
 })
 viewsForm.addEventListener('click', function(){
