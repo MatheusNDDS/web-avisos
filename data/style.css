@@ -126,7 +126,7 @@ hr{
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
     top: calc(var(--title-size) + 9px);
     width: 400px;
-    height: calc(100vh - 64px);
+    height: calc(100vh - var(--title-size) - 9px);
     display: var(--ui-display);
     position: absolute;
     flex-direction: column;
@@ -137,10 +137,11 @@ hr{
     transform: translate(-390px, 0);
     transition-duration: var(--animation-speed);
     overflow-y: auto;
-    padding: 12px;
-    padding-right: 0px;
+    padding: 13px;
+    padding-left: 1px;
     scrollbar-gutter: stable;
     transition-delay: 0.25s;
+    direction: rtl;
 }
 #ui > h1{
     font-size: 38px;
@@ -157,6 +158,7 @@ hr{
 }
 #ui > *{
     font-family: var(--ui-font);
+    direction: ltr;
 }
 
 /***CLASSES***/
@@ -503,10 +505,11 @@ Hora, .Hora {
 }
 ::-webkit-scrollbar-track {
     background: lightgrey;
-    box-shadow: inset 0 0px 3px 1px rgba(0, 0, 0, 0.05)
+    box-shadow: inset 0 0px 3px 1px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
-    border-radius: 2px;
+    border-radius: 10px;
     background: var(--accent);
 }
 /***TRANSITIONS***/
