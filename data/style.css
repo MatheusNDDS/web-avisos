@@ -31,7 +31,7 @@
     --ui-bg: #FFFFFF;
     --container-border: 0;
     --slide-highlight: none;
-    --html-bg:var(--dark-accent);
+    --html-bg:white;
     opacity: 0; /*All elements are 100% opaque until the script finish*/
 
 }
