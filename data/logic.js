@@ -78,6 +78,64 @@ if (Data == undefined || Data == null){
 var eventData = Data.Events
 var settingsData = Data.Settings
 
+//// Listeners ////
+addBtn.addEventListener('click',function(){
+    if (settingsData.slide_view == "Semana"){
+        eventMn('-add',dayEntry.value)
+    }else{
+        eventMn('-add',settingsData.slide_view)
+    }
+    buildUi3()
+})
+cardHeight.addEventListener('change',function(){
+    styleMn('-save',"card_height",parseInt(this.value),'px')
+    styleMn('-set',"card_height")
+})
+slideTitle.addEventListener('change',function(){
+    settingsData.slide_title = this.value
+    saveData()
+})
+fontSize.addEventListener('change',function(){
+    styleMn('-save',"font_size",parseInt(this.value),'px')
+    styleMn('-set',"font_size")
+    this.setAttribute('tip',this.value)
+})
+titleSize.addEventListener('change',function(){
+    styleMn('-save',"title_size",parseInt(this.value),'px')
+    styleMn('-set',"title_size")
+})
+editBtn.addEventListener('click', function(){
+    uiUpdate();eventMn('-sort')
+})
+viewsForm.addEventListener('click', function(){
+    for (let key in viewMode){
+        let element = viewMode[key]
+        if (element.checked == true){
+            settingsData.slide_view = element.value
+            slideViewUpdate()
+        }
+    }
+})
+impBtn.addEventListener('click', function(){
+    impTrigger.click()
+})
+expBtn.addEventListener('click', function(){
+    fileMn('-dl',Data,`Eventos.json`)
+})
+impTrigger.addEventListener('change', function(){
+    let eventsFile = this.files[0]
+    let fileReader = new FileReader()
+    if (eventsFile) {
+        fileReader.readAsText(eventsFile,"UTF-8")
+        fileReader.onload = function(loadedFile){
+            fileMn('-up',loadedFile.target.result,null)
+            impTrigger.value = null
+        }
+    }
+})
+sidePanel.addEventListener('onMouseover', function(){
+    style.setProperty('--slide-move','390px')
+})
 
 //// Functions ////
 function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
@@ -180,6 +238,7 @@ function uiUpdate(cmd){
             style.setProperty('--ui-span-display','none')
             style.setProperty('--edit-btn-bg','none')
             style.setProperty('--slide-highlight','var(--slide-font-shadow)')
+            style.setProperty('--card-highlight','var(--slide-shadow)')
             editBtnIcon.classList.add('fa-edit')
             editBtnIcon.classList.remove('fa-check')
             uiState = '-edit'
@@ -189,6 +248,7 @@ function uiUpdate(cmd){
             style.setProperty('--ui-span-display','absolute')
             style.setProperty('--edit-btn-bg','var(--light-accent)')
             style.setProperty('--slide-highlight','var(--slide-font-shadow), 0px 0px 10px var(--light-accent)')
+            style.setProperty('--card-highlight','0px 0px 10px var(--light-accent)')
             editBtnIcon.classList.add('fa-check')
             editBtnIcon.classList.remove('fa-edit')
             uiState = '-view'
@@ -253,14 +313,14 @@ function saveData(){
 function timeParse(day,eventIndex,timeStr){
         let events = eventData[day]
         let fullTimeStr = `${timeStr}.00`
-        event = events[eventIndex]
+        let event = events[eventIndex]
         event[timeIndex] = toMS(fullTimeStr)
 }
 function toMS(str) {
     if (! str.includes(":")) {return parseFloat(str)}
-    const [mins, secms] = str.split(":")
-    const [sec, ms] = secms.split(".")
-    return ((+mins * 60) + +sec) * 1000 + +ms
+    const [mins, secms] = str.split(":") // mins=01 secms=30.05
+    const [sec, ms] = secms.split(".") // secms=30.00 -> sec=30 ms=05
+    return ((+mins * 60) + +sec) * 1000 + +ms  // ((01 * 60) + 30) * 1000 + ms = 9005
 }
 function styleMn(cmd,key,value,type,master){
     let cssVars = settingsData.css
@@ -320,11 +380,9 @@ function setup(){
     //Data storage refactoring (Everting went wrong during test stage.)
     oldEvents = JSON.parse(localStorage.getItem('eventData'))
     oldSettings = JSON.parse(localStorage.getItem('settingsData'))
-    firstModel = eventData.Modelos[0]
 
     if (oldEvents != undefined | oldEvents != null){
         eventData = oldEvents
-        firstModel = eventData.Modelos[0]
         if (eventData.Modelos == undefined){eventData.Modelos = [defaultEvent]}
         if (eventData.Amanhã == undefined){eventData.Amanhã = []}
         if (eventData.Hoje == undefined){eventData.Hoje = []}
@@ -353,64 +411,8 @@ function setup(){
 
 /// Starting functions
     styleMn('-restore'); eventMn('-sort'); uiUpdate(); slideViewUpdate()
-    style.setProperty('opacity',1) // Prevent visual gliches when JS change css style during setup.
+    style.setProperty('opacity','1') // Prevent visual gliches when JS change css style during setup.
 }
-
-//// Listeners ////
-addBtn.addEventListener('click',function(){
-    if (settingsData.slide_view == "Semana"){
-        eventMn('-add',dayEntry.value)
-    }else{
-        eventMn('-add',settingsData.slide_view)
-    }
-    buildUi3()
-})
-cardHeight.addEventListener('change',function(){
-    styleMn('-save',"card_height",parseInt(this.value),'px')
-    styleMn('-set',"card_height")
-})
-slideTitle.addEventListener('change',function(){
-    settingsData.slide_title = this.value
-    saveData()
-})
-fontSize.addEventListener('change',function(){
-    styleMn('-save',"font_size",parseInt(this.value),'px')
-    styleMn('-set',"font_size")
-})
-titleSize.addEventListener('change',function(){
-    styleMn('-save',"title_size",parseInt(this.value),'px')
-    styleMn('-set',"title_size")
-})
-editBtn.addEventListener('click', function(){
-    uiUpdate();eventMn('-sort')
-
-})
-viewsForm.addEventListener('click', function(){
-    for (let key in viewMode){
-        let element = viewMode[key]
-        if (element.checked == true){
-            settingsData.slide_view = element.value
-            slideViewUpdate()
-        }
-    }
-})
-impBtn.addEventListener('click', function(){
-    impTrigger.click()
-})
-expBtn.addEventListener('click', function(){
-    fileMn('-dl',Data,`Eventos.json`)
-})
-impTrigger.addEventListener('change',  function(){
-    let eventsFile = this.files[0]
-    let fileReader = new FileReader()
-    if (eventsFile) {
-        fileReader.readAsText(eventsFile,"UTF-8")
-        fileReader.onload = function(loadedFile){
-            fileMn('-up',loadedFile.target.result,null)
-            impTrigger.value = null
-        }
-    }
-})
 
 //// Main Space ////
 setup()

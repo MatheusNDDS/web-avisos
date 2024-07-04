@@ -2,8 +2,10 @@
 /***PRIMARY***/
 :root{
     --scale: 1;
-    --slide-width:calc(100%);
-    --slide-height: calc(100%);
+    --slide-width:100%;
+    --slide-margin: 0px;
+    --slide-vh-wrap: 0vh;
+    --slide-height: calc(100vh - var(--slide-vh-wrap));
     --title-size: 50px;
     --card-height:calc(70px) ;
     --font-size: calc(28px);
@@ -29,6 +31,7 @@
     --ui-bg: #FFFFFF;
     --container-border: 0;
     --slide-highlight: none;
+    --html-bg:var(--dark-accent);
     opacity: 0; /*All elements are 100% opaque until the script finish*/
 
 }
@@ -79,6 +82,9 @@ hr{
     margin:0;
     margin-bottom: 7px;
 }
+html{
+    background:var(--html-bg);
+}
 
 
 
@@ -120,7 +126,9 @@ hr{
     display: block;
     padding: 0;
     padding-left: 0;
-    margin: 0;
+    margin: var(--slide-margin);
+    box-shadow:var(--slide-shadow);
+    transform: translate(var(--slide-move), 0);
 }
 #ui{
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
@@ -160,7 +168,6 @@ hr{
     font-family: var(--ui-font);
     direction: ltr;
 }
-
 /***CLASSES***/
 .clickable{
     padding-top:0;
@@ -185,6 +192,9 @@ hr{
     margin-bottom: 0px;
     gap:0;
 
+}
+.nobg{
+    background: #00000000;
 }
 
 /***TRANSITIONS***/
@@ -394,10 +404,10 @@ Dia::after{
 }
 .event:hover{
     text-shadow: var(--slide-highlight);
-}.event:focus{
+}
+.event:focus{
     text-shadow: var(--slide-font-shadow);
 }
-
 /***ELEMENTS***/
 Evento, Hora,.Hora, Titulo,.Titulo ,Dia {
     appearance: none;
@@ -506,7 +516,6 @@ Hora, .Hora {
 ::-webkit-scrollbar-track {
     background: lightgrey;
     box-shadow: inset 0 0px 3px 1px rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
