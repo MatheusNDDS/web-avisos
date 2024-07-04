@@ -386,7 +386,6 @@ function setup(){
         if (eventData.Modelos == undefined){eventData.Modelos = [defaultEvent]}
         if (eventData.Amanhã == undefined){eventData.Amanhã = []}
         if (eventData.Hoje == undefined){eventData.Hoje = []}
-        if (firstModel[0] != defaultEvent[0]) {console.log('TODO')}
         saveData();buildUi3()
         localStorage.removeItem('eventData')
     }
