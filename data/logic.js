@@ -112,7 +112,10 @@ viewsForm.addEventListener('click', function(){
         let element = viewMode[key]
         if (element.checked == true){
             settingsData.slide_view = element.value
+            document.getElementById(`${element.value}Span`).style.setProperty("background","var(--light-accent)")
             slideViewUpdate()
+        }else{
+            document.getElementById(`${element.value}Span`).style.setProperty("background","var(--spanbg)")
         }
     }
 })
@@ -374,6 +377,7 @@ function slideViewUpdate(){
         document.getElementById('DinAdd').innerHTML = 'Novo Evento'
         modMenu.disabled = false
     }
+    saveData()
 }
 function setup(){
 /// Backward compatibility
@@ -409,7 +413,7 @@ function setup(){
     settingsData.last_event = null
 
 /// Starting functions
-    styleMn('-restore'); eventMn('-sort'); uiUpdate(); slideViewUpdate()
+    styleMn('-restore'); eventMn('-sort'); uiUpdate(); viewsForm.click()
     style.setProperty('opacity','1') // Prevent visual gliches when JS change css style during setup.
 }
 

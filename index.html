@@ -11,27 +11,26 @@
   <div id="ui">
               <section>
                 <h2>Visualização</h2>
-                <form id="ViewsForm">
-                  <span class="clickable">
-                    <label for="VMC1"> Semana </label>
-                    <input type="radio" value="Semana" id="VMC1" name="VM">
-                  </span>
-
-                  <span class="clickable">
-                    <label id="TomDayLabel" for="VMC2"> Amanhã </label>
-                    <input type="radio" value="Amanhã" id="VMC2" name="VM">
-                  </span>
-
-                  <span class="clickable">
-                    <label for="VMC3"> Hoje </label>
-                    <input type="radio" value="Hoje" id="VMC3" name="VM">
-                  </span>
-
-                  <span class="clickable">
-                    <label for="VMC4"> Modelos </label>
-                    <input type="radio" value="Modelos" id="VMC4" name="VM">
-                  </span>
-                </form>
+                  <TabView>
+                    <form id="ViewsForm">
+                        <span id="SemanaSpan" >
+                          <label for="VMC1"> Semana </label>
+                          <input type="radio" value="Semana" id="VMC1" name="VM">
+                        </span>
+                        <span id="AmanhãSpan" >
+                          <label id="TomDayLabel" for="VMC2"> Amanhã </label>
+                          <input type="radio" value="Amanhã" id="VMC2" name="VM">
+                        </span>
+                        <span id="HojeSpan" >
+                          <label for="VMC3"> Hoje </label>
+                          <input type="radio" value="Hoje" id="VMC3" name="VM">
+                        </span>
+                        <span id="ModelosSpan" >
+                          <label for="VMC4"> Modelos </label>
+                          <input type="radio" value="Modelos" id="VMC4" name="VM">
+                        </span>
+                    </form>
+                  </TabView>
               </section>
               <section>
                   <h2 id="DinAdd" > Novo Evento </h2>
