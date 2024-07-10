@@ -328,6 +328,7 @@ TabView > * label{
 }
 TabView > * span{
     text-align: center;
+    height: calc(var(--ui-height) + 8px);
     margin: none;
     padding-top:0;
     margin-top: 0px;
@@ -353,6 +354,7 @@ TabView span:last-child{
 }
 TabView > * label{
     text-align: center;
+    vertical-align:middle;
     font-size: calc(var(--ui-font-size) + 2px);
 }
 input[type="number"]{
@@ -609,11 +611,9 @@ Hora, .Hora {
 }
 /***TRANSITIONS***/
 ::-webkit-scrollbar-thumb:hover{
-    background: var(--light-accent)
-}
-::-webkit-scrollbar-track:hover{
+    background: var(--dark-accent)
 }
 ::-webkit-scrollbar-thumb:active{
-    background: var(--dark-accent);
+    background: var(--light-accent);
 
 }
