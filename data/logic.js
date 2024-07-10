@@ -108,14 +108,15 @@ editBtn.addEventListener('click', function(){
     uiUpdate();eventMn('-sort')
 })
 viewsForm.addEventListener('click', function(){
+    let spanElements = document.getElementsByClassName("TabSpan")
     for (let key in viewMode){
         let element = viewMode[key]
         if (element.checked == true){
             settingsData.slide_view = element.value
-            document.getElementById(`${element.value}Span`).style.setProperty("background","var(--light-accent)")
+            spanElements[key].style.setProperty("background","var(--light-accent)")
             slideViewUpdate()
-        }else{
-            document.getElementById(`${element.value}Span`).style.setProperty("background","var(--spanbg)")
+        } else {
+            spanElements[key].style.setProperty("background","var(--spanbg)")
         }
     }
 })

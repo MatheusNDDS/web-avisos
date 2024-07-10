@@ -67,14 +67,6 @@ h1, .h1{
     font-family: serif;
     vertical-align: middle;
 }
-h2{
-    text-align: center;
-    font-size: 25px;
-    margin: auto 0px auto 0px;
-    padding: 10px;
-    line-height: 25px;
-    border-bottom: 1px solid darkgray;
-}
 main{
     display: block;
     text-align: center;
@@ -133,6 +125,20 @@ html{
     box-shadow:var(--slide-shadow);
     transform: translate(var(--slide-move), 0);
 }
+#slide h1, .h1{
+    appearance: none;
+    -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
+    font-size: var(--title-size);
+    margin: none;padding:none;
+    display:flex;
+    height: var(--title-size);
+    line-height: var(--title-size);
+    border: none;
+    text-align: center;
+    font-weight: bold;
+    font-family: serif;
+    vertical-align: middle;
+}
 #ui{
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
     top: calc(var(--title-size) + 9px);
@@ -154,27 +160,41 @@ html{
     transition-delay: 0.25s;
     direction: rtl;
 }
-#ui > h1{
-    font-size: 38px;
-    text-align:center;
-}
 #ui:hover{
     transform: translate(0, 0);
     transition-delay: 0s;
+}
+#ui > *{
+    font-family: var(--ui-font);
+    direction: ltr;
+    cursor: default;
+    user-select: none;
+}
+#ui > h1{
+    font-size: 38px;
+    text-align:center;
 }
 #ui, section,{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-#ui > *{
-    font-family: var(--ui-font);
-    direction: ltr;
+#ui span:last-child, #ui vspan:last-child{
+    margin-bottom: 0px;
+}
+#ui h2{
+    text-align: center;
+    font-size: 25px;
+    margin: auto 0px auto 0px;
+    padding: 10px;
+    line-height: 25px;
+    border-bottom: 1px solid darkgray;
 }
 /***CLASSES***/
 .clickable{
     padding-top:0;
     padding-bottom:0;
+    cursor: pointer;
 }
 .clickable:hover{
     --edit-btn-bg: var(--section-accent);
@@ -188,6 +208,9 @@ html{
 .trigger{
     display: none;
 }
+.compact{
+    gap:0;
+}
 .compact > *{
     padding-top:0;
     margin-top: 2px;
@@ -199,8 +222,14 @@ html{
 .nobg{
     background: #00000000;
 }
+.TabSpan{
+    cursor: pointer;
+}
 
 /***TRANSITIONS***/
+:disabled{
+    cursor: default;
+}
 button:hover{
     background: var(--dark-accent);
 }
@@ -229,6 +258,10 @@ button, input, select{
     padding: 5px;
     outline: 0;
     border-radius: var(--ui-radius);
+    cursor: pointer;
+}
+input[type="text"]{
+    cursor: text;
 }
 span, vspan{
     text-align: center;
@@ -290,6 +323,9 @@ option:checked{
 TabView{
     display: block
 }
+TabView > * label{
+    cursor: pointer;
+}
 TabView > * span{
     text-align: center;
     margin: none;
@@ -312,7 +348,7 @@ TabView span:first-child{
 }
 TabView span:last-child{
     border: 0px solid var(--tabview-border-color);
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     border-radius: 0 0 var(--ui-radius) var(--ui-radius);
 }
 TabView > * label{
@@ -564,8 +600,8 @@ Hora, .Hora {
     opacity: 0;
 }
 ::-webkit-scrollbar-track {
-    background: lightgrey;
-    box-shadow: inset 0 0px 3px 1px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(90deg, rgba(0,0,0,0) 39%, darkgray 39%, darkgray 55%, rgba(0,0,0,0) 55%);
+    box-shadow: inset 0 0px 3px 1px rgba(0, 0, 0, 0);
 }
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
