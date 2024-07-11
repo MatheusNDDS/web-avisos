@@ -357,6 +357,9 @@ TabView > * label{
     vertical-align:middle;
     font-size: calc(var(--ui-font-size) + 2px);
 }
+TabView > * input[type="radio"]{
+    display: none;
+}
 input[type="number"]{
     height: var(--ui-height);
 }
@@ -379,9 +382,6 @@ input[type="checkbox"],input[type="radio"]{
 input[type="radio"]{
 /*     appearance: none; */
 /*     opacity: 0; */
-}
-#VMC1,#VMC2,#VMC3,#VMC4{
-    display: none;
 }
 input[type="range"]{
     margin-top: 0;
