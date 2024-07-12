@@ -15,6 +15,7 @@
     --animation-speed: 0.2s;
     --slide-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
     --container-border: 2.5pt solid black;
+    --card-space: 7px;
 }
 #Semana,#Hoje,#Amanhã,#Modelos{
     padding:0;
@@ -31,11 +32,7 @@
 .hour{
     font-size: calc(var(--font-size) + 5px);
 }
-.ph{
-    border: 0;
-    box-shadow: none;
-    background: none;
-}
+
 /***TRANSITIONS***/
 .event:hover{
     text-shadow: var(--slide-highlight);
@@ -78,7 +75,11 @@ TituloDia, .daytitle {
     font-size:  min(var(--font-size), 30px);
     font-weight: bold;
     height: var(--font-size);
-    margin-left: 5px; margin-right: 0; margin-top:5px;
+    margin: 0;
+    margin-left: 5px;
+}
+TituloDia.ph{
+    margin:0;
 }
 Hora, .hour {
     max-width: 150px;
@@ -106,8 +107,9 @@ Cartão{
     min-width: 100%;
 }
 Evento{
-    height: auto; min-height: calc(var(--card-height) - 22px);
-    width: calc(100%);
+    height: auto;
+    min-height: calc(var(--card-height) - 22px);
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -116,12 +118,12 @@ Evento{
     line-height: var(--line-height);
     vertical-align: middle;
     margin: auto;
-    margin-bottom: 7px;
+    margin-bottom: var(--card-space);
     margin-left: 0;
     margin-right: 0;
-    background: #a1a1a1;
     padding-left: 0px;
     border: var(--container-border);
+    background: #a1a1a1;
     overflow: hidden;
 }
 Container{
@@ -211,7 +213,7 @@ main{
 }
 hr{
     margin:0;
-    margin-bottom: 7px;
+    margin-bottom: var(--card-space);
 }
 html{
     background:var(--html-bg);

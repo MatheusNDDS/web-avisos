@@ -22,7 +22,8 @@ const dayEntry = document.getElementById('DayEntry'),
       viewMode = document.getElementsByName("VM"),
       radios = document.forms[0].elements["VM"],
       impTrigger = document.getElementById('ImpTrigger'),
-      slideTitle = document.getElementById('SlideTitle')
+      slideTitle = document.getElementById('SlideTitle'),
+      cardSpace = document.getElementById('CardSpace')
 
 //Week html map
 const weekMap = {
@@ -100,11 +101,17 @@ fontSize.addEventListener('change',function(){
     styleMn('-set',"font_size")
     this.setAttribute('tip',this.value)
 })
+cardSpace.addEventListener('change',function(){
+    styleMn('-save',"card_space",parseInt(this.value),'px')
+    styleMn('-set',"card_space")
+    this.setAttribute('tip',this.value)
+})
 titleSize.addEventListener('change',function(){
     styleMn('-save',"title_size",parseInt(this.value),'px')
     styleMn('-set',"title_size")
 })
 editBtn.addEventListener('click', function(){
+    settingsData.last_event = null
     uiUpdate();eventMn('-sort')
 })
 viewsForm.addEventListener('click', function(){
@@ -140,7 +147,6 @@ impTrigger.addEventListener('change', function(){
 sidePanel.addEventListener('onMouseover', function(){
     style.setProperty('--slide-move','390px')
 })
-
 //// Functions ////
 function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
     switch (cmd) {
@@ -262,7 +268,7 @@ function uiUpdate(cmd){
 function buildUi3(){
     for (let key in eventData){
         let Events = eventData[key]
-        if (Events.length == 0){weekMap[key].Container.innerHTML='<Evento class="ph">-</Evento>'}else{weekMap[key].Container.innerHTML=''}
+        if (Events.length == 0){weekMap[key].Container.innerHTML='<TituloDia class="ph">-</TituloDia>'}else{weekMap[key].Container.innerHTML=''}
         for (const i in Events){
             let event = Events[i]
             if (Events.length != 0 && Events != null){
@@ -286,6 +292,8 @@ function buildUi3(){
         if (! Events.length > 0){
             // Remove a borda esquerda do Layout se não ouver eventos //
             weekMap[key].Container.style.setProperty('border-left', '0')
+        }else{
+            weekMap[key].Container.style.setProperty('border-left', 'var(--container-border)')
         }
     }
     saveData(); menuUpdate()
