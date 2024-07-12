@@ -1,176 +1,40 @@
-/*WEB AVISOS: MATHEUS NDDS*/
-/*SE VOCÊ MANJA DE CSS RECOMENDO EDITAR APENAS A SESSÃO “SLIDE”*/
-/*Optei por deixar as classes em inglês por semântica*/
-
-/************SLIDE************/
-/***PRIMARY***/
-:root{
-    --slide-highlight: none;
-    --slide-font: sans-serif;
-    --slide-font-shadow:  1px 2px 1px #000000dd;
-    --radius: calc(15px);
-    --title-size: 50px;
-    --card-height:calc(70px) ;
-    --font-size: calc(28px);
-    --animation-speed: 0.2s;
-    --slide-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
-    --container-border: 2.5pt solid black;
-}
-#Semana,#Hoje,#Amanhã,#Modelos{
-    padding:0;
-    text-align:right;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-#SlideTitle{
-    height: var(--title-size);
-    line-height: var(--title-size);
-    width: auto;
-}
-/***CLASSES***/
-.hour{
-    font-size: calc(var(--font-size) + 5px);
-}
-.ph{
-    border: 0;
-    box-shadow: none;
-    background: none;
-}
-/***TRANSITIONS***/
-.event:hover{
-    text-shadow: var(--slide-highlight);
-}
-.event:focus{
-    text-shadow: var(--slide-font-shadow);
-}
-/***ELEMENTS***/
-Evento, Hora, TituloDia, .daytitle, .event, .hour, .title{
-    appearance: none;
-    height: var(--card-height);
-    border-radius: var(--radius);
-    font-size: var(--font-size);
-    text-align: center;
-    font-family: sans-serif;
-    display: inline-block;
-    font-weight: 600;
-    min-height: var(--font-size);
-    line-height: var(--font-size);
-}
-.title, .title.event{
-    background: none;
-    border: none;
-    margin: 0;
-    color: white;
-    vertical-align: middle;
-    text-align: center;
-    line-height: var(--card-height);
-    width: 100%;
-}
-TituloDia, .daytitle {
-    appearance: none;
-    max-width: 160px;
-    width: 18%;
-    padding-right: 0px;
-    display: inline;
-    vertical-align: top;
-    text-align: left;
-    line-height: var(--font-size);
-    font-size:  min(var(--font-size), 30px);
-    font-weight: bold;
-    height: var(--font-size);
-    margin-left: 5px; margin-right: 0; margin-top:5px;
-}
-Hora, .hour {
-    max-width: 150px;
-    padding-left: calc(20px); padding-right: calc(20px);
-    vertical-align: middle;
-    text-align: center;
-    height: var(--card-height);
-    border-radius: 0;
-    line-height: var(--card-height);
-    color: white;
-    background: darkslateblue;
-}
-Cartão, .card {
-    border-radius: 0;
-    background: darkblue;
-    display: flex;
-    width: 100%;
-    margin-bottom: 0px;
-    justify-content: stretch;
-}
-Cartão > * {
-    text-shadow:var(--slide-font-shadow);
-}
-Cartão{
-    min-width: 100%;
-}
-Evento{
-    height: auto; min-height: calc(var(--card-height) - 22px);
-    width: calc(100%);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 20px;
-    border-radius: var(--radius);
-    line-height: var(--line-height);
-    vertical-align: middle;
-    margin: auto;
-    margin-bottom: 7px;
-    margin-left: 0;
-    margin-right: 0;
-    background: #a1a1a1;
-    padding-left: 0px;
-    border: var(--container-border);
-    overflow: hidden;
-}
-Container{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0px;padding-bottom:0px;
-    border-radius: var(--radius) 0 0 var(--radius);
-    border-left: var(--container-border);
-    overflow: hidden;
-}
-Leiaute{
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-    border-radius: 0;
-
-}
-
-
-
 /************ HTML ************/
 /***PRIMARY***/
 :root{
-    --accent: teal;
-    --light-accent: #00b8b8;
-    --dark-accent: #005353;
-    --html-bg:white;
+    --scale: 1;
+    --slide-width:100%;
+    --slide-margin: 0px;
+    --slide-vh-wrap: 0vh;
+    --slide-height: calc(100vh - var(--slide-vh-wrap));
+    --title-size: 50px;
+    --card-height:calc(70px) ;
+    --font-size: calc(28px);
+    --radius: calc(15px);
     --ui-font: sans-serif;
-    --ui-shadow:  0 0px 3px 1px rgba(0, 0, 0, 0.3);
-    --ui-highlight:  0px 0px 1px 1px var(--light-accent);
-    --ui-bg: #FFFFFF;
+    --slide-font: sans-serif;
+    --slide-font-shadow:  1px 2px 1px #000000dd;
     --ui-font-size: 18px;
     --ui-radius: 5px;
     --ui-height: 30px;
     --ui-display: none;
     --ui-span-display: none;
-    --spanbg: #cecece;
-    --slide-width:100%;
-    --slide-margin: 0px;
-    --slide-vh-wrap: 0vh;
-    --slide-height: calc(100vh - var(--slide-vh-wrap));
-    --section-accent: #79dada;
-    --tabview-border-color: var(--section-bg);
-    --section-bg: #ebebeb;
     --edit-span-width: calc(130px);
     --edit-btn-bg: none;
+    --animation-speed: 0.2s;
+    --accent: teal;
+    --section-accent: #79dada;
+    --light-accent: #00b8b8;
+    --dark-accent: #005353;
+    --slide-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
+    --ui-shadow:  0 0px 3px 1px rgba(0, 0, 0, 0.3);
+    --ui-highlight:  0px 0px 1px 1px var(--light-accent);
+    --ui-bg: #FFFFFF;
+    --container-border: 0;
+    --slide-highlight: none;
+    --html-bg:white;
+    --spanbg: #cecece;
+    --tabview-border-color: var(--section-bg);
+    --section-bg: #ebebeb;
     opacity: 0; /*All elements are 100% opaque until the script finish*/
 
 }
@@ -383,6 +247,7 @@ select:disabled{
 TabView > * span:hover{
     --spanbg: var(--section-accent);
 }
+
 /***ELEMENTS***/
 button, input, select{
     font-size: var(--ui-font-size);
@@ -590,14 +455,145 @@ input[type="color"].edit{
 }
 input[type="time"].event::-webkit-calendar-picker-indicator { display: none; }
 input[type="time"].event{
-    margin:0;
-    width: 18%;
-    border-width: 3px;
-    border-style: solid;
-    border-color: black;
-    border-radius: var(--radius);
-    height: calc(100% - 6px);
+    border: 0;
+    margin: auto;
+    margin-right: 0;
 }
+
+
+
+/************SLIDE************/
+/***Primary***/
+#Semana,#Hoje,#Amanhã,#Modelos{
+    padding:0;
+    text-align:right;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+#SlideTitle{
+    height: var(--title-size);
+    line-height: var(--title-size);
+    width: auto;
+}
+/***CLASSES***/
+.Hora{
+    font-size: calc(var(--font-size) + 5px);
+}
+.ph{
+    border-bottom: 0;
+    box-shadow: none;
+    background: none;
+}
+
+/***TRANSITIONS***/
+Dia::after{
+    content: ":";
+    display: inline
+}
+.event:hover{
+    text-shadow: var(--slide-highlight);
+}
+.event:focus{
+    text-shadow: var(--slide-font-shadow);
+}
+/***ELEMENTS***/
+Evento, Hora,.Hora, Titulo,.Titulo ,Dia {
+    appearance: none;
+    height: var(--card-height);
+    border-radius: var(--radius);
+    font-size: var(--font-size);
+    text-align: center;
+    font-family: sans-serif;
+    display: inline-block;
+    font-weight: 600;
+    min-height: var(--font-size);
+    line-height: var(--font-size);
+}
+Evento{
+    height: auto; min-height: calc(var(--card-height) - 22px);
+    width: calc(100%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    border-radius: var(--radius);
+    line-height: var(--line-height);
+    vertical-align: middle;
+    margin: auto;
+    margin-bottom: 7px;
+    margin-left: 0;
+    margin-right: 0;
+    background: #a1a1a1;
+    padding-left: 0px;
+}
+Container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;padding-bottom:0px;
+    border-radius: var(--radius);
+}
+Leiaute{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    border-left: var(--container-border);
+
+}
+Cartão, .card {
+    border-radius: var(--radius);
+    background: darkblue;
+    display: flex;
+    width: 100%;
+    margin-bottom: 5px;
+    justify-content: stretch;
+    box-shadow: var(--slide-shadow);
+}
+Cartão > * {
+    text-shadow:var(--slide-font-shadow);
+}
+Cartão{
+    min-width: 100%;
+}
+Titulo, .Titulo, .Titulo.event{
+    background: none;
+    border: none;
+    margin: 0;
+    color: white;
+    vertical-align: middle;
+    text-align: center;
+    line-height: var(--card-height);
+    width: 100%;
+}
+Dia, .Dia{
+    appearance: none;
+    max-width: 160px;
+    width: 18%;
+    padding-right: 0px;
+    display: inline;
+    vertical-align: top;
+    text-align: left;
+    line-height: var(--font-size);
+    font-size:  min(var(--font-size), 30px);
+    font-weight: bold;
+    height: 100%;
+    margin-left: 5px; margin-right: 0; margin-top:5px;
+}
+Hora, .Hora {
+    max-width: 150px;
+    padding-left: calc(20px); padding-right: calc(20px);
+    vertical-align: middle;
+    text-align: center;
+    height: var(--card-height);
+    border-radius: var(--radius);
+    line-height: var(--card-height);
+    color: white;
+    background: darkslateblue;
+}
+
+
 
 /************WEBKIT************/
 /***ELEMENTS***/
@@ -617,9 +613,8 @@ input[type="time"].event{
 /***TRANSITIONS***/
 ::-webkit-scrollbar-thumb:hover{
     background: var(--dark-accent);
-    border: 1px solid white;
+    border: 2px solid var(--accent);
 }
 ::-webkit-scrollbar-thumb:active{
     background: var(--light-accent);
-    border: 1px solid white;
 }

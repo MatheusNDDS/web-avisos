@@ -267,8 +267,8 @@ function buildUi3(){
             let event = Events[i]
             if (Events.length != 0 && Events != null){
                 let card = `<Leiaute id="Lay${key}${i}"><Cartão id="Card${key}${i}" style="background-color: ${event[1]};">
-                                <input id="Name${key}${i}" class="title event" type="text" onchange=(eventMn('-update',"${key}",${i},this.value,0,null)) value="${event[0]}">
-                                <input  id="Hour${key}${i}" class="hour event" type="time" style="background-color: ${event[3]}; border-color: ${event[1]};" onchange=(eventMn('-update',"${key}",${i},this.value,2,null)) value="${event[2]}">
+                                <input id="Name${key}${i}" class="Titulo event" type="text" onchange=(eventMn('-update',"${key}",${i},this.value,0,null)) value="${event[0]}">
+                                <input  id="Hour${key}${i}" class="Hora event" type="time" style="background-color: ${event[3]};" onchange=(eventMn('-update',"${key}",${i},this.value,2,null)) value="${event[2]}">
                             </Cartão>
                             <div class="edit"><span class="edit">
                                     <input id="NameColor${key}${i}" title="Fundo do título" onchange="eventMn('-update','${key}',${i},this.value,1,Card${key}${i})" class="button card edit" type="color" value="${event[1]}">
@@ -278,14 +278,18 @@ function buildUi3(){
                 weekMap[key].Container.innerHTML+= card
                 timeParse(key,i,event[2])
             }
-            if (Events.length > 1 && i != Events.length-1) {
-                // Define a borda inferior dos Cartões se o container tiver mais de um evento//
-                document.getElementById(`Card${key}${i}`).style.setProperty("border-bottom","var(--container-border)")
-            }
         }
-        if (! Events.length > 0){
-            // Remove a borda esquerda do Layout se não ouver eventos //
-            weekMap[key].Container.style.setProperty('border-left', '0')
+        if (Events.length > 0){
+            weekMap[key].Container.style.setProperty('background', '#838383')
+        }else{
+            weekMap[key].Container.style.setProperty('background', '#00000000')
+        }
+        if (Events.length > 1 && settingsData.slide_view == "Semana") {
+            weekMap[key].Container.style.setProperty('border-left', `5pt  black solid`)
+            weekMap[key].Container.style.setProperty('border-right', `5pt  black solid`)
+        }else{
+            weekMap[key].Container.style.setProperty('border-left', '0pt  #40404000 solid')
+            weekMap[key].Container.style.setProperty('border-right', '0pt  #40404000 solid')
         }
     }
     saveData(); menuUpdate()
