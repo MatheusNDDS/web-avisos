@@ -308,9 +308,12 @@ html{
     cursor: default;
     user-select: none;
 }
-#ui > h1{
+#ui h1{
     font-size: 38px;
     text-align:center;
+}
+#ui p{
+    font-size: var(--ui-font-size);
 }
 #ui, section,{
     display: flex;
@@ -327,6 +330,9 @@ html{
     padding: 10px;
     line-height: 25px;
     border-bottom: 1px solid darkgray;
+}
+#EditDiagTr{
+    width: 90px;
 }
 /***CLASSES***/
 .clickable{
@@ -363,6 +369,12 @@ html{
 .TabSpan{
     cursor: pointer;
 }
+.danger{
+    background: red;
+    color: white;
+    border-radius: var(--ui-radius);
+    padding: 2px;
+}
 
 /***TRANSITIONS***/
 :disabled{
@@ -374,7 +386,7 @@ button:hover{
 button:active{
     background: var(--light-accent);
 }
-select:hover{
+select:hover,textarea:hover{
     box-shadow: var(--ui-highlight);
     border-color: var(--light-accent);
 }
@@ -386,7 +398,7 @@ TabView > * span:hover{
     --spanbg: var(--section-accent);
 }
 /***ELEMENTS***/
-button, input, select{
+button, input, select,textarea{
     font-size: var(--ui-font-size);
     height: var(--ui-height);
     font-family: var(--ui-font);
@@ -397,8 +409,12 @@ button, input, select{
     border-radius: var(--ui-radius);
     cursor: pointer;
 }
-input[type="text"]{
+input[type="text"],textarea{
     cursor: text;
+}
+textarea{
+    height:auto;
+    resize: none;
 }
 span, vspan{
     text-align: center;
@@ -415,12 +431,19 @@ span, vspan{
 vspan{
     flex-direction: column;
 }
-section{
+section,dialog{
     background: var(--section-bg);
     border-radius: var(--ui-radius);
     padding: 10px;
     border: 5px;
     border-color: black;
+}
+dialog{
+    max-width: 550px;
+    box-shadow: var(--ui-shadow);
+}
+dialog::backdrop{
+    background: #00000055;
 }
 section > * hr{
     border-color: darkgray;

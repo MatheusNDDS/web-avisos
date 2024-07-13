@@ -23,7 +23,11 @@ const dayEntry = document.getElementById('DayEntry'),
       radios = document.forms[0].elements["VM"],
       impTrigger = document.getElementById('ImpTrigger'),
       slideTitle = document.getElementById('SlideTitle'),
-      cardSpace = document.getElementById('CardSpace')
+      cardSpace = document.getElementById('CardSpace'),
+      editDiagTr = document.getElementById('EditDiagTr'),
+      editDiagClose = document.getElementById('EditDiagClose')
+      saveEdit = document.getElementById('SaveEdit')
+      dataTextEntry = document.getElementById('DataTextEntry')
 
 //Week html map
 const weekMap = {
@@ -87,6 +91,17 @@ addBtn.addEventListener('click',function(){
         eventMn('-add',settingsData.slide_view)
     }
     buildUi3()
+})
+editDiagTr.addEventListener('click',function(){
+    document.getElementById('EditDiag').showModal()
+    dataTextEntry.value = localStorage.getItem('Data')
+})
+editDiagClose.addEventListener('click',function(){
+    document.getElementById('EditDiag').close()
+})
+saveEdit.addEventListener('click',function(){
+    localStorage.setItem('Data',dataTextEntry.value)
+    location.reload()
 })
 cardHeight.addEventListener('change',function(){
     styleMn('-save',"card_height",parseInt(this.value),'px')
@@ -356,6 +371,7 @@ function setupEntries(){
     let cssVars = settingsData.css
 
     if (cssVars.card_height != undefined) {cardHeight.value = cssVars.card_height[0]}
+    if (cssVars.card_space != undefined) {cardSpace.value = cssVars.card_space[0]}
     if (cssVars.title_size != undefined) {titleSize.value = cssVars.title_size[0]}
     if (cssVars.font_size != undefined) {fontSize.value = cssVars.font_size[0]}
     if (settings.slide_title != undefined | settings.slide_title != null) {slideTitle.value = settings.slide_title}
