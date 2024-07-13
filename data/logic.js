@@ -165,7 +165,7 @@ sidePanel.addEventListener('onMouseover', function(){
     style.setProperty('--slide-move','390px')
 })
 //// Functions ////
-function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
+function eventMn(cmd,day,eventIndex,value,dataIndex,tagId,cssProp){
     switch (cmd) {
         case '-add':
             if (modMenu.value == '' && settingsData.slide_view !== "Modelos"){
@@ -193,7 +193,7 @@ function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
             let event = dayEvents[eventIndex]
             event[dataIndex] = value
 
-            if (tagId != null) {tagId.style.setProperty('background', `${event[dataIndex]}`)}
+            if (tagId != null) {tagId.style.setProperty(cssProp, `${event[dataIndex]}`)}
 
             timeParse(day,eventIndex,event[dataIndex])
             menuUpdate();saveData()
@@ -296,8 +296,8 @@ function buildUi3(){
                                 <input  id="Hour${key}${i}" class="hour event" type="time" style="background-color: ${event[3]}; border-color: ${event[1]};" onchange=(eventMn('-update',"${key}",${i},this.value,2,null)) value="${event[2]}">
                             </Cartão>
                             <div class="edit"><span class="edit">
-                                    <input id="NameColor${key}${i}" title="Fundo do título" onchange="eventMn('-update','${key}',${i},this.value,1,Card${key}${i})" class="button card edit" type="color" value="${event[1]}">
-                                    <input id="HourColor${key}${i}" title="Fundo da hora" onchange="eventMn('-update','${key}',${i},this.value,3,Hour${key}${i})" class="button card edit" type="color" value="${event[3]}">
+                                    <input id="NameColor${key}${i}" title="Fundo do título" onchange="eventMn('-update','${key}',${i},this.value,1,Card${key}${i},'background');eventMn('-update','${key}',${i},this.value,1,Hour${key}${i},'border-color')" class="button card edit" type="color" value="${event[1]}">
+                                    <input id="HourColor${key}${i}" title="Fundo da hora" onchange="eventMn('-update','${key}',${i},this.value,3,Hour${key}${i},'background')" class="button card edit" type="color" value="${event[3]}">
                                     <button class="button card edit" title="Excluir" onclick="eventMn('-rm','${key}',${i})" ><i class="fa fa-trash"></i></button>
                             </span></div></Leiaute>`
                 weekMap[key].Container.innerHTML+= card
