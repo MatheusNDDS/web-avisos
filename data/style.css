@@ -122,7 +122,7 @@ Evento{
     margin-bottom: var(--card-space);
     margin-left: 0;
     margin-right: 0;
-    border: var(--container-border-noc) #000000D5;
+    border: var(--container-border);
     background: #a1a1a1;
     overflow: hidden;
 }

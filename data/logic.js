@@ -94,7 +94,7 @@ addBtn.addEventListener('click',function(){
 })
 editDiagTr.addEventListener('click',function(){
     document.getElementById('EditDiag').showModal()
-    dataTextEntry.value = localStorage.getItem('Data')
+    dataTextEntry.value = localStorage.getItem('Data').replaceAll('],' , '],\n').replaceAll(':[[' , ':[\n[').replaceAll(']],',']\n],\n').replaceAll(']},',']\n},\n').replaceAll('":{"', '":{\n"').replaceAll('[],', '[],\n')
 })
 editDiagClose.addEventListener('click',function(){
     document.getElementById('EditDiag').close()
