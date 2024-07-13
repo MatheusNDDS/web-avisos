@@ -135,10 +135,12 @@ viewsForm.addEventListener('click', function(){
         let element = viewMode[key]
         if (element.checked == true){
             settingsData.slide_view = element.value
-            spanElements[key].style.setProperty("background","var(--light-accent)")
+            spanElements[key].style.setProperty("background","var(--accent)")
+            spanElements[key].style.setProperty("color","white")
             slideViewUpdate()
         } else {
             spanElements[key].style.setProperty("background","var(--spanbg)")
+            spanElements[key].style.setProperty("color","black")
         }
     }
 })
@@ -262,6 +264,7 @@ function uiUpdate(cmd){
             style.setProperty('--ui-display','none')
             style.setProperty('--ui-span-display','none')
             style.setProperty('--edit-btn-bg','none')
+            style.setProperty('--edit-btn-color','black')
             style.setProperty('--slide-highlight','var(--slide-font-shadow)')
             style.setProperty('--card-highlight','var(--slide-shadow)')
             editBtnIcon.classList.add('fa-edit')
@@ -271,7 +274,8 @@ function uiUpdate(cmd){
         case '-edit':
             style.setProperty('--ui-display','flex')
             style.setProperty('--ui-span-display','absolute')
-            style.setProperty('--edit-btn-bg','var(--light-accent)')
+            style.setProperty('--edit-btn-bg','var(--accent)')
+            style.setProperty('--edit-btn-color','white')
             style.setProperty('--slide-highlight','var(--slide-font-shadow), 0px 0px 10px var(--light-accent)')
             style.setProperty('--card-highlight','0px 0px 10px var(--light-accent)')
             editBtnIcon.classList.add('fa-check')
