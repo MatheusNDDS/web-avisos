@@ -14,7 +14,8 @@
     --font-size: calc(28px);
     --animation-speed: 0.2s;
     --slide-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
-    --container-border: 2.5pt solid black;
+    --container-border-noc: 2.5pt solid;
+    --container-border: var(--container-border-noc) black;
     --card-space: 7px;
 }
 #Semana,#Hoje,#Amanhã,#Modelos{
@@ -121,8 +122,7 @@ Evento{
     margin-bottom: var(--card-space);
     margin-left: 0;
     margin-right: 0;
-    padding-left: 0px;
-    border: var(--container-border);
+    border: var(--container-border-noc) #000000D5;
     background: #a1a1a1;
     overflow: hidden;
 }
