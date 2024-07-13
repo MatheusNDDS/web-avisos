@@ -94,7 +94,7 @@ addBtn.addEventListener('click',function(){
 })
 editDiagTr.addEventListener('click',function(){
     document.getElementById('EditDiag').showModal()
-    dataTextEntry.value = localStorage.getItem('Data').replaceAll('],' , '],\n').replaceAll(':[[' , ':[\n[').replaceAll(']],',']\n],\n').replaceAll(']},',']\n},\n').replaceAll('":{"', '":{\n"').replaceAll('[],', '[],\n')
+    dataTextEntry.value = localStorage.getItem('Data')
 })
 editDiagClose.addEventListener('click',function(){
     document.getElementById('EditDiag').close()
@@ -335,7 +335,7 @@ function saveData(){
         "Events" : eventData,
         "Settings" : settingsData,
     }
-    localStorage.setItem('Data',JSON.stringify(wadata))
+    localStorage.setItem('Data',jsonFormatter(JSON.stringify(wadata)))
 }
 function timeParse(day,eventIndex,timeStr){
         let events = eventData[day]
@@ -403,6 +403,15 @@ function slideViewUpdate(){
         modMenu.disabled = false
     }
     saveData()
+}
+function jsonFormatter(jsonstr,cmd){
+    let jsonStrF
+    if (cmd == '-reset'){
+        jsonStrF = jsonstr.replaceAll('\n','')
+    }else{
+        jsonStrF = jsonstr.replaceAll('],' , '],\n').replaceAll(':[[' , ':[\n[').replaceAll(']],',']\n],\n').replaceAll(']},',']\n\n},\n\n').replaceAll('":{"', '":{\n\n"').replaceAll('[],', '[],\n')
+    }
+    return jsonStrF
 }
 function setup(){
 /// Backward compatibility
