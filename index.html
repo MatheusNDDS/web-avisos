@@ -10,8 +10,8 @@
 <!--- APP Ui --->
   <div id="ui">
     <dialog id="EditDiag">
-      <h2>Editar Dados</h2>
-      <p><i class="fa fa-exclamation-triangle"></i> Esta função não é para os fracos de coração, <b>alterar os dados</b> de sem conhecimento de JSON pode <b class="danger" >QUEBRAR O PROGRAMA</b>.</p>
+      <h2>Editor de Dados</h2>
+      <p><i class="fa fa-exclamation-triangle"></i> Esta função não é para os fracos de coração, <b>alterar os dados</b> de sem conhecimento de <b>JSON</b> pode <b class="danger" >QUEBRAR O PROGRAMA</b>.</p>
       <textarea id="DataTextEntry" rows="20" cols="50" ></textarea>
       <span class="nobg">
             <button id="SaveEdit"><i class="fa fa-save"></i> Salvar e Recarregar</button>
@@ -44,7 +44,7 @@
     <section>
         <h2 id="DinAdd" > Novo Evento </h2>
         <span id="DayEntrySpan">
-          <label>TituloDia</label>
+          <label>Dia</label>
           <select id="DayEntry" required>
             <option>Segunda
             <option>Terça
@@ -78,7 +78,7 @@
           <input type="range" id="TitleSize" min="30" max="80" value="50" required>
         </vspan>
         <vspan class="compact">
-          <label>Espacamento</label>
+          <label>Espaçamento</label>
           <input type="range" id="CardSpace" min="5" max="10" value="5" required>
         </vspan>
     </section>
