@@ -562,8 +562,8 @@ input[type="range"]{
     margin-top: 0;
 }
 .edit{
-    height: calc(55px);
-    width: calc(39px);
+    height: 55px;
+    width: 39px;
     font-size: 26px;
 
 }
@@ -572,6 +572,7 @@ div.edit{
     width: 137px;
     transform: translate(0px,0);
     height: calc(var(--card-height) + 0px);
+    min-height: 55px;
     left: 99%;
     display:flex;
     flex-direction: column;
