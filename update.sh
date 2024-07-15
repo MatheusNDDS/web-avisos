@@ -22,5 +22,3 @@ case "$(echo $yn| tr [:upper] [:lower])" in
 		echo -e "-- cancelado --"
 	;;
 esac
-
-exit
