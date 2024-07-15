@@ -9,10 +9,9 @@
     --slide-highlight-active: none;
     --slide-font: sans-serif;
     --slide-font-shadow:  1px 2px 1px #000000dd;
-    --slide-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
-    --radius: calc(15px);
+    --radius: 17px;
     --title-size: 50px;
-    --card-height:calc(70px) ;
+    --card-height:calc(70px);
     --font-size: calc(28px);
     --animation-speed: 0.2s;
     --container-border-noc: 2.5pt solid;
@@ -23,8 +22,6 @@
 #Semana,#Hoje,#Amanhã,#Modelos{
     padding:0;
     text-align:right;
-    padding-left: 15px;
-    padding-right: 15px;
 }
 #SlideTitle{
     height: var(--title-size);
@@ -33,7 +30,7 @@
 }
 /***CLASSES***/
 .hour{
-    font-size: calc(var(--font-size) + 5px);
+    font-size: calc(var(--font-size));
 }
 
 /***TRANSITIONS***/
@@ -99,6 +96,7 @@ Hora, .hour {
 }
 Cartão, .card {
     height: var(--card-height);
+    min-height: calc(var(--font-size) + 8px);
     border-radius: 0;
     background: darkblue;
     display: flex;
@@ -115,18 +113,16 @@ Cartão{
 Evento{
     height: auto;
     min-height: calc(var(--card-height) - 22px);
-    width: 100%;
+    width: 97%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 20px;
+    gap: 0;
     border-radius: var(--radius);
     line-height: var(--line-height);
     vertical-align: middle;
     margin: auto;
     margin-bottom: var(--card-space);
-    margin-left: 0;
-    margin-right: 0;
     border: var(--container-border);
     background: var(--eventbg);
     overflow: hidden;
@@ -177,6 +173,7 @@ Leiaute{
     --slide-margin: 0px;
     --slide-vh-wrap: 0vh;
     --slide-height: calc(100vh - var(--slide-vh-wrap));
+    --slide-shadow: 0 1px 2px 3px rgba(0, 0, 0, 0.3);
     --section-accent: #79dada;
     --tabview-border-color: var(--section-bg);
     --section-bg: #ebebeb;
@@ -277,7 +274,9 @@ i,label{
     appearance: none;
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
     font-size: var(--title-size);
-    margin: none;padding:none;
+    margin: none;
+    margin-bottom: 2px;
+    padding:none;
     display:flex;
     height: var(--title-size);
     line-height: var(--title-size);
@@ -302,7 +301,7 @@ i,label{
     justify-content: start;
     gap: 10px;
     background: var(--ui-bg);
-    box-shadow: var(--slide-shadow);
+    box-shadow: var(--ui-shadow);
     transform: translate(-390px, 0);
     transition-duration: var(--animation-speed);
     overflow-y: auto;
@@ -566,6 +565,7 @@ input[type="range"]{
     height: calc(55px);
     width: calc(39px);
     font-size: 26px;
+
 }
 div.edit{
     position: absolute;
@@ -593,8 +593,6 @@ span.edit{
 
 }
 span.edit:hover{
-    box-shadow: var(--slide-shadow);
-
 }
 div.edit:hover{
     transform: translate(-120px,0);
@@ -639,6 +637,7 @@ input[type="time"].event{
     border-color: black;
     border-radius: var(--radius);
     height: calc(100% - 8px);
+    padding: 0;
     padding-left: 5px;
     padding-right: 5px;
 }
