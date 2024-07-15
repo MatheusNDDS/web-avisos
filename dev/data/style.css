@@ -64,8 +64,9 @@ Evento, Hora, TituloDia, .daytitle, .event, .hour, .title{
     color: white;
     vertical-align: middle;
     text-align: center;
+    width: 100%;
+    flex: 6;
     line-height: var(--card-height);
-    width: 85%;
 }
 TituloDia, .daytitle {
     appearance: none;
@@ -97,6 +98,7 @@ Hora, .hour {
     background: darkslateblue;
 }
 Cartão, .card {
+    height: var(--card-height);
     border-radius: 0;
     background: darkblue;
     display: flex;
@@ -129,12 +131,13 @@ Evento{
     background: var(--eventbg);
     overflow: hidden;
     padding: 1px;
+    flex: 4;
 }
 Container{
     display: flex;
     width: 100%;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: stretch;
     padding: 0px;padding-bottom:0px;
 /*     border-radius: var(--radius) 0 0 var(--radius); */
     border-radius: calc(var(--radius));
@@ -629,15 +632,15 @@ input[type="color"].edit{
 input[type="time"].event::-webkit-calendar-picker-indicator { display: none; }
 input[type="time"].event{
     margin:0;
-    max-width: 15%;
+    min-height: 0px;
     width: max-content;
-    padding-left: 5px;
-    padding-right: 5px;
     border-width: 4px;
     border-style: solid;
     border-color: black;
     border-radius: var(--radius);
     height: calc(100% - 8px);
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 /************WEBKIT************/
