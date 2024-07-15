@@ -407,7 +407,7 @@ function jsonFormatter(jsonstr,cmd){
     if (cmd == '-reset'){
         jsonStrF = jsonstr.replaceAll('\n','')
     }else{
-        jsonStrF = jsonstr.replaceAll('],' , '],\n').replaceAll(':[[' , ':[\n[').replaceAll(']],',']\n],\n').replaceAll(']},',']\n\n},\n\n').replaceAll('":{"', '":{\n\n"').replaceAll('[],', '[],\n')
+        jsonStrF = jsonstr.replaceAll('],' , '],\n').replaceAll(':[[' , ':[\n[').replaceAll(']],',']\n],\n').replaceAll(']]',']\n]\n\n').replaceAll('}}','\n\n}}').replaceAll(']},',']\n\n},\n\n').replaceAll('":{"', '":{\n\n"').replaceAll('[],', '[],\n')
     }
     return jsonStrF
 }
