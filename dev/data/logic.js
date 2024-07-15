@@ -265,8 +265,8 @@ function uiUpdate(cmd){
             style.setProperty('--ui-span-display','none')
             style.setProperty('--edit-btn-bg','none')
             style.setProperty('--edit-btn-color','black')
-            style.setProperty('--slide-highlight','var(--slide-font-shadow)')
-            style.setProperty('--card-highlight','var(--slide-shadow)')
+            style.setProperty('--slide-highlight','0')
+            style.setProperty('--slide-highlight-active','0')
             editBtnIcon.classList.add('fa-edit')
             editBtnIcon.classList.remove('fa-check')
             uiState = '-edit'
@@ -276,8 +276,8 @@ function uiUpdate(cmd){
             style.setProperty('--ui-span-display','absolute')
             style.setProperty('--edit-btn-bg','var(--accent)')
             style.setProperty('--edit-btn-color','white')
-            style.setProperty('--slide-highlight','var(--slide-font-shadow), 0px 0px 10px var(--light-accent)')
-            style.setProperty('--card-highlight','0px 0px 10px var(--light-accent)')
+            style.setProperty('--slide-highlight','0px 0px 1px 3px var(--light-accent), inset var(--slide-shadow)')
+            style.setProperty('--slide-highlight-active','0px 0px 1px 4px var(--light-accent), inset var(--slide-shadow)')
             editBtnIcon.classList.add('fa-check')
             editBtnIcon.classList.remove('fa-edit')
             uiState = '-view'
@@ -305,14 +305,12 @@ function buildUi3(){
             }
             if (Events.length > 1 && i != Events.length-1) {
                 // Define a borda inferior dos Cartões se o container tiver mais de um evento//
-                document.getElementById(`Card${key}${i}`).style.setProperty("border-bottom","var(--container-border)")
+                document.getElementById(`Card${key}${i}`).style.setProperty("border-bottom","var(--container-border-noc) var(--eventbg)")
             }
         }
         if (! Events.length > 0){
             // Remove a borda esquerda do Layout se não ouver eventos //
-            weekMap[key].Container.style.setProperty('border-left', '0')
         }else{
-            weekMap[key].Container.style.setProperty('border-left', 'var(--container-border)')
         }
     }
     saveData(); menuUpdate()

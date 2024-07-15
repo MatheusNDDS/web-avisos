@@ -6,17 +6,19 @@
 /***PRIMARY***/
 :root{
     --slide-highlight: none;
+    --slide-highlight-active: none;
     --slide-font: sans-serif;
     --slide-font-shadow:  1px 2px 1px #000000dd;
+    --slide-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
     --radius: calc(15px);
     --title-size: 50px;
     --card-height:calc(70px) ;
     --font-size: calc(28px);
     --animation-speed: 0.2s;
-    --slide-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
     --container-border-noc: 2.5pt solid;
-    --container-border: var(--container-border-noc) black;
+    --container-border: var(--container-border-noc) #00000034;
     --card-space: 7px;
+    --eventbg: #a1a1a1;
 }
 #Semana,#Hoje,#Amanhã,#Modelos{
     padding:0;
@@ -36,10 +38,10 @@
 
 /***TRANSITIONS***/
 .event:hover{
-    text-shadow: var(--slide-highlight);
+    box-shadow: inset var(--slide-highlight);
 }
 .event:focus{
-    text-shadow: var(--slide-font-shadow);
+    box-shadow: inset var(--slide-highlight-active);
 }
 /***ELEMENTS***/
 Evento, Hora, TituloDia, .daytitle, .event, .hour, .title{
@@ -57,12 +59,13 @@ Evento, Hora, TituloDia, .daytitle, .event, .hour, .title{
 .title, .title.event{
     background: none;
     border: none;
+    border-radius: calc(var(--radius) - 3px);
     margin: 0;
     color: white;
     vertical-align: middle;
     text-align: center;
     line-height: var(--card-height);
-    width: 100%;
+    width: 85%;
 }
 TituloDia, .daytitle {
     appearance: none;
@@ -99,7 +102,7 @@ Cartão, .card {
     display: flex;
     width: 100%;
     margin-bottom: 0px;
-    justify-content: stretch;
+    justify-content: space-between;
 }
 Cartão > * {
     text-shadow:var(--slide-font-shadow);
@@ -123,8 +126,9 @@ Evento{
     margin-left: 0;
     margin-right: 0;
     border: var(--container-border);
-    background: #a1a1a1;
+    background: var(--eventbg);
     overflow: hidden;
+    padding: 1px;
 }
 Container{
     display: flex;
@@ -132,8 +136,9 @@ Container{
     flex-direction: column;
     justify-content: space-between;
     padding: 0px;padding-bottom:0px;
-    border-radius: var(--radius) 0 0 var(--radius);
-    border-left: var(--container-border);
+/*     border-radius: var(--radius) 0 0 var(--radius); */
+    border-radius: calc(var(--radius));
+    border: var(--container-border-noc) var(--eventbg);
     overflow: hidden;
 }
 Leiaute{
@@ -281,9 +286,13 @@ i,label{
 }
 #ui{
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
-    top: calc(var(--title-size) + 9px);
+    top: calc(var(--title-size) + 8px);
     width: 400px;
     height: calc(100vh - var(--title-size) - 9px);
+    padding: 13px;
+    border-bottom-right-radius: var(--ui-radius);
+    border-top-right-radius: var(--ui-radius);
+    padding-left: 1px;
     display: var(--ui-display);
     position: absolute;
     flex-direction: column;
@@ -294,8 +303,6 @@ i,label{
     transform: translate(-390px, 0);
     transition-duration: var(--animation-speed);
     overflow-y: auto;
-    padding: 13px;
-    padding-left: 1px;
     scrollbar-gutter: stable;
     transition-delay: 0.25s;
     direction: rtl;
@@ -622,12 +629,15 @@ input[type="color"].edit{
 input[type="time"].event::-webkit-calendar-picker-indicator { display: none; }
 input[type="time"].event{
     margin:0;
-    width: 18%;
-    border-width: 3px;
+    max-width: 15%;
+    width: max-content;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-width: 4px;
     border-style: solid;
     border-color: black;
     border-radius: var(--radius);
-    height: calc(100% - 6px);
+    height: calc(100% - 8px);
 }
 
 /************WEBKIT************/
