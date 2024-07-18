@@ -65,7 +65,7 @@ Evento, Hora, TituloDia, .daytitle, .event, .hour, .title{
     flex: 6;
     line-height: var(--card-height);
 }
-TituloDia, .daytitle {
+TituloDia{
     appearance: none;
     max-width: 160px;
     width: 18%;
@@ -83,7 +83,7 @@ TituloDia, .daytitle {
 TituloDia.ph{
     margin:0;
 }
-Hora, .hour {
+Hora{
     max-width: 150px;
     padding-left: calc(20px); padding-right: calc(20px);
     vertical-align: middle;
@@ -94,7 +94,7 @@ Hora, .hour {
     color: white;
     background: darkslateblue;
 }
-Cartão, .card {
+Cartão{
     height: var(--card-height);
     min-height: calc(var(--font-size) + 8px);
     border-radius: 0;

@@ -22,7 +22,12 @@ const dayEntry = document.getElementById('DayEntry'),
       viewMode = document.getElementsByName("VM"),
       radios = document.forms[0].elements["VM"],
       impTrigger = document.getElementById('ImpTrigger'),
-      slideTitle = document.getElementById('SlideTitle')
+      slideTitle = document.getElementById('SlideTitle'),
+      cardSpace = document.getElementById('CardSpace'),
+      editDiagTr = document.getElementById('EditDiagTr'),
+      editDiagClose = document.getElementById('EditDiagClose')
+      saveEdit = document.getElementById('SaveEdit')
+      dataTextEntry = document.getElementById('DataTextEntry')
 
 //Week html map
 const weekMap = {
@@ -87,6 +92,17 @@ addBtn.addEventListener('click',function(){
     }
     buildUi3()
 })
+editDiagTr.addEventListener('click',function(){
+    document.getElementById('EditDiag').showModal()
+    dataTextEntry.value = localStorage.getItem('Data')
+})
+editDiagClose.addEventListener('click',function(){
+    document.getElementById('EditDiag').close()
+})
+saveEdit.addEventListener('click',function(){
+    localStorage.setItem('Data',dataTextEntry.value)
+    location.reload()
+})
 cardHeight.addEventListener('change',function(){
     styleMn('-save',"card_height",parseInt(this.value),'px')
     styleMn('-set',"card_height")
@@ -100,11 +116,17 @@ fontSize.addEventListener('change',function(){
     styleMn('-set',"font_size")
     this.setAttribute('tip',this.value)
 })
+cardSpace.addEventListener('change',function(){
+    styleMn('-save',"card_space",parseInt(this.value),'px')
+    styleMn('-set',"card_space")
+    this.setAttribute('tip',this.value)
+})
 titleSize.addEventListener('change',function(){
     styleMn('-save',"title_size",parseInt(this.value),'px')
     styleMn('-set',"title_size")
 })
 editBtn.addEventListener('click', function(){
+    settingsData.last_event = null
     uiUpdate();eventMn('-sort')
 })
 viewsForm.addEventListener('click', function(){
@@ -113,10 +135,12 @@ viewsForm.addEventListener('click', function(){
         let element = viewMode[key]
         if (element.checked == true){
             settingsData.slide_view = element.value
-            spanElements[key].style.setProperty("background","var(--light-accent)")
+            spanElements[key].style.setProperty("background","var(--accent)")
+            spanElements[key].style.setProperty("color","white")
             slideViewUpdate()
         } else {
             spanElements[key].style.setProperty("background","var(--spanbg)")
+            spanElements[key].style.setProperty("color","black")
         }
     }
 })
@@ -140,9 +164,8 @@ impTrigger.addEventListener('change', function(){
 sidePanel.addEventListener('onMouseover', function(){
     style.setProperty('--slide-move','390px')
 })
-
 //// Functions ////
-function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
+function eventMn(cmd,day,eventIndex,value,dataIndex,tagId,cssProp){
     switch (cmd) {
         case '-add':
             if (modMenu.value == '' && settingsData.slide_view !== "Modelos"){
@@ -170,7 +193,7 @@ function eventMn(cmd,day,eventIndex,value,dataIndex,tagId){
             let event = dayEvents[eventIndex]
             event[dataIndex] = value
 
-            if (tagId != null) {tagId.style.setProperty('background', `${event[dataIndex]}`)}
+            if (tagId != null) {tagId.style.setProperty(cssProp, `${event[dataIndex]}`)}
 
             timeParse(day,eventIndex,event[dataIndex])
             menuUpdate();saveData()
@@ -241,8 +264,9 @@ function uiUpdate(cmd){
             style.setProperty('--ui-display','none')
             style.setProperty('--ui-span-display','none')
             style.setProperty('--edit-btn-bg','none')
-            style.setProperty('--slide-highlight','var(--slide-font-shadow)')
-            style.setProperty('--card-highlight','var(--slide-shadow)')
+            style.setProperty('--edit-btn-color','black')
+            style.setProperty('--slide-highlight','0')
+            style.setProperty('--slide-highlight-active','0')
             editBtnIcon.classList.add('fa-edit')
             editBtnIcon.classList.remove('fa-check')
             uiState = '-edit'
@@ -250,9 +274,10 @@ function uiUpdate(cmd){
         case '-edit':
             style.setProperty('--ui-display','flex')
             style.setProperty('--ui-span-display','absolute')
-            style.setProperty('--edit-btn-bg','var(--light-accent)')
-            style.setProperty('--slide-highlight','var(--slide-font-shadow), 0px 0px 10px var(--light-accent)')
-            style.setProperty('--card-highlight','0px 0px 10px var(--light-accent)')
+            style.setProperty('--edit-btn-bg','var(--accent)')
+            style.setProperty('--edit-btn-color','white')
+            style.setProperty('--slide-highlight','0px 0px 1px 3px var(--light-accent), inset var(--slide-shadow)')
+            style.setProperty('--slide-highlight-active','0px 0px 1px 4px var(--light-accent), inset var(--slide-shadow)')
             editBtnIcon.classList.add('fa-check')
             editBtnIcon.classList.remove('fa-edit')
             uiState = '-view'
@@ -262,34 +287,30 @@ function uiUpdate(cmd){
 function buildUi3(){
     for (let key in eventData){
         let Events = eventData[key]
-        if (Events.length == 0){weekMap[key].Container.innerHTML='<Evento class="ph">-</Evento>'}else{weekMap[key].Container.innerHTML=''}
+        if (Events.length == 0){weekMap[key].Container.innerHTML='<TituloDia class="ph">-</TituloDia>'}else{weekMap[key].Container.innerHTML=''}
         for (const i in Events){
             let event = Events[i]
             if (Events.length != 0 && Events != null){
                 let card = `<Leiaute id="Lay${key}${i}"><Cartão id="Card${key}${i}" style="background-color: ${event[1]};">
-                                <input id="Name${key}${i}" class="Titulo event" type="text" onchange=(eventMn('-update',"${key}",${i},this.value,0,null)) value="${event[0]}">
-                                <input  id="Hour${key}${i}" class="Hora event" type="time" style="background-color: ${event[3]};" onchange=(eventMn('-update',"${key}",${i},this.value,2,null)) value="${event[2]}">
+                                <input id="Name${key}${i}" class="title event" type="text" onchange=(eventMn('-update',"${key}",${i},this.value,0,null)) value="${event[0]}">
+                                <input  id="Hour${key}${i}" class="hour event" type="time" style="background-color: ${event[3]}; border-color: ${event[1]};" onchange=(eventMn('-update',"${key}",${i},this.value,2,null)) value="${event[2]}">
                             </Cartão>
                             <div class="edit"><span class="edit">
-                                    <input id="NameColor${key}${i}" title="Fundo do título" onchange="eventMn('-update','${key}',${i},this.value,1,Card${key}${i})" class="button card edit" type="color" value="${event[1]}">
-                                    <input id="HourColor${key}${i}" title="Fundo da hora" onchange="eventMn('-update','${key}',${i},this.value,3,Hour${key}${i})" class="button card edit" type="color" value="${event[3]}">
-                                    <button class="button card edit" title="Excluir" onclick="eventMn('-rm','${key}',${i})" ><i class="fa fa-trash"></i></button>
+                                    <input id="NameColor${key}${i}" title="Fundo do título" onchange="eventMn('-update','${key}',${i},this.value,1,Card${key}${i},'background');eventMn('-update','${key}',${i},this.value,1,Hour${key}${i},'border-color')" class="edit" type="color" value="${event[1]}">
+                                    <input id="HourColor${key}${i}" title="Fundo da hora" onchange="eventMn('-update','${key}',${i},this.value,3,Hour${key}${i},'background')" class="edit" type="color" value="${event[3]}">
+                                    <button class="edit" title="Excluir" onclick="eventMn('-rm','${key}',${i})" ><i class="fa fa-trash"></i></button>
                             </span></div></Leiaute>`
                 weekMap[key].Container.innerHTML+= card
                 timeParse(key,i,event[2])
             }
+            if (Events.length > 1 && i != Events.length-1) {
+                // Define a borda inferior dos Cartões se o container tiver mais de um evento//
+                document.getElementById(`Card${key}${i}`).style.setProperty("border-bottom","var(--container-border-noc) var(--eventbg)")
+            }
         }
-        if (Events.length > 0){
-            weekMap[key].Container.style.setProperty('background', '#838383')
+        if (! Events.length > 0){
+            // Remove a borda esquerda do Layout se não ouver eventos //
         }else{
-            weekMap[key].Container.style.setProperty('background', '#00000000')
-        }
-        if (Events.length > 1 && settingsData.slide_view == "Semana") {
-            weekMap[key].Container.style.setProperty('border-left', `5pt  black solid`)
-            weekMap[key].Container.style.setProperty('border-right', `5pt  black solid`)
-        }else{
-            weekMap[key].Container.style.setProperty('border-left', '0pt  #40404000 solid')
-            weekMap[key].Container.style.setProperty('border-right', '0pt  #40404000 solid')
         }
     }
     saveData(); menuUpdate()
@@ -312,7 +333,7 @@ function saveData(){
         "Events" : eventData,
         "Settings" : settingsData,
     }
-    localStorage.setItem('Data',JSON.stringify(wadata))
+    localStorage.setItem('Data',jsonFormatter(JSON.stringify(wadata)))
 }
 function timeParse(day,eventIndex,timeStr){
         let events = eventData[day]
@@ -352,6 +373,7 @@ function setupEntries(){
     let cssVars = settingsData.css
 
     if (cssVars.card_height != undefined) {cardHeight.value = cssVars.card_height[0]}
+    if (cssVars.card_space != undefined) {cardSpace.value = cssVars.card_space[0]}
     if (cssVars.title_size != undefined) {titleSize.value = cssVars.title_size[0]}
     if (cssVars.font_size != undefined) {fontSize.value = cssVars.font_size[0]}
     if (settings.slide_title != undefined | settings.slide_title != null) {slideTitle.value = settings.slide_title}
@@ -379,6 +401,15 @@ function slideViewUpdate(){
         modMenu.disabled = false
     }
     saveData()
+}
+function jsonFormatter(jsonstr,cmd){
+    let jsonStrF
+    if (cmd == '-reset'){
+        jsonStrF = jsonstr.replaceAll('\n','')
+    }else{
+        jsonStrF = jsonstr.replaceAll('],' , '],\n').replaceAll(':[[' , ':[\n[').replaceAll(']],',']\n],\n').replaceAll(']]',']\n]\n\n').replaceAll('}}','\n\n}}').replaceAll(']},',']\n\n},\n\n').replaceAll('":{"', '":{\n\n"').replaceAll('[],', '[],\n')
+    }
+    return jsonStrF
 }
 function setup(){
 /// Backward compatibility

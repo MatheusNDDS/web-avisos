@@ -1,45 +1,191 @@
+/*WEB AVISOS: MATHEUS NDDS*/
+/*SE VOCÊ MANJA DE CSS RECOMENDO EDITAR APENAS A SESSÃO “SLIDE”*/
+/*Optei por deixar as classes em inglês por semântica*/
+
+/************SLIDE************/
+/***PRIMARY***/
+:root{
+    --slide-highlight: none;
+    --slide-highlight-active: none;
+    --slide-font: sans-serif;
+    --slide-font-shadow:  1px 2px 1px #000000dd;
+    --radius: 17px;
+    --title-size: 50px;
+    --card-height:calc(70px);
+    --font-size: calc(28px);
+    --animation-speed: 0.2s;
+    --container-border-noc: 2.5pt solid;
+    --container-border: var(--container-border-noc) #00000034;
+    --card-space: 7px;
+    --eventbg: #a1a1a1;
+}
+#Semana,#Hoje,#Amanhã,#Modelos{
+    padding:0;
+    text-align:right;
+}
+#SlideTitle{
+    height: var(--title-size);
+    line-height: var(--title-size);
+    width: auto;
+}
+/***CLASSES***/
+.hour{
+    font-size: calc(var(--font-size));
+}
+
+/***TRANSITIONS***/
+.event:hover{
+    box-shadow: inset var(--slide-highlight);
+}
+.event:focus{
+    box-shadow: inset var(--slide-highlight-active);
+}
+/***ELEMENTS***/
+Evento, Hora, TituloDia, .daytitle, .event, .hour, .title{
+    appearance: none;
+    height: var(--card-height);
+    border-radius: var(--radius);
+    font-size: var(--font-size);
+    text-align: center;
+    font-family: sans-serif;
+    display: inline-block;
+    font-weight: 600;
+    min-height: var(--font-size);
+    line-height: var(--font-size);
+}
+.title, .title.event{
+    background: none;
+    border: none;
+    border-radius: calc(var(--radius) - 3px);
+    margin: 0;
+    color: white;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    flex: 6;
+    line-height: var(--card-height);
+}
+TituloDia, .daytitle {
+    appearance: none;
+    max-width: 160px;
+    width: 18%;
+    padding-right: 0px;
+    display: inline;
+    vertical-align: top;
+    text-align: left;
+    line-height: var(--font-size);
+    font-size:  min(var(--font-size), 30px);
+    font-weight: bold;
+    height: var(--font-size);
+    margin: 0;
+    margin-left: 5px;
+}
+TituloDia.ph{
+    margin:0;
+}
+Hora, .hour {
+    max-width: 150px;
+    padding-left: calc(20px); padding-right: calc(20px);
+    vertical-align: middle;
+    text-align: center;
+    height: var(--card-height);
+    border-radius: 0;
+    line-height: var(--card-height);
+    color: white;
+    background: darkslateblue;
+}
+Cartão, .card {
+    height: var(--card-height);
+    min-height: calc(var(--font-size) + 8px);
+    border-radius: 0;
+    background: darkblue;
+    display: flex;
+    width: 100%;
+    margin-bottom: 0px;
+    justify-content: space-between;
+}
+Cartão > * {
+    text-shadow:var(--slide-font-shadow);
+}
+Cartão{
+    min-width: 100%;
+}
+Evento{
+    height: auto;
+    min-height: calc(var(--card-height) - 22px);
+    width: 97%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0;
+    border-radius: var(--radius);
+    line-height: var(--line-height);
+    vertical-align: middle;
+    margin: auto;
+    margin-bottom: var(--card-space);
+    border: var(--container-border);
+    background: var(--eventbg);
+    overflow: hidden;
+    padding: 1px;
+    flex: 4;
+}
+Container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: stretch;
+    padding: 0px;padding-bottom:0px;
+/*     border-radius: var(--radius) 0 0 var(--radius); */
+    border-radius: calc(var(--radius));
+    border: var(--container-border-noc) var(--eventbg);
+    overflow: hidden;
+}
+Leiaute{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 0;
+
+}
+
+
+
 /************ HTML ************/
 /***PRIMARY***/
 :root{
-    --scale: 1;
-    --slide-width:100%;
-    --slide-margin: 0px;
-    --slide-vh-wrap: 0vh;
-    --slide-height: calc(100vh - var(--slide-vh-wrap));
-    --title-size: 50px;
-    --card-height:calc(70px) ;
-    --font-size: calc(28px);
-    --radius: calc(15px);
+    --accent: teal;
+    --light-accent: #00b8b8;
+    --dark-accent: #005353;
+    --html-bg:white;
     --ui-font: sans-serif;
-    --slide-font: sans-serif;
-    --slide-font-shadow:  1px 2px 1px #000000dd;
+    --ui-shadow:  0 0px 3px 1px rgba(0, 0, 0, 0.3);
+    --ui-highlight:  0px 0px 1px 1px var(--light-accent);
+    --ui-inset-shadow:  0px 0px 1px 1px;
+    --ui-bg: #FFFFFF;
     --ui-font-size: 18px;
     --ui-radius: 5px;
     --ui-height: 30px;
     --ui-display: none;
     --ui-span-display: none;
-    --edit-span-width: calc(130px);
-    --edit-btn-bg: none;
-    --animation-speed: 0.2s;
-    --accent: teal;
+    --spanbg: #cececeD0;
+    --slide-width:100%;
+    --slide-margin: 0px;
+    --slide-vh-wrap: 0vh;
+    --slide-height: calc(100vh - var(--slide-vh-wrap));
+    --slide-shadow: 0 1px 2px 3px rgba(0, 0, 0, 0.3);
     --section-accent: #79dada;
-    --light-accent: #00b8b8;
-    --dark-accent: #005353;
-    --slide-shadow:  2px 2px 5px 1px rgba(0, 0, 0, 0.3);
-    --ui-shadow:  0 0px 3px 1px rgba(0, 0, 0, 0.3);
-    --ui-highlight:  0px 0px 1px 1px var(--light-accent);
-    --ui-bg: #FFFFFF;
-    --container-border: 0;
-    --slide-highlight: none;
-    --html-bg:white;
-    --spanbg: #cecece;
     --tabview-border-color: var(--section-bg);
     --section-bg: #ebebeb;
+    --edit-span-width: calc(130px);
+    --edit-btn-bg: none;
+    --edit-bnt-color: black;
     opacity: 0; /*All elements are 100% opaque until the script finish*/
 
 }
 *{
     transition-duration: var(--animation-speed);
+    transition-delay: 0s;
 }
 /***ELEMENTS***/
 header{
@@ -75,10 +221,13 @@ main{
 }
 hr{
     margin:0;
-    margin-bottom: 7px;
+    margin-bottom: var(--card-space);
 }
 html{
     background:var(--html-bg);
+}
+i,label{
+    transition-duration: 0s;
 }
 
 
@@ -106,11 +255,7 @@ html{
     background: var(--edit-btn-bg);
     width: 100px;
     left: -28px;
-    color: black;
-
-}
-#EditBtn:active{
-    background: var(--accent);
+    color: var(--edit-btn-color);
 }
 #Slide {
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
@@ -129,7 +274,9 @@ html{
     appearance: none;
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
     font-size: var(--title-size);
-    margin: none;padding:none;
+    margin: none;
+    margin-bottom: 2px;
+    padding:none;
     display:flex;
     height: var(--title-size);
     line-height: var(--title-size);
@@ -141,21 +288,23 @@ html{
 }
 #ui{
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
-    top: calc(var(--title-size) + 9px);
+    top: calc(var(--title-size) + 8px);
     width: 400px;
     height: calc(100vh - var(--title-size) - 9px);
+    padding: 13px;
+    border-bottom-right-radius: var(--ui-radius);
+    border-top-right-radius: var(--ui-radius);
+    padding-left: 1px;
     display: var(--ui-display);
     position: absolute;
     flex-direction: column;
     justify-content: start;
     gap: 10px;
     background: var(--ui-bg);
-    box-shadow: var(--slide-shadow);
+    box-shadow: var(--ui-shadow);
     transform: translate(-390px, 0);
     transition-duration: var(--animation-speed);
     overflow-y: auto;
-    padding: 13px;
-    padding-left: 1px;
     scrollbar-gutter: stable;
     transition-delay: 0.25s;
     direction: rtl;
@@ -170,9 +319,12 @@ html{
     cursor: default;
     user-select: none;
 }
-#ui > h1{
+#ui h1{
     font-size: 38px;
     text-align:center;
+}
+#ui p{
+    font-size: var(--ui-font-size);
 }
 #ui, section,{
     display: flex;
@@ -190,6 +342,9 @@ html{
     line-height: 25px;
     border-bottom: 1px solid darkgray;
 }
+#EditDiagTr{
+    width: 90px;
+}
 /***CLASSES***/
 .clickable{
     padding-top:0;
@@ -202,7 +357,7 @@ html{
     color: black;
 }
 .clickable:active{
-    --edit-btn-bg: var(--accent);
+    --edit-btn-bg: var(--light-accent);
     background: var(--light-accent);
 }
 .trigger{
@@ -210,12 +365,14 @@ html{
 }
 .compact{
     gap:0;
+    padding-top:0;
+    padding-bottom:0;
 }
 .compact > *{
     padding-top:0;
     margin-top: 2px;
     padding-bottom:0;
-    margin-bottom: 0px;
+    padding-bottom:0;
     gap:0;
 
 }
@@ -224,6 +381,12 @@ html{
 }
 .TabSpan{
     cursor: pointer;
+}
+.danger{
+    background: red;
+    color: white;
+    border-radius: var(--ui-radius);
+    padding: 2px;
 }
 
 /***TRANSITIONS***/
@@ -235,8 +398,9 @@ button:hover{
 }
 button:active{
     background: var(--light-accent);
+    box-shadow: var(--ui-highlight);
 }
-select:hover{
+select:hover,textarea:hover{
     box-shadow: var(--ui-highlight);
     border-color: var(--light-accent);
 }
@@ -247,9 +411,8 @@ select:disabled{
 TabView > * span:hover{
     --spanbg: var(--section-accent);
 }
-
 /***ELEMENTS***/
-button, input, select{
+button, input, select,textarea{
     font-size: var(--ui-font-size);
     height: var(--ui-height);
     font-family: var(--ui-font);
@@ -260,8 +423,12 @@ button, input, select{
     border-radius: var(--ui-radius);
     cursor: pointer;
 }
-input[type="text"]{
+input[type="text"],textarea{
     cursor: text;
+}
+textarea{
+    height:auto;
+    resize: none;
 }
 span, vspan{
     text-align: center;
@@ -278,12 +445,19 @@ span, vspan{
 vspan{
     flex-direction: column;
 }
-section{
+section,dialog{
     background: var(--section-bg);
     border-radius: var(--ui-radius);
     padding: 10px;
     border: 5px;
     border-color: black;
+}
+dialog{
+    max-width: 550px;
+    box-shadow: var(--ui-shadow);
+}
+dialog::backdrop{
+    background: #00000055;
 }
 section > * hr{
     border-color: darkgray;
@@ -307,6 +481,7 @@ button, .button{
     background: var(--accent);
     color: white;
     font-weight: bold;
+    border:0;
 }
 input, select{
     background: white;
@@ -387,15 +562,17 @@ input[type="range"]{
     margin-top: 0;
 }
 .edit{
-    height: calc(55px);
-    width: calc(39px);
+    height: 55px;
+    width: 39px;
     font-size: 26px;
+
 }
 div.edit{
     position: absolute;
     width: 137px;
     transform: translate(0px,0);
     height: calc(var(--card-height) + 0px);
+    min-height: 55px;
     left: 99%;
     display:flex;
     flex-direction: column;
@@ -417,8 +594,6 @@ span.edit{
 
 }
 span.edit:hover{
-    box-shadow: var(--slide-shadow);
-
 }
 div.edit:hover{
     transform: translate(-120px,0);
@@ -455,145 +630,18 @@ input[type="color"].edit{
 }
 input[type="time"].event::-webkit-calendar-picker-indicator { display: none; }
 input[type="time"].event{
-    border: 0;
-    margin: auto;
-    margin-right: 0;
-}
-
-
-
-/************SLIDE************/
-/***Primary***/
-#Semana,#Hoje,#Amanhã,#Modelos{
-    padding:0;
-    text-align:right;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-#SlideTitle{
-    height: var(--title-size);
-    line-height: var(--title-size);
-    width: auto;
-}
-/***CLASSES***/
-.Hora{
-    font-size: calc(var(--font-size) + 5px);
-}
-.ph{
-    border-bottom: 0;
-    box-shadow: none;
-    background: none;
-}
-
-/***TRANSITIONS***/
-Dia::after{
-    content: ":";
-    display: inline
-}
-.event:hover{
-    text-shadow: var(--slide-highlight);
-}
-.event:focus{
-    text-shadow: var(--slide-font-shadow);
-}
-/***ELEMENTS***/
-Evento, Hora,.Hora, Titulo,.Titulo ,Dia {
-    appearance: none;
-    height: var(--card-height);
+    margin:0;
+    min-height: 0px;
+    width: max-content;
+    border-width: 4px;
+    border-style: solid;
+    border-color: black;
     border-radius: var(--radius);
-    font-size: var(--font-size);
-    text-align: center;
-    font-family: sans-serif;
-    display: inline-block;
-    font-weight: 600;
-    min-height: var(--font-size);
-    line-height: var(--font-size);
+    height: calc(100% - 8px);
+    padding: 0;
+    padding-left: 5px;
+    padding-right: 5px;
 }
-Evento{
-    height: auto; min-height: calc(var(--card-height) - 22px);
-    width: calc(100%);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 20px;
-    border-radius: var(--radius);
-    line-height: var(--line-height);
-    vertical-align: middle;
-    margin: auto;
-    margin-bottom: 7px;
-    margin-left: 0;
-    margin-right: 0;
-    background: #a1a1a1;
-    padding-left: 0px;
-}
-Container{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 5px;padding-bottom:0px;
-    border-radius: var(--radius);
-}
-Leiaute{
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-    border-left: var(--container-border);
-
-}
-Cartão, .card {
-    border-radius: var(--radius);
-    background: darkblue;
-    display: flex;
-    width: 100%;
-    margin-bottom: 5px;
-    justify-content: stretch;
-    box-shadow: var(--slide-shadow);
-}
-Cartão > * {
-    text-shadow:var(--slide-font-shadow);
-}
-Cartão{
-    min-width: 100%;
-}
-Titulo, .Titulo, .Titulo.event{
-    background: none;
-    border: none;
-    margin: 0;
-    color: white;
-    vertical-align: middle;
-    text-align: center;
-    line-height: var(--card-height);
-    width: 100%;
-}
-Dia, .Dia{
-    appearance: none;
-    max-width: 160px;
-    width: 18%;
-    padding-right: 0px;
-    display: inline;
-    vertical-align: top;
-    text-align: left;
-    line-height: var(--font-size);
-    font-size:  min(var(--font-size), 30px);
-    font-weight: bold;
-    height: 100%;
-    margin-left: 5px; margin-right: 0; margin-top:5px;
-}
-Hora, .Hora {
-    max-width: 150px;
-    padding-left: calc(20px); padding-right: calc(20px);
-    vertical-align: middle;
-    text-align: center;
-    height: var(--card-height);
-    border-radius: var(--radius);
-    line-height: var(--card-height);
-    color: white;
-    background: darkslateblue;
-}
-
-
 
 /************WEBKIT************/
 /***ELEMENTS***/
@@ -604,17 +652,20 @@ Hora, .Hora {
 ::-webkit-scrollbar-track {
     background: linear-gradient(90deg, rgba(0,0,0,0) 39%, darkgray 39%, darkgray 55%, rgba(0,0,0,0) 55%);
     box-shadow: inset 0 0px 3px 1px rgba(0, 0, 0, 0);
+    cursor: pointer;
 }
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background: var(--accent);
     border: 3px solid white;
+    cursor: pointer;
 }
 /***TRANSITIONS***/
 ::-webkit-scrollbar-thumb:hover{
     background: var(--dark-accent);
-    border: 2px solid var(--accent);
+    border: 1px solid white;
 }
 ::-webkit-scrollbar-thumb:active{
     background: var(--light-accent);
+    border: 1px solid white;
 }
