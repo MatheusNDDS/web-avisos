@@ -180,6 +180,8 @@ Leiaute{
     --edit-span-width: calc(130px);
     --edit-btn-bg: none;
     --edit-bnt-color: black;
+    --dayfx: saturate(100%);
+    --day-lbl-checked: white;
     opacity: 0; /*All elements are 100% opaque until the script finish*/
 
 }
@@ -302,7 +304,7 @@ i,label{
     gap: 10px;
     background: var(--ui-bg);
     box-shadow: var(--ui-shadow);
-    transform: translate(-390px, 0);
+    transform: translate(-390px, 0); \\ revert X to -390px
     transition-duration: var(--animation-speed);
     overflow-y: auto;
     scrollbar-gutter: stable;
@@ -326,7 +328,7 @@ i,label{
 #ui p{
     font-size: var(--ui-font-size);
 }
-#ui, section,{
+#ui section,{
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -345,7 +347,72 @@ i,label{
 #EditDiagTr{
     width: 90px;
 }
+#DayTexts{
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    color: black;
+}
+#DayTexts > label{
+    height: 32px;
+    line-height: 32px;
+    width: 32px;
+    padding: 0px;
+    margin: 1px;
+    text-align: center;
+    color: black;
+}
+#Days{
+    display: flex;
+
+}
+#Days > input[type="radio"]{
+    height: 32px;
+    width: 32px;
+    padding: 10px;
+    margin: 1px;
+}
+#DayLabels{
+    position: absolute;
+    display: flex;
+    padding:0;
+    margin:0;
+    color: black;
+}
+
 /***CLASSES***/
+
+.Days{
+    appearance: none;
+    height: var(--ui-height);
+    width: var(--ui-height);
+    background: var(--ui-bg);
+    border-radius: 50%;
+}
+.Days:checked{
+    --section-accent: var(--accent);
+    --light-accent: var(--accent);
+    background: var(--accent);
+    border-color: var(--accent);
+}
+.Days:disabled{
+    --section-accent: darkgrey;
+    --light-accent: darkgrey;
+    background: darkgrey;
+    border-color: darkgrey;
+}
+
+
+.Days:hover{
+    background: var(--light-accent);
+    border-color: var(--light-accent);
+
+}
+.Days:active{
+    background: var(--light-accent);
+    border-color: var(--light-accent);
+}
+
 .clickable{
     padding-top:0;
     padding-bottom:0;
@@ -548,7 +615,7 @@ input[type="time"], input[type="text"]{
     width: 75%;
     height:100%;
 }
-input[type="checkbox"],input[type="radio"]{
+input[type="checkbox"]{
     height: 25px; width: 25px;
     margin: auto;
     padding: 20px;
@@ -642,6 +709,7 @@ input[type="time"].event{
     padding-left: 5px;
     padding-right: 5px;
 }
+
 
 /************WEBKIT************/
 /***ELEMENTS***/

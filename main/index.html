@@ -45,15 +45,28 @@
         <h2 id="DinAdd" > Novo Evento </h2>
         <span id="DayEntrySpan">
           <label>Dia</label>
-          <select id="DayEntry" required>
-            <option>Segunda
-            <option>Terça
-            <option>Quarta
-            <option>Quinta
-            <option>Sexta
-            <option>Sábado
-            <option>Domingo
-          </select>
+          <span class="nobg">
+            <span id="DayLabels" class="nobg">
+              <div id="DayTexts">
+                <label for="DSeg">S</label>
+                <label for="DTer">T</label>
+                <label for="DQua">Q</label>
+                <label for="DQui">Q</label>
+                <label for="DSex">S</label>
+                <label for="DSab">S</label>
+                <label for="DDom">D</label>
+              </div>
+            </span>
+            <form id="Days">
+              <input id="DSeg" class="Days clickable" type="radio" name="DayRadios" value="Segunda" checked />
+              <input id="DTer" class="Days clickable" type="radio" name="DayRadios" value="Terça"/>
+              <input id="DQua" class="Days clickable" type="radio" name="DayRadios" value="Quarta"/>
+              <input id="DQui" class="Days clickable" type="radio" name="DayRadios" value="Quinta"/>
+              <input id="DSex" class="Days clickable" type="radio" name="DayRadios" value="Sexta"/>
+              <input id="DSab" class="Days clickable" type="radio" name="DayRadios" value="Sábado"/>
+              <input id="DDom" class="Days clickable" type="radio" name="DayRadios" value="Domingo"/>
+            </form>
+          </span>
         </span>
         <span>
           <label>Modelo</label>
@@ -83,7 +96,7 @@
         </vspan>
     </section>
     <section>
-      <h2>Dados de eventos</h2>
+      <h2>Dados</h2>
         <span class="nobg">
             <button id="ExpBtn"><i class="fa fa-download"></i> Exportar</button>
             <button id="ImpBtn"><i class="fa fa-file-import"></i> Importar</button>
@@ -101,48 +114,48 @@
       <input id="SlideTitle" class="h1" type="text" value="Avisos">
     </header>
     <div style="display:none;" id="Semana">
-        <Evento id="segMaster">
+        <Evento id="segMaster" name="DayMasters">
             <TituloDia>Segunda</TituloDia>
             <Container id="segCont">
 
             </Container>
         </Evento>
 
-        <Evento id="terMaster">
+        <Evento id="terMaster" name="DayMasters">
           <TituloDia>Terça</TituloDia>
           <Container id="terCont">
           </Container>
         </Evento>
 
-        <Evento id="quaMaster">
+        <Evento id="quaMaster" name="DayMasters">
           <TituloDia>Quarta</TituloDia>
           <Container id="quaCont">
 
           </Container>
         </Evento>
 
-        <Evento id="quiMaster">
+        <Evento id="quiMaster" name="DayMasters">
           <TituloDia>Quinta</TituloDia>
           <Container id="quiCont">
 
           </Container>
         </Evento>
 
-        <Evento id="sixMaster">
+        <Evento id="sixMaster" name="DayMasters">
           <TituloDia>Sexta</TituloDia>
           <Container id="sixCont">
 
           </Container>
         </Evento>
 
-        <Evento id="sabMaster">
+        <Evento id="sabMaster" name="DayMasters">
           <TituloDia>Sábado</TituloDia>
           <Container id="sabCont">
 
           </Container>
         </Evento>
 
-        <Evento id="domMaster">
+        <Evento id="domMaster" name="DayMasters">
           <TituloDia>Domingo</TituloDia>
           <Container id="domCont">
 

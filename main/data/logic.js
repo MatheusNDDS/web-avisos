@@ -4,14 +4,18 @@ const timeIndex = 4,
       views = ['Semana','Amanhã', 'Hoje', 'Modelos']
 
 var defaultEvent = ["Evento", '#005a5c', "--:--", "#008080","0" ],
-    uiState = '-view'
+    uiState = '-view', // revert this to -view
+    lastDay = document.getElementById('segMaster')
 // UI
 const addBtn = document.getElementById('addBtn'),
       expBtn = document.getElementById('ExpBtn'),
       impBtn = document.getElementById('ImpBtn'),
       editBtn = document.getElementById('EditBtn'),
       editBtnIcon = document.getElementById('EditBtnIcon'),
-      sidePanel = document.getElementById('ui')
+      sidePanel = document.getElementById('ui'),
+      dayTexts = document.getElementById('DayTexts'),
+      dayMasters = document.getElementsByName("DayMasters")
+
 //Entries
 const dayEntry = document.getElementById('DayEntry'),
       cardHeight = document.getElementById('CardHeight'),
@@ -20,13 +24,15 @@ const dayEntry = document.getElementById('DayEntry'),
       modMenu = document.getElementById('ModMenu'),
       viewsForm = document.getElementById('ViewsForm'),
       viewMode = document.getElementsByName("VM"),
+      dayRadios = document.getElementsByName("DayRadios"),
+      daysForm = document.getElementById('Days'),
       radios = document.forms[0].elements["VM"],
       impTrigger = document.getElementById('ImpTrigger'),
       slideTitle = document.getElementById('SlideTitle'),
       cardSpace = document.getElementById('CardSpace'),
       editDiagTr = document.getElementById('EditDiagTr'),
-      editDiagClose = document.getElementById('EditDiagClose')
-      saveEdit = document.getElementById('SaveEdit')
+      editDiagClose = document.getElementById('EditDiagClose'),
+      saveEdit = document.getElementById('SaveEdit'),
       dataTextEntry = document.getElementById('DataTextEntry')
 
 //Week html map
@@ -86,7 +92,7 @@ var settingsData = Data.Settings
 //// Listeners ////
 addBtn.addEventListener('click',function(){
     if (settingsData.slide_view == "Semana"){
-        eventMn('-add',dayEntry.value)
+        eventMn('-add',document.querySelector('input[name="DayRadios"]:checked').value)
     }else{
         eventMn('-add',settingsData.slide_view)
     }
@@ -141,6 +147,23 @@ viewsForm.addEventListener('click', function(){
         } else {
             spanElements[key].style.setProperty("background","var(--spanbg)")
             spanElements[key].style.setProperty("color","black")
+        }
+    }
+})
+
+daysForm.addEventListener('click', function(){
+    let dayLabelsElements = dayTexts.children
+    for ( let key in dayRadios){
+        let element = dayRadios[key]
+        if (element.checked == true){
+            dayLabelsElements[key].style.setProperty('color','var(--day-lbl-checked)')
+            dayMasters[key].style.setProperty('--container-border','var(--container-border-noc) var(--light-accent)')
+            dayMasters[key].style.setProperty('--eventbg','var(--section-accent)')
+            lastDay = dayMasters[key]
+        } else {
+            dayLabelsElements[key].style.setProperty('color','black')
+            dayMasters[key].style.setProperty('--container-border','var(--container-border-noc) #00000034')
+            dayMasters[key].style.setProperty('--eventbg','#a1a1a1')
         }
     }
 })
@@ -269,6 +292,11 @@ function uiUpdate(cmd){
             style.setProperty('--slide-highlight-active','0')
             editBtnIcon.classList.add('fa-edit')
             editBtnIcon.classList.remove('fa-check')
+            for (key in weekMap){
+                weekMap[key].Master.style.setProperty('--container-border','var(--container-border-noc) #00000034')
+                weekMap[key].Master.style.setProperty('--eventbg','#a1a1a1')
+            }
+
             uiState = '-edit'
         break;
         case '-edit':
@@ -278,6 +306,8 @@ function uiUpdate(cmd){
             style.setProperty('--edit-btn-color','white')
             style.setProperty('--slide-highlight','0px 0px 1px 3px var(--light-accent), inset var(--slide-shadow)')
             style.setProperty('--slide-highlight-active','0px 0px 1px 4px var(--light-accent), inset var(--slide-shadow)')
+            lastDay.style.setProperty('--container-border','var(--container-border-noc) var(--light-accent)')
+            lastDay.style.setProperty('--eventbg','var(--section-accent)')
             editBtnIcon.classList.add('fa-check')
             editBtnIcon.classList.remove('fa-edit')
             uiState = '-view'
@@ -368,6 +398,12 @@ function styleMn(cmd,key,value,type,master){
     }
     saveData()
 }
+function dayOpsDisabled(cmd){
+    for ( let key in dayRadios){
+        let element = dayRadios[key]
+        element.disabled = cmd
+    }
+}
 function setupEntries(){
     let settings = settingsData
     let cssVars = settingsData.css
@@ -392,7 +428,15 @@ function slideViewUpdate(){
             document.getElementById(views[key]).style.display ='none'
         }
     }
-    if (view == 'Semana') {dayEntry.disabled = false} else {dayEntry.disabled = true}
+    if (view == 'Semana') {
+        dayOpsDisabled(false)
+        style.setProperty('--day-lbl-checked','white')
+
+    } else {
+        dayOpsDisabled(true)
+        style.setProperty('--day-lbl-checked','black')
+
+    }
     if (view == 'Modelos'){
         document.getElementById('DinAdd').innerHTML = 'Novo Modelo'
         modMenu.disabled = true
@@ -445,7 +489,7 @@ function setup(){
     settingsData.last_event = null
 
 /// Starting functions
-    styleMn('-restore'); eventMn('-sort'); uiUpdate(); viewsForm.click()
+    styleMn('-restore'); eventMn('-sort'); viewsForm.click(); daysForm.click(); uiUpdate()
     style.setProperty('opacity','1') // Prevent visual gliches when JS change css style during setup.
 }
 
