@@ -310,6 +310,12 @@ function uiUpdate(cmd){
             lastDay.style.setProperty('--eventbg','var(--section-accent)')
             editBtnIcon.classList.add('fa-check')
             editBtnIcon.classList.remove('fa-edit')
+            weekMap.Modelos.Master.style.setProperty('--container-border','var(--container-border-noc) var(--light-accent)')
+            weekMap.Modelos.Master.style.setProperty('--eventbg','var(--section-accent)')
+            weekMap.Amanhã.Master.style.setProperty('--container-border','var(--container-border-noc) var(--light-accent)')
+            weekMap.Amanhã.Master.style.setProperty('--eventbg','var(--section-accent)')
+            weekMap.Hoje.Master.style.setProperty('--container-border','var(--container-border-noc) var(--light-accent)')
+            weekMap.Hoje.Master.style.setProperty('--eventbg','var(--section-accent)')
             uiState = '-view'
         break;
     }
