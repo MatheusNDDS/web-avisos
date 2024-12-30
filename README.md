@@ -5,4 +5,4 @@ Um quadro de avisos simples pensado para apresentações.
 - Os dados são guardados localmente no navegador
 - Suporte off-line 100%
 - Pode ser hospedado ou rodar localmente
-- Compativel com a extensão Web Viewer da Microsoft para PowerPoint, exceto pela função exportar
+- Compativel com a extensão Web Viewer para PowerPoint, exceto a função exportar
