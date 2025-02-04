@@ -4,6 +4,9 @@
 
 /************SLIDE************/
 /***PRIMARY***/
+*{
+    user-select: none;
+}
 :root{
     --slide-highlight: none;
     --slide-highlight-active: none;
