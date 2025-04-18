@@ -150,7 +150,6 @@ viewsForm.addEventListener('click', function(){
         }
     }
 })
-
 daysForm.addEventListener('click', function(){
     let dayLabelsElements = dayTexts.children
     for ( let key in dayRadios){
@@ -186,6 +185,9 @@ impTrigger.addEventListener('change', function(){
 })
 sidePanel.addEventListener('onMouseover', function(){
     style.setProperty('--slide-move','390px')
+})
+weekMap.Segunda.Master.addEventListener('click', function(){
+    console.log('Soon...')
 })
 //// Functions ////
 function eventMn(cmd,day,eventIndex,value,dataIndex,tagId,cssProp){
@@ -331,10 +333,10 @@ function buildUi3(){
                                 <input id="Name${key}${i}" class="title event" type="text" onchange=(eventMn('-update',"${key}",${i},this.value,0,null)) value="${event[0]}">
                                 <input  id="Hour${key}${i}" class="hour event" type="time" style="background-color: ${event[3]}; border-color: ${event[1]};" onchange=(eventMn('-update',"${key}",${i},this.value,2,null)) value="${event[2]}">
                             </Cartão>
-                            <div class="edit"><span class="edit">
-                                    <input id="NameColor${key}${i}" title="Fundo do título" onchange="eventMn('-update','${key}',${i},this.value,1,Card${key}${i},'background');eventMn('-update','${key}',${i},this.value,1,Hour${key}${i},'border-color')" class="edit" type="color" value="${event[1]}">
-                                    <input id="HourColor${key}${i}" title="Fundo da hora" onchange="eventMn('-update','${key}',${i},this.value,3,Hour${key}${i},'background')" class="edit" type="color" value="${event[3]}">
-                                    <button class="edit" title="Excluir" onclick="eventMn('-rm','${key}',${i})" ><i class="fa fa-trash"></i></button>
+                            <div class="edit"><span class="edit" tabindex="-1">
+                                    <input tabindex="-1" id="NameColor${key}${i}" title="Fundo do título" onchange="eventMn('-update','${key}',${i},this.value,1,Card${key}${i},'background');eventMn('-update','${key}',${i},this.value,1,Hour${key}${i},'border-color')" class="edit" type="color" value="${event[1]}">
+                                    <input tabindex="-1" id="HourColor${key}${i}" title="Fundo da hora" onchange="eventMn('-update','${key}',${i},this.value,3,Hour${key}${i},'background')" class="edit" type="color" value="${event[3]}">
+                                    <button tabindex="-1" class="edit" title="Excluir" onclick="eventMn('-rm','${key}',${i})" ><i class="fa fa-trash"></i></button>
                             </span></div></Leiaute>`
                 weekMap[key].Container.innerHTML+= card
                 timeParse(key,i,event[2])
