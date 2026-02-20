@@ -307,7 +307,7 @@ i,label{
     gap: 10px;
     background: var(--ui-bg);
     box-shadow: var(--ui-shadow);
-    transform: translate(-390px, 0); \\ revert X to -390px
+    transform: translate(-390px, 0);
     transition-duration: var(--animation-speed);
     overflow-y: auto;
     scrollbar-gutter: stable;
@@ -331,7 +331,7 @@ i,label{
 #ui p{
     font-size: var(--ui-font-size);
 }
-#ui section,{
+#ui section{
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -624,10 +624,6 @@ input[type="checkbox"]{
     padding: 20px;
     background: var(--accent);
 }
-input[type="radio"]{
-/*     appearance: none; */
-/*     opacity: 0; */
-}
 input[type="range"]{
     margin-top: 0;
 }
@@ -662,8 +658,6 @@ span.edit{
     vertical-align: middle;
     transition-duration: var(--animation-speed);
 
-}
-span.edit:hover{
 }
 div.edit:hover{
     transform: translate(-120px,0);
