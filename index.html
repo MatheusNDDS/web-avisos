@@ -7,8 +7,9 @@
 <link rel="stylesheet" href="data/fonts/css/all.css">
 </head>
 <body>
-<!--- APP Ui --->
+<!---Menu lateral de Opções--->
   <div id="ui">
+    <!---Dialogo do Editor de Dados--->
     <dialog id="EditDiag">
       <h2>Editor de Dados</h2>
       <p><i class="fa fa-exclamation-triangle"></i> Esta função não é para os fracos de coração, <b>alterar os dados</b> de sem conhecimento de <b>JSON</b> pode <b class="danger" >QUEBRAR O PROGRAMA</b>.</p>
@@ -18,6 +19,8 @@
             <button id="EditDiagClose"><i class="fa fa-times"></i> Fechar</button>
       </span>
     </dialog>
+
+    <!---Seção de Visualização---> 
     <section>
       <h2>Visualização</h2>
         <TabView>
@@ -41,6 +44,8 @@
           </form>
         </TabView>
     </section>
+
+    <!---Seção de Novo Evento--->    
     <section>
         <h2 id="DinAdd" > Novo Evento </h2>
         <span id="DayEntrySpan">
@@ -76,6 +81,7 @@
         <button id="addBtn"><i class="fa fa-calendar-plus"></i> Criar</button>
     </section>
 
+    <!---Seção de Opções de Visualização--->
     <section>
       <h2>Opções de apresentação</h2>
         <vspan class="compact">
@@ -95,6 +101,8 @@
           <input type="range" id="CardSpace" min="5" max="10" value="5" required>
         </vspan>
     </section>
+
+    <!---Seção de Dados--->
     <section>
       <h2>Dados</h2>
         <span class="nobg">
@@ -105,6 +113,7 @@
         </span>
     </section>
   </div>
+
 <!--- Slide --->
   <div id="Slide">
     <header>
