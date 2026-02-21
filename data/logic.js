@@ -287,6 +287,7 @@ function uiUpdate(cmd){
     switch(uiState){
         case '-view':
             style.setProperty('--ui-display','none')
+            style.setProperty('--toolbar-display','none')
             style.setProperty('--ui-span-display','none')
             style.setProperty('--edit-btn-bg','none')
             style.setProperty('--edit-btn-color','black')
@@ -303,8 +304,9 @@ function uiUpdate(cmd){
         break;
         case '-edit':
             style.setProperty('--ui-display','flex')
+            style.setProperty('--toolbar-display','flex')
             style.setProperty('--ui-span-display','absolute')
-            style.setProperty('--edit-btn-bg','var(--accent)')
+            style.setProperty('--edit-btn-bg','var(--light-accent)')
             style.setProperty('--edit-btn-color','white')
             style.setProperty('--slide-highlight','0px 0px 1px 3px var(--light-accent), inset var(--slide-shadow)')
             style.setProperty('--slide-highlight-active','0px 0px 1px 4px var(--light-accent), inset var(--slide-shadow)')

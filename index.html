@@ -7,6 +7,33 @@
 <link rel="stylesheet" href="data/fonts/css/all.css">
 </head>
 <body>
+  <header>
+    <button class="clickable" id="EditBtn"> <i id="EditBtnIcon" class="fa fa-edit"></i> </button>
+    <div id="ToolBar">
+      <!-- <button class="clickable" id="AddBtn"> <i id="AddBtnIcon" class="fa fa-plus"></i>Novo Evento</button> -->
+      <TabView> <p>Visualização</p>
+        <form id="ViewsForm">
+            <span class="TabSpan">
+              <label for="VMC1"> Semana </label>
+              <input type="radio" value="Semana" id="VMC1" name="VM">
+            </span>
+            <span class="TabSpan">
+              <label id="TomDayLabel" for="VMC2"> Amanhã </label>
+              <input type="radio" value="Amanhã" id="VMC2" name="VM">
+            </span>
+            <span class="TabSpan">
+              <label for="VMC3"> Hoje </label>
+              <input type="radio" value="Hoje" id="VMC3" name="VM">
+            </span>
+            <span class="TabSpan">
+              <label for="VMC4"> Modelos </label>
+              <input type="radio" value="Modelos" id="VMC4" name="VM">
+            </span>
+        </form>
+      </TabView>
+    </div>
+    <input id="SlideTitle" class="h1" type="text" value="Avisos">
+  </header>
 <!---Menu lateral de Opções--->
   <div id="ui">
     <!---Dialogo do Editor de Dados--->
@@ -19,32 +46,6 @@
             <button id="EditDiagClose"><i class="fa fa-times"></i> Fechar</button>
       </span>
     </dialog>
-
-    <!---Seção de Visualização---> 
-    <section>
-      <h2>Visualização</h2>
-        <TabView>
-          <form id="ViewsForm">
-              <span class="TabSpan">
-                <label for="VMC1"> Semana </label>
-                <input type="radio" value="Semana" id="VMC1" name="VM">
-              </span>
-              <span class="TabSpan">
-                <label id="TomDayLabel" for="VMC2"> Amanhã </label>
-                <input type="radio" value="Amanhã" id="VMC2" name="VM">
-              </span>
-              <span class="TabSpan">
-                <label for="VMC3"> Hoje </label>
-                <input type="radio" value="Hoje" id="VMC3" name="VM">
-              </span>
-              <span class="TabSpan">
-                <label for="VMC4"> Modelos </label>
-                <input type="radio" value="Modelos" id="VMC4" name="VM">
-              </span>
-          </form>
-        </TabView>
-    </section>
-
     <!---Seção de Novo Evento--->    
     <section>
         <h2 id="DinAdd" > Novo Evento </h2>
@@ -94,7 +95,7 @@
         </vspan>
         <vspan class="compact">
           <label>Tamanho do Título</label>
-          <input type="range" id="TitleSize" min="30" max="80" value="50" required>
+          <input type="range" id="TitleSize" min="46" max="80" value="50" required>
         </vspan>
         <vspan class="compact">
           <label>Espaçamento</label>
@@ -116,12 +117,6 @@
 
 <!--- Slide --->
   <div id="Slide">
-    <header>
-      <div id="ToolBar">
-        <button class="clickable" id="EditBtn"> <i id="EditBtnIcon" class="fa fa-edit"></i> </button>
-      </div>
-      <input id="SlideTitle" class="h1" type="text" value="Avisos">
-    </header>
     <div style="display:none;" id="Semana">
         <Evento id="segMaster" name="DayMasters">
             <TituloDia>Segunda</TituloDia>

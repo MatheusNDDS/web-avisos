@@ -27,9 +27,13 @@
     text-align:right;
 }
 #SlideTitle{
+    position: absolute;
     height: var(--title-size);
     line-height: var(--title-size);
-    width: auto;
+    width: 100%;
+    z-index: 0;
+    background: #00000000;
+    min-height: calc(var(--ui-height) + 13px);
 }
 /***CLASSES***/
 .hour{
@@ -171,12 +175,13 @@ Leiaute{
     --ui-height: 30px;
     --ui-display: none;
     --ui-span-display: none;
+    --toolbar-display: none;
     --spanbg: #cececeD0;
     --slide-width:100%;
     --slide-margin: 0px;
     --slide-vh-wrap: 0vh;
     --slide-height: calc(100vh - var(--slide-vh-wrap));
-    --slide-shadow: 0 1px 2px 3px rgba(0, 0, 0, 0.3);
+    --slide-shadow: none;
     --section-accent: #79dada;
     --tabview-border-color: var(--section-bg);
     --section-bg: #ebebeb;
@@ -195,14 +200,19 @@ Leiaute{
 /***ELEMENTS***/
 header{
     display: flex;
-    justify-content: center;
+    justify-content: left;
     padding: 4px;
+    background: white;
+    width: fit-content;
+    height: var(--title-size);
+    gap: 5px;
 }
 body{
     display: flex;
     text-align:center;
     margin: 0;
     overflow: hidden;
+    flex-direction: column;
 }
 h1, .h1{
     appearance: none;
@@ -240,27 +250,37 @@ i,label{
 /************UI************/
 /***PRIMARY***/
 #ToolBar{
+    display: var(--toolbar-display);
     vertical-align: middle;
-    height: 100%;
-
+    flex-direction: row;
+    text-align: left;
+    z-index: 1;
+    height: calc(var(--ui-height) + 13px);
+    padding: 0px;
+    width: auto;
+    gap: 8px;
 }
 #ToolBar > *{
-    position: absolute;
-    background: none;
-    border: none;
+    font-family: var(--ui-font);
+    flex-direction: row;
+    position: relative;
     text-align: center;
     vertical-align: middle;
     width: auto;
-    height: var(--title-size);
-    padding-left: 50px;
-    padding-right:30px;
     border-radius: var(--ui-radius);
+    height: 100%;
+    cursor: default;
+    user-select: none;
+    display: inline-block;
+    vertical-align: middle;
+    min-width: calc(var(--ui-height) + 18px) ;
 }
+
 #EditBtn{
     background: var(--edit-btn-bg);
-    width: 100px;
-    left: -28px;
+    width: 5em;
     color: var(--edit-btn-color);
+    z-index: 3
 }
 #Slide {
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
@@ -293,9 +313,9 @@ i,label{
 }
 #ui{
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
-    top: calc(var(--title-size) + 8px);
+    top: calc(var(--ui-height) + 13px + 11px);
     width: 400px;
-    height: calc(100vh - var(--title-size) - 9px);
+    height: calc(100vh - (var(--ui-height) + 13px + 16px));
     padding: 13px;
     border-bottom-right-radius: var(--ui-radius);
     border-top-right-radius: var(--ui-radius);
@@ -313,6 +333,7 @@ i,label{
     scrollbar-gutter: stable;
     transition-delay: 0.25s;
     direction: rtl;
+    z-index: 2;
 }
 #ui:hover{
     transform: translate(0, 0);
@@ -449,9 +470,6 @@ i,label{
 .nobg{
     background: #00000000;
 }
-.TabSpan{
-    cursor: pointer;
-}
 .danger{
     background: red;
     color: white;
@@ -506,7 +524,7 @@ span, vspan{
     justify-content: space-between;
     gap: 5px;
     padding: 5px;
-    margin: 5px 0 5px 0;
+    margin: 0px;
     background: var(--spanbg);
     border-radius: var(--ui-radius);
     vertical-align: middle;
@@ -565,46 +583,7 @@ select,input[type="number"]{
 option:checked{
     background-color: var(--section-accent);
 }
-TabView{
-    display: block
-}
-TabView > * label{
-    cursor: pointer;
-}
-TabView > * span{
-    text-align: center;
-    height: calc(var(--ui-height) + 8px);
-    margin: none;
-    padding-top:0;
-    margin-top: 0px;
-    padding-bottom:0;
-    margin-bottom: 0px;
-    gap:0;
-    border-radius: 0;
-}
-TabView span{
-    border: 1px solid var(--tabview-border-color);
-    border-width: 0 0 2px 0;
-}
-TabView span:first-child{
-    border: 1px solid var(--tabview-border-color);
-    border-width: 0 0 2px 0;
-    margin-top: 5px;
-    border-radius: var(--ui-radius) var(--ui-radius) 0 0;
-}
-TabView span:last-child{
-    border: 0px solid var(--tabview-border-color);
-    margin-bottom: 0px;
-    border-radius: 0 0 var(--ui-radius) var(--ui-radius);
-}
-TabView > * label{
-    text-align: center;
-    vertical-align:middle;
-    font-size: calc(var(--ui-font-size) + 2px);
-}
-TabView > * input[type="radio"]{
-    display: none;
-}
+
 input[type="number"]{
     height: var(--ui-height);
 }
@@ -705,6 +684,63 @@ input[type="time"].event{
     padding: 0;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+TabView{
+    background: var(--section-bg);
+    height: calc(var(--ui-height) + 13px);
+    padding-left: 5px;
+    padding-right: 5px;
+    align-content: center;
+}
+TabView > * label{
+    cursor: pointer;
+}
+TabView > *{
+    display: inline-block;
+    vertical-align: middle;
+    align-content: center;
+    margin: auto;
+}
+TabView > * span{
+    text-align: center;
+    height: calc(var(--ui-height) + 4px);
+    margin: 0px;
+    padding-top:0;
+    margin-top: 0px;
+    padding-bottom:0;
+    margin-bottom: 0px;
+    gap:0;
+    border-radius: 0;
+    display: inline-block;
+}
+TabView span{
+    border: none;
+    cursor: pointer;
+}
+TabView span:first-child{
+    border: none;
+    border-radius: var(--ui-radius) 0 0 var(--ui-radius);
+}
+TabView span:last-child{
+    border: none;
+    border-radius: 0  var(--ui-radius)  var(--ui-radius) 0;
+}
+TabView > * label{
+    text-align: center;
+    vertical-align:middle;
+    font-size: calc(var(--ui-font-size) + 2px);
+}
+TabView > * input[type="radio"]{
+    display: none;
+}
+TabView p{
+    margin-left: 2px;
+    margin-right: 2px;
+    font-weight: bold;
+}
+#ToolBar > button{
+    
 }
 
 
