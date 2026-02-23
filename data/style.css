@@ -691,7 +691,7 @@ input[type="time"].event{
 }
 
 TabView {
-    display: flex;
+    display: var(--toolbar-display);
     position: relative;
     text-align: center;
     height: 100%;
