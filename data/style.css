@@ -297,9 +297,11 @@ i,label{
     display: block;
     padding: 0;
     padding-left: 0;
+    padding-top: var(--card-space);
     margin: var(--slide-margin);
     box-shadow:var(--slide-shadow);
     transform: translate(var(--slide-move), 0);
+    animation-delay: 0;
 }
 #slide h1, .h1{
     appearance: none;
@@ -693,6 +695,7 @@ input[type="time"].event{
 }
 
 TabView {
+    font-family: var(--ui-font);
     display: var(--toolbar-display);
     position: relative;
     text-align: center;
@@ -702,7 +705,6 @@ TabView {
     padding-right: 10px;
 }
 TabView > *{
-    font: var(--ui-font);
     font-size: var(--ui-font-size);
     display: inline-block;
     margin: 0px;
@@ -710,6 +712,7 @@ TabView > *{
 TabView > * span{
     text-align: center;
     height: calc(var(--ui-height) + 4px);
+    width: 100px;
     padding:0;
     border-radius: 0;
     display: inline-block;
@@ -723,9 +726,8 @@ TabView > * label{
     text-align: center;
     vertical-align: bottom;
     font-size: calc(var(--ui-font-size) + 2px);
-    padding-left: 5px ;
-    padding-right: 5px;
     display: flex;
+    justify-content: space-around;
     cursor: pointer;
     height: 100%;
     width: 100%;
