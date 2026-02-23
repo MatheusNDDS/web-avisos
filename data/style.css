@@ -182,6 +182,7 @@ Leiaute{
     --slide-vh-wrap: 0vh;
     --slide-height: calc(100vh - var(--slide-vh-wrap));
     --slide-shadow: none;
+    --entry-highlight: 0px 0px 1px 3px ;
     --section-accent: #79dada;
     --tabview-border-color: var(--section-bg);
     --section-bg: #ebebeb;
@@ -206,7 +207,6 @@ header{
     width: 100%;
     height: var(--title-size);
     gap: 5px;
-    background: red;
 }
 body{
     display: flex;
