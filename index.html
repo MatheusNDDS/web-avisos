@@ -7,32 +7,37 @@
 <link rel="stylesheet" href="data/fonts/css/all.css">
 </head>
 <body>
-  <header>
-    <button class="clickable" id="EditBtn"> <i id="EditBtnIcon" class="fa fa-edit"></i> </button>
-    <div id="ToolBar">
-      <!-- <button class="clickable" id="AddBtn"> <i id="AddBtnIcon" class="fa fa-plus"></i>Novo Evento</button> -->
-      <TabView> <p>Visualização</p>
-        <form id="ViewsForm">
-            <span class="TabSpan">
-              <label for="VMC1"> Semana </label>
-              <input type="radio" value="Semana" id="VMC1" name="VM">
-            </span>
-            <span class="TabSpan">
-              <label id="TomDayLabel" for="VMC2"> Amanhã </label>
-              <input type="radio" value="Amanhã" id="VMC2" name="VM">
-            </span>
-            <span class="TabSpan">
-              <label for="VMC3"> Hoje </label>
-              <input type="radio" value="Hoje" id="VMC3" name="VM">
-            </span>
-            <span class="TabSpan">
-              <label for="VMC4"> Modelos </label>
-              <input type="radio" value="Modelos" id="VMC4" name="VM">
-            </span>
-        </form>
-      </TabView>
+  <header> 
+    <div style="display: flex; gap: 5px;"> 
+      <button class="clickable" id="EditBtn"> <i id="EditBtnIcon" class="fa fa-edit"></i> </button>
+        <div id="ToolBar" class="hidable">
+          <button class="clickable" id="AddBtn"> <i id="AddBtnIcon" class="fa fa-plus"></i>Novo Evento</button>
+          <button class="clickable" id="AddBtn"> <i id="AddBtnIcon" class="fa fa-plus"></i></button>
+          <button class="clickable" id="AddBtn"> <i id="AddBtnIcon" class="fa fa-plus"></i></button>
+          <button class="clickable" id="AddBtn"> <i id="AddBtnIcon" class="fa fa-plus"></i></button>
+        </div>
     </div>
     <input id="SlideTitle" class="h1" type="text" value="Avisos">
+    <TabView>
+      <form id="ViewsForm">
+          <span class="TabSpan">
+            <label for="VMC1"> Semana </label>
+            <input type="radio" value="Semana" id="VMC1" name="VM">
+          </span>
+          <span class="TabSpan">
+            <label id="TomDayLabel" for="VMC2"> Amanhã </label>
+            <input type="radio" value="Amanhã" id="VMC2" name="VM">
+          </span>
+          <span class="TabSpan">
+            <label for="VMC3"> Hoje </label>
+            <input type="radio" value="Hoje" id="VMC3" name="VM">
+          </span>
+          <span class="TabSpan">
+            <label for="VMC4"> Modelos </label>
+            <input type="radio" value="Modelos" id="VMC4" name="VM">
+          </span>
+      </form>
+    </TabView>
   </header>
 <!---Menu lateral de Opções--->
   <div id="ui">
