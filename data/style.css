@@ -191,6 +191,7 @@ Leiaute{
     --edit-bnt-color: black;
     --dayfx: saturate(100%);
     --day-lbl-checked: white;
+    --header-bg: var(--section-bg);
     opacity: 0; /*All elements are 100% opaque until the script finish*/
 
 }
@@ -207,6 +208,7 @@ header{
     width: 100%;
     height: var(--title-size);
     gap: 5px;
+    background-color: var(--header-bg);
 }
 body{
     display: flex;
@@ -694,56 +696,40 @@ TabView {
     display: var(--toolbar-display);
     position: relative;
     text-align: center;
-    height: 100%;
-    margin-left: 5px;
-    background: blue;
-}
-TabView > * label{
-    display: flex;
-    cursor: pointer;
-    height: 100%;
-    width: 100%;
-    margin: 0;
+    height: var(--title-size);
+    align-items: flex-end;
+    padding: 0px;
+    padding-right: 10px;
 }
 TabView > *{
     font: var(--ui-font);
     font-size: var(--ui-font-size);
     display: inline-block;
-    vertical-align: middle;
-    align-content: center;
-    margin: auto;
+    margin: 0px;
 }
 TabView > * span{
     text-align: center;
     height: calc(var(--ui-height) + 4px);
-    margin: 0px;
-    padding-top:0;
-    margin-top: 0px;
-    padding-bottom:0;
-    margin-bottom: 0px;
-    gap:0;
+    padding:0;
     border-radius: 0;
     display: inline-block;
-}
-TabView span{
     border: none;
     cursor: pointer;
+    margin-right: 0px;
+    border-radius: var(--ui-radius) var(--ui-radius) 0 0;
 }
-TabView span:first-child{
-    border: none;
-    border-radius: var(--ui-radius) 0 0 var(--ui-radius);
-}
-TabView span:last-child{
-    border: none;
-    border-radius: 0  var(--ui-radius)  var(--ui-radius) 0;
-}
+
 TabView > * label{
     text-align: center;
-    vertical-align:middle;
+    vertical-align: bottom;
     font-size: calc(var(--ui-font-size) + 2px);
-}
-TabView > * input[type="radio"]{
-    display: none;
+    padding-left: 5px ;
+    padding-right: 5px;
+    display: flex;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    margin: 0;
 }
 TabView p{
     margin-left: 2px;
@@ -751,6 +737,31 @@ TabView p{
     font-weight: bold;
 }
 
+TabView > * input[type="radio"]{
+    display: none;
+}
+
+/*TabView span:first-child{
+    border: none;
+    border-radius: var(--ui-radius) 0 0 ;
+}
+TabView span:last-child{
+    border: none;
+    border-radius: 0  var(--ui-radius)  0 0;
+}*/
+#ViewsForm{
+    display: inline-block;
+    height: calc(var(--ui-height) + 4px);
+    align-content: flex-end;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: var(--spanbg);
+    border-radius: var(--ui-radius) var(--ui-radius) 0 0;
+}
+#ViewsForm > *{
+    display: inline-block;
+    margin-right: -5px;
+}
 /************WEBKIT************/
 /***ELEMENTS***/
 ::-webkit-scrollbar {

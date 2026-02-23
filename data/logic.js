@@ -141,8 +141,8 @@ viewsForm.addEventListener('click', function(){
         let element = viewMode[key]
         if (element.checked == true){
             settingsData.slide_view = element.value
-            spanElements[key].style.setProperty("background","var(--accent)")
-            spanElements[key].style.setProperty("color","white")
+            spanElements[key].style.setProperty("background","white")
+            spanElements[key].style.setProperty("color","var(--dark-accent)")
             slideViewUpdate()
         } else {
             spanElements[key].style.setProperty("background","var(--spanbg)")
