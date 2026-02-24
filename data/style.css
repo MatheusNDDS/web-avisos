@@ -263,6 +263,8 @@ i,label{
     width: auto;
     gap: 5px;
     margin:5px;
+    background: white;
+    box-shadow: var(--ui-shadow);
 }
 
 #ToolBar > *{
@@ -363,7 +365,7 @@ i,label{
 #ui section{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
 }
 #ui span:last-child, #ui vspan:last-child{
     margin-bottom: 0px;
@@ -563,7 +565,7 @@ section > * hr{
 }
 label{
     font-size: var(--ui-font-size);
-    height: 100%;
+    height: var(--ui-height);
     padding: 0;
     line-height: calc(var(--ui-font-size)*2);
     width: 100%;
