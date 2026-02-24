@@ -263,8 +263,6 @@ i,label{
     width: auto;
     gap: 5px;
     margin:5px;
-    background: white;
-    box-shadow: var(--ui-shadow);
 }
 
 #ToolBar > *{
