@@ -21,6 +21,7 @@
     --container-border: var(--container-border-noc) #00000034;
     --card-space: 7px;
     --eventbg: #a1a1a1;
+    --eventbg-hover: var(--section-accent);
 }
 #Semana,#Hoje,#Amanhã,#Modelos{
     padding:0;
@@ -135,6 +136,9 @@ Evento, .evento{
     overflow: hidden;
     padding: 1px;
     flex: 4;
+}
+Evento:hover{
+    border-color: var(--eventbg-hover);
 }
 Container{
     display: flex;

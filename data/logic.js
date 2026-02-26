@@ -188,7 +188,9 @@ for (let item in weekMap){
     let masterName = master.getAttribute('vname')
     if (masterName !== 'Modelos' && masterName !== 'Amanhã' && masterName !== 'Hoje'){
         master.addEventListener('click', function(){
-        selectMasterContainer(masterName)
+            if (uiState == "-view"){
+                selectMasterContainer(masterName)
+            }
         })
     }
 }
@@ -325,6 +327,7 @@ function uiUpdate(cmd){
             style.setProperty('--edit-btn-color','black')
             style.setProperty('--slide-highlight','0')
             style.setProperty('--slide-highlight-active','0')
+            style.setProperty('--eventbg-hover', '#00000034')
             editBtnIcon.classList.add('fa-edit')
             editBtnIcon.classList.remove('fa-check')
             for (key in weekMap){
@@ -343,6 +346,7 @@ function uiUpdate(cmd){
             style.setProperty('--edit-btn-color','white')
             style.setProperty('--slide-highlight','0px 0px 1px 3px var(--light-accent), inset var(--entry-highlight)')
             style.setProperty('--slide-highlight-active','0px 0px 1px 4px var(--light-accent), inset var(--entry-highlight)')
+            style.setProperty('--eventbg-hover', 'var(--section-accent)')
             lastDay.style.setProperty('--container-border','var(--container-border-noc) var(--light-accent)')
             lastDay.style.setProperty('--eventbg','var(--section-accent)')
             editBtnIcon.classList.add('fa-check')
