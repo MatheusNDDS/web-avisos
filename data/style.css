@@ -299,11 +299,17 @@ option, #ModMenu{
 #EditBtn{
     background: var(--edit-btn-bg);
     width: 4em;
+    height: 55px;
     color: var(--edit-btn-color);
     z-index: 3;
-    margin: 5px;
+    margin: 0;
     margin-right: 0;
+    border-radius: 0 var(--ui-radius) var(--ui-radius) 0;
 }
+#EditBtn:active{
+    box-shadow: none;
+}
+
 #Slide {
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
     width: var(--slide-width);
@@ -334,12 +340,13 @@ option, #ModMenu{
     font-weight: bold;
     font-family: serif;
     vertical-align: middle;
+    z-index: 4;
 }
 #ui{
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
-    top: calc(var(--ui-height) + 13px + 11px);
+    top: calc(var(--ui-height) + 25px);
     width: 400px;
-    height: calc(100vh - (var(--ui-height) + 13px + 16px));
+    height: calc(100vh - (var(--ui-height) + 27px));
     padding: 13px;
     border-bottom-right-radius: var(--ui-radius);
     border-top-right-radius: var(--ui-radius);
@@ -357,7 +364,7 @@ option, #ModMenu{
     scrollbar-gutter: stable;
     transition-delay: 0.25s;
     direction: rtl;
-    z-index: 2;
+    z-index: 5;
 }
 #ui:hover{
     transform: translate(0, 0);
