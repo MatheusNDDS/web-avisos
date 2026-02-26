@@ -48,7 +48,7 @@
     box-shadow: inset var(--slide-highlight-active);
 }
 /***ELEMENTS***/
-Evento, Hora, TituloDia, .daytitle, .event, .hour, .title{
+Evento, Hora, TituloDia, .daytitle, .event, .hour, .title, .evento{
     appearance: none;
     height: var(--card-height);
     border-radius: var(--radius);
@@ -117,7 +117,7 @@ Cartão > * {
 Cartão{
     min-width: 100%;
 }
-Evento{
+Evento, .evento{
     height: auto;
     min-height: calc(var(--card-height) - 22px);
     width: 97%;

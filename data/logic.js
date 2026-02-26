@@ -5,7 +5,8 @@ const timeIndex = 4,
 
 var defaultEvent = ["Evento", '#005a5c', "--:--", "#008080","0" ],
     uiState = '-view', // revert this to -view
-    lastDay = document.getElementById('segMaster')
+    lastDay = document.getElementById('segMaster'),
+    selectedDay = "Segunda"
 // UI
 const addBtn = document.getElementById('addBtn'),
       expBtn = document.getElementById('ExpBtn'),
@@ -189,6 +190,30 @@ sidePanel.addEventListener('onMouseover', function(){
 weekMap.Segunda.Master.addEventListener('click', function(){
     console.log('Soon...')
 })
+
+for (let item in weekMap){
+    weekMap[item].Master.addEventListener('click', function(){
+        targetMaster(weekMap[item].Master.getAttribute('vname'))
+        slideTitle.value =  weekMap[item].Master.getAttribute('vname')
+    })
+}
+
+function targetMaster(day){
+    let master = weekMap[day].Master
+    selectedDay = day
+
+    for ( let key in weekMap){
+        if (master.getAttribute('vname') == weekMap[key].Master.getAttribute('vname')){
+            weekMap[key].Master.style.setProperty('--container-border','var(--container-border-noc) var(--light-accent)')
+            weekMap[key].Master.style.setProperty('--eventbg','var(--section-accent)')
+            lastDay = day
+        } else {
+            weekMap[key].Master.style.setProperty('--container-border','var(--container-border-noc) #00000034')
+            weekMap[key].Master.style.setProperty('--eventbg','#a1a1a1')
+        }
+    }
+}
+
 //// Functions ////
 function eventMn(cmd,day,eventIndex,value,dataIndex,tagId,cssProp){
     switch (cmd) {
