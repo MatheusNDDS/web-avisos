@@ -143,22 +143,6 @@ viewsForm.addEventListener('click', function(){
         }
     }
 })
-daysForm.addEventListener('click', function(){
-    let dayLabelsElements = dayTexts.children
-    for ( let key in dayRadios){
-        let element = dayRadios[key]
-        if (element.checked == true){
-            dayLabelsElements[key].style.setProperty('color','var(--day-lbl-checked)')
-            dayMasters[key].style.setProperty('--container-border','var(--container-border-noc) var(--light-accent)')
-            dayMasters[key].style.setProperty('--eventbg','var(--section-accent)')
-            lastDay = dayMasters[key]
-        } else {
-            dayLabelsElements[key].style.setProperty('color','black')
-            dayMasters[key].style.setProperty('--container-border','var(--container-border-noc) #00000034')
-            dayMasters[key].style.setProperty('--eventbg','#a1a1a1')
-        }
-    }
-})
 impBtn.addEventListener('click', function(){
     impTrigger.click()
 })
@@ -351,6 +335,7 @@ function uiUpdate(cmd){
             lastDay.style.setProperty('--eventbg','var(--section-accent)')
             editBtnIcon.classList.add('fa-check')
             editBtnIcon.classList.remove('fa-edit')
+
             weekMap.Modelos.Master.style.setProperty('--container-border','var(--container-border-noc) var(--light-accent)')
             weekMap.Modelos.Master.style.setProperty('--eventbg','var(--section-accent)')
             weekMap.Amanhã.Master.style.setProperty('--container-border','var(--container-border-noc) var(--light-accent)')
@@ -485,10 +470,8 @@ function slideViewUpdate(){
 
     }
     if (view == 'Modelos'){
-        document.getElementById('DinAdd').innerHTML = 'Novo Modelo'
         modMenu.disabled = true
     }else{
-        document.getElementById('DinAdd').innerHTML = 'Novo Evento'
         modMenu.disabled = false
     }
     weekMap.Modelos.Master.style.setProperty('--eventbg','var(--section-accent)')
@@ -541,7 +524,7 @@ function setup(){
     settingsData.last_event = null
 
 /// Starting functions
-    styleMn('-restore'); eventMn('-sort'); viewsForm.click(); daysForm.click(); uiUpdate()
+    styleMn('-restore'); eventMn('-sort'); viewsForm.click(); uiUpdate()
     style.setProperty('opacity','1') // Prevent visual gliches when JS change css style during setup.
 }
 

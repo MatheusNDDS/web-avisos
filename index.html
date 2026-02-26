@@ -8,10 +8,10 @@
 </head>
 <body>
   <header> 
-    <div style="display: flex; gap: 5px;"> 
+    <div style="display: flex; gap: 5px; margin: 0;"> 
       <button class="clickable" id="EditBtn"> <i id="EditBtnIcon" class="fa fa-edit"></i> </button>
-        <div id="ToolBar" class="hidable">
-          <button id="addBtn"><i class="fa fa-calendar-plus"></i> Criar</button>
+        <div id="ToolBar">
+          <button id="addBtn"><i class="fa fa-plus"></i> Adicionar</button>
           <select id="ModMenu"></select>
         </div>
     </div>
@@ -50,54 +50,22 @@
       </span>
     </dialog>
     <!---Seção de Novo Evento--->    
-    <section>
-        <h2 id="DinAdd" > Novo Evento </h2>
-        <span id="DayEntrySpan">
-          <label>Dia</label>
-          <span class="nobg">
-            <span id="DayLabels" class="nobg">
-              <div id="DayTexts">
-                <label for="DSeg">S</label>
-                <label for="DTer">T</label>
-                <label for="DQua">Q</label>
-                <label for="DQui">Q</label>
-                <label for="DSex">S</label>
-                <label for="DSab">S</label>
-                <label for="DDom">D</label>
-              </div>
-            </span>
-            <form id="Days">
-              <input id="DSeg" class="Days clickable" type="radio" name="DayRadios" value="Segunda" checked />
-              <input id="DTer" class="Days clickable" type="radio" name="DayRadios" value="Terça"/>
-              <input id="DQua" class="Days clickable" type="radio" name="DayRadios" value="Quarta"/>
-              <input id="DQui" class="Days clickable" type="radio" name="DayRadios" value="Quinta"/>
-              <input id="DSex" class="Days clickable" type="radio" name="DayRadios" value="Sexta"/>
-              <input id="DSab" class="Days clickable" type="radio" name="DayRadios" value="Sábado"/>
-              <input id="DDom" class="Days clickable" type="radio" name="DayRadios" value="Domingo"/>
-            </form>
-          </span>
-        </span>
-        <span>
-          <label>Modelo</label>
-          
-          </select>
-        </span>
-    </section>
+    
 
     <!---Seção de Opções de Visualização--->
     <section>
       <h2>Opções de apresentação</h2>
         <vspan class="compact">
           <label>Tamanho dos Cartões</label>
-          <input type="range" id="CardHeight" min="35" value="70" required>
+          <input type="range" id="CardHeight" min="35" value="35" required>
         </vspan>
         <vspan class="compact">
           <label>Tamanho da Fonte</label>
-          <input type="range" id="FontSize" min="30" max="49" value="30" required>
+          <input type="range" id="FontSize" min="30" max="50" value="35" required>
         </vspan>
         <vspan class="compact">
           <label>Tamanho do Título</label>
-          <input type="range" id="TitleSize" min="55" max="80" value="50" required>
+          <input type="range" id="TitleSize" min="55" max="80" value="55" required>
         </vspan>
         <vspan class="compact">
           <label>Espaçamento</label>

@@ -14,12 +14,12 @@
     --slide-font-shadow:  1px 2px 1px #000000dd;
     --radius: 17px;
     --title-size: 50px;
-    --card-height:calc(70px);
-    --font-size: calc(28px);
+    --card-height:35px;
+    --font-size: 35px;
     --animation-speed: 0.2s;
     --container-border-noc: 2.5pt solid;
     --container-border: var(--container-border-noc) #00000034;
-    --card-space: 7px;
+    --card-space: 5px;
     --eventbg: #a1a1a1;
     --eventbg-hover: var(--section-accent);
 }
@@ -175,7 +175,7 @@ Leiaute{
     --ui-inset-shadow:  0px 0px 1px 1px;
     --ui-bg: #FFFFFF;
     --ui-font-size: 18px;
-    --ui-radius: 5px;
+    --ui-radius: 7px;
     --ui-height: 30px;
     --ui-display: none;
     --ui-span-display: none;
@@ -262,13 +262,23 @@ i,label{
     flex-direction: row;
     text-align: left;
     z-index: 1;
-    height: calc(var(--ui-height) + 13px);
-    padding: 0px;
+    height: calc(var(--ui-height) + 3px);
+    padding: 5px;
     width: auto;
     gap: 5px;
     margin:5px;
-}
+    margin-left: 0 ;
+    background: var(--ui-bg);
+    border-radius: var(--ui-radius);
+    border-color: var(--dark-accent);
+    border: 10px;
 
+}
+option, #ModMenu{
+    overflow: hidden;
+    max-width: 300px;
+    text-overflow: ellipsis;
+}
 #ToolBar > *{
     font-family: var(--ui-font);
     flex-direction: row;
@@ -283,14 +293,16 @@ i,label{
     display: inline-block;
     vertical-align: middle;
     min-width: calc(var(--ui-height) + 18px) ;
+
 }
 
 #EditBtn{
     background: var(--edit-btn-bg);
-    width: 5em;
+    width: 4em;
     color: var(--edit-btn-color);
     z-index: 3;
     margin: 5px;
+    margin-right: 0;
 }
 #Slide {
     -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;
@@ -595,6 +607,7 @@ select,input[type="number"]{
 option:checked{
     background-color: var(--section-accent);
 }
+
 
 input[type="number"]{
     height: var(--ui-height);
