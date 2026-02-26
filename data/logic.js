@@ -91,14 +91,6 @@ var eventData = Data.Events
 var settingsData = Data.Settings
 
 //// Listeners ////
-addBtn.addEventListener('click',function(){
-    if (settingsData.slide_view == "Semana"){
-        eventMn('-add',document.querySelector('input[name="DayRadios"]:checked').value)
-    }else{
-        eventMn('-add',settingsData.slide_view)
-    }
-    buildUi3()
-})
 editDiagTr.addEventListener('click',function(){
     document.getElementById('EditDiag').showModal()
     dataTextEntry.value = localStorage.getItem('Data')
@@ -192,21 +184,35 @@ weekMap.Segunda.Master.addEventListener('click', function(){
 })
 
 for (let item in weekMap){
-    weekMap[item].Master.addEventListener('click', function(){
-        targetMaster(weekMap[item].Master.getAttribute('vname'))
-        slideTitle.value =  weekMap[item].Master.getAttribute('vname')
-    })
+    let master = weekMap[item].Master
+    let masterName = master.getAttribute('vname')
+    if (masterName !== 'Modelos' && masterName !== 'Amanhã' && masterName !== 'Hoje'){
+        master.addEventListener('click', function(){
+        selectMasterContainer(masterName)
+        })
+    }
 }
+addBtn.addEventListener('click',function(){
+    if (settingsData.slide_view == "Semana"){
+        eventMn('-add',selectedDay)
+    }else{
+        eventMn('-add',settingsData.slide_view)
+    }
+    buildUi3()
+})
 
-function targetMaster(day){
+
+//// Functions ////
+function selectMasterContainer(day){
     let master = weekMap[day].Master
+    let masterName = master.getAttribute('vname')
     selectedDay = day
 
-    for ( let key in weekMap){
-        if (master.getAttribute('vname') == weekMap[key].Master.getAttribute('vname')){
+    for (let key in weekMap){
+        if (masterName == weekMap[key].Master.getAttribute('vname')){
             weekMap[key].Master.style.setProperty('--container-border','var(--container-border-noc) var(--light-accent)')
             weekMap[key].Master.style.setProperty('--eventbg','var(--section-accent)')
-            lastDay = day
+            lastDay = weekMap[key].Master
         } else {
             weekMap[key].Master.style.setProperty('--container-border','var(--container-border-noc) #00000034')
             weekMap[key].Master.style.setProperty('--eventbg','#a1a1a1')
@@ -214,7 +220,7 @@ function targetMaster(day){
     }
 }
 
-//// Functions ////
+
 function eventMn(cmd,day,eventIndex,value,dataIndex,tagId,cssProp){
     switch (cmd) {
         case '-add':
@@ -481,6 +487,11 @@ function slideViewUpdate(){
         document.getElementById('DinAdd').innerHTML = 'Novo Evento'
         modMenu.disabled = false
     }
+    weekMap.Modelos.Master.style.setProperty('--eventbg','var(--section-accent)')
+    weekMap.Amanhã.Master.style.setProperty('--container-border','var(--container-border-noc) var(--light-accent)')
+    weekMap.Amanhã.Master.style.setProperty('--eventbg','var(--section-accent)')
+    weekMap.Hoje.Master.style.setProperty('--container-border','var(--container-border-noc) var(--light-accent)')
+    weekMap.Hoje.Master.style.setProperty('--eventbg','var(--section-accent)')
     saveData()
 }
 function jsonFormatter(jsonstr,cmd){
