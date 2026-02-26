@@ -163,10 +163,6 @@ impTrigger.addEventListener('change', function(){
 sidePanel.addEventListener('onMouseover', function(){
     style.setProperty('--slide-move','390px')
 })
-weekMap.Segunda.Master.addEventListener('click', function(){
-    console.log('Soon...')
-})
-
 for (let item in weekMap){
     let master = weekMap[item].Master
     let masterName = master.getAttribute('vname')
@@ -178,6 +174,7 @@ for (let item in weekMap){
         })
     }
 }
+
 addBtn.addEventListener('click',function(){
     if (settingsData.slide_view == "Semana"){
         eventMn('-add',selectedDay)
@@ -205,7 +202,6 @@ function selectMasterContainer(day){
         }
     }
 }
-
 
 function eventMn(cmd,day,eventIndex,value,dataIndex,tagId,cssProp){
     switch (cmd) {
